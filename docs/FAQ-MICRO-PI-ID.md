@@ -1,18 +1,19 @@
-# FAQ — «كل micro-π عندها معرّف (ID) خاص، إذن يمكن التفرقة؟»
+# FAQ — “Every micro-π has its own ID, so you can tell them apart?”
 
-## الادّعاء
-> «كل وحدة micro-π (أصغر وحدة) عندها معرّف فريد، ومن خلاله يمكن تتبّعها والتفريق بين Pi المعدّنة و Pi المنصّة.»
+## The claim
+> “Every unit (micro-π) has a unique identifier, and through it you can trace units and tell mined Pi apart
+> from exchange Pi.”
 
-## الحقيقة: نموذج البيانات غلط ❌
+## The truth: the data model is misunderstood ❌
 
-بي ₩ Network (مبنية على **Stellar**) ما تستعملش **UTXO**، بل نموذج **Account / Balance**:
+Pi Network (built on **Stellar**) does **not** use a **UTXO** model. It uses an **Account / Balance** model:
 
-| النموذج | كيف يخزّن | مثال |
+| Model | How it stores value | Example |
 |---|---|---|
-| **UTXO** (بيتكوين) | قائمة «مخرجات غير مصروفة»، كل واحدة لها معرّف `txid:vout` | فيه شبه-معرّف لكل قطعة |
-| **Account/Balance** (Stellar/Pi) | **رصيد رقمي واحد** لكل (حساب + أصل) | رقم واحد فقط، بلا قطع |
+| **UTXO** (Bitcoin) | A list of “unspent outputs”, each with a `txid:vout` id | quasi-ID per piece |
+| **Account/Balance** (Stellar/Pi) | **A single numeric balance** per (account + asset) | one number, no pieces |
 
-### إثبات مباشر من السلسلة
+### Direct on-chain evidence
 ```json
 // GET https://api.mainnet.minepi.com/accounts/GC55...
 {
@@ -20,60 +21,63 @@
   "asset_type": "native"
 }
 ```
-👉 الرصيد = **"2.0000000"** — رقم واحد. **ما فيهاش مصفوفة قطع، ولا معرّف لأي وحدة، ولا `txid` لكل π.**
+👉 The balance is **"2.0000000"** — a single number. There is **no array of pieces, no per-unit ID, and no
+`txid` for each π.**
 
-شغّل `examples/coin-id-check.mjs` تشوفها بعينيك.
+Run `examples/coin-id-check.mjs` to see it for yourself.
 
 ---
 
-## شنو معنى «micro-π»؟ هي مجرّد خانة عشرية، مو معرّف
+## What does “micro-π” even mean? It’s just a decimal place, not an ID
 - `1 π = 10,000,000 micro-π`.
-- هذا **تقسيم رياضي (كسري)** — مثل ما تقول «1 دينار = 1000 مليم». المليم ما عندهوش معرّف خاص.
-- الرصيد يُخزَّن كعدد صحيح صغير (scaled integer) داخل العقد؛ **ما فيه حقل لكل خانة**.
+- That’s **mathematical division** — like saying “1 dollar = 100 cents”. A cent has no unique ID.
+- The balance is stored as a scaled integer inside the contract; **there is no field per decimal place**.
 
 ---
 
-## المعرّفات اللي توجد **فعلاً** في Pi/Stellar — وشنو تعرّف
-| المعرّف | الشكل | يعرّف شنو |
+## The IDs that **do** exist on Pi/Stellar — and what each identifies
+| Identifier | Form | Identifies |
 |---|---|---|
-| Account ID | `G...` | **حساب** — مو قطعة |
-| Muxed Account ID | `M...` | **مستخدم داخل حساب مجمّع** — مو قطعة |
-| Contract ID | `C...` | **عقد ذكي** |
-| Transaction Hash | `txid` | **معاملة** |
-| Operation ID | رقم | **عملية** |
-| Claimable Balance ID | `0000...` | **صندوق رصيد مقفول** — مو قطعة |
-| Ledger Sequence | رقم | **كتلة** |
+| Account ID | `G...` | an **account** — not a coin |
+| Muxed Account ID | `M...` | a **user inside a pooled account** — not a coin |
+| Contract ID | `C...` | a **smart contract** |
+| Transaction Hash | `txid` | a **transaction** |
+| Operation ID | number | an **operation** |
+| Claimable Balance ID | `0000...` | a **locked balance container** — not a coin |
+| Ledger Sequence | number | a **ledger (block)** |
 
-⚠️ **مافيه ولا واحد منهم = «معرّف وحدة π».**
-
----
-
-## خلط مفاهيم شائع
-الناس تخلط بين ثلاثة أشياء مختلفة تماماً:
-
-1. **معرّف القطعة (coin ID)** — موجود فقط في نموذج UTXO. ← **مش موجود في Pi**.
-2. **معرّف الحساب (G/M)** — يقولك **مين**، مو **العملة من وين**.
-3. **معرّف المعاملة (txid)** — يقولك **أي عملية**، مو **مصدر الحبات**.
+⚠️ **None of them is “a π unit ID”.**
 
 ---
 
-## ليش حتى «لو» وُجد، ما كانش يفيد
-- في بيتكوين (نموذج UTXO) فيه `txid:vout` لكل مخرج — ومع ذلك التحليل (chain analysis) **احتمالي** ومحدود، لأن المخرجات تُدمج وتُقسَّم.
-- في Pi (نموذج رصيد) المفهوم أصلاً **غير موجود**: أول ما تستقبل π، المبلغ **يندمج** في رصيدك كرقم واحد. ما فيه طريقة تتبع «أي π» بعتها.
+## A common conflation
+People merge three completely different things:
+
+1. **Coin ID** — exists only in a UTXO model. ← **Not present in Pi.**
+2. **Account ID (G/M)** — tells you **who**, not **where the coin came from**.
+3. **Transaction ID (txid)** — tells you **which operation**, not the **origin of the units**.
 
 ---
 
-## الخلاصة
-- ✅ صحيح: لكل **حساب** معرّف (`G`)، ولكل **معاملة** معرّف (`txid`).
-- ❌ غلط: لكل **وحدة micro-π** معرّف. **مافيهش هك شي إطلاقاً.**
-- **النتيجة:** الفطرة (fungibility) قائمة — الأصل native واحد، بلا مصدر ولا وسم.
+## Why it wouldn’t help even if it existed
+- In Bitcoin (a UTXO model) each output has a `txid:vout` — yet chain analysis is **probabilistic and limited**,
+  because outputs get merged and split.
+- In Pi (a balance model) the concept doesn’t exist at all: the moment you receive π, the amount **merges** into
+  your balance as one number. There is no way to track “which π” you sent.
 
 ---
 
-## المصادر
-- Stellar — Accounts (نموذج الرصيد + الأصل الأصلي بلا issuer):
+## Conclusion
+- ✅ True: every **account** has an ID (`G`), and every **transaction** has an ID (`txid`).
+- ❌ False: every **micro-π unit** has an ID. **No such thing exists.**
+- **Result:** fungibility holds — a single native asset, with no origin and no tag.
+
+---
+
+## Sources
+- Stellar — Accounts (balance model + native asset with no issuer):
   https://developers.stellar.org/docs/learn/fundamentals/stellar-data-structures/accounts
-- الفرق بين UTXO ونموذج الحساب:
+- UTXO vs Account model:
   https://www.alchemy.com/docs/utxo-vs-account-models
   https://bitcoin.stackexchange.com/questions/49853/utxo-model-vs-account-balance-model
-- اختبار مباشر: `examples/coin-id-check.mjs`
+- Live test: `examples/coin-id-check.mjs`

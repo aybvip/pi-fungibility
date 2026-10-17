@@ -2,13 +2,13 @@
 /**
  * provenance-check.mjs
  * ---------------------------------------------------------------------------
- * يفحص معاملة على بلوكشين Pi Mainnet ويبيّن بالضبط:
- *   - شنو ينفع أي تطبيق/منصّة تعرفو (amount, from, to, asset_type, memo)
- *   - شنو ما ينفعش تعرفو (مصدر العملة: تعدين؟ منصّة؟ تطبيق؟)
+ * Inspects a transaction on the Pi Mainnet blockchain and shows exactly:
+ *   - what any app/exchange CAN know (amount, from, to, asset_type, memo)
+ *   - what it CANNOT know (the coin's origin: mined? exchange? app?)
  *
- * بلا أي اعتماديات (يستعمل fetch الأصلي في Node 18+).
+ * Zero dependencies (uses Node's built-in fetch, Node 18+).
  *
- * التشغيل:
+ * Usage:
  *   node examples/provenance-check.mjs
  *   node examples/provenance-check.mjs <TRANSACTION_HASH>
  * ---------------------------------------------------------------------------
@@ -16,7 +16,7 @@
 
 const BASE = "https://api.mainnet.minepi.com";
 
-// معاملة حقيقية على Pi Mainnet (payment بحجم 0.8 Pi) كنموذج افتراضي.
+// A real Pi Mainnet transaction (a 0.8 Pi payment) as the default sample.
 const DEFAULT_TX =
   "e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c";
 
@@ -28,7 +28,7 @@ async function api(path) {
   return res.json();
 }
 
-const rule = () => console.log("─".repeat(72));
+const rule = () => console.log("-".repeat(74));
 
 async function main() {
   console.log("\n🔎  Pi Mainnet — Coin Provenance Check");
@@ -40,7 +40,7 @@ async function main() {
   console.log("    hash       :", tx.hash);
   console.log("    ledger     :", tx.ledger);
   console.log("    source     :", tx.source_account);
-  console.log("    memo       :", tx.memo_type, tx.memo ? JSON.stringify(tx.memo) : "—");
+  console.log("    memo       :", tx.memo_type, tx.memo ? JSON.stringify(tx.memo) : "-");
   console.log("    successful :", tx.successful);
   rule();
 
@@ -54,10 +54,10 @@ async function main() {
       console.log("      to        :", op.to);
       console.log("      amount    :", op.amount);
       const kind = op.asset_type === "native"
-        ? 'native  (Pi — no issuer, cannot be traced to an origin)'
+        ? 'native  (Pi - no issuer, cannot be traced to an origin)'
         : `${op.asset_code}/${op.asset_issuer}  (custom token)`;
       console.log("      asset     :", kind);
-      // حقول Muxed (CAP-27): تزيد معلومة عن *الطرف الآخر* فقط، مو عن مصدر العملة.
+      // Muxed fields (CAP-27): identify the *counterparty* only, never the coin's origin.
       // (Stellar: muxed accounts don't exist on the ledger.)
       if (op.from_muxed) console.log("      from(M)   :", op.from_muxed, "#", op.from_muxed_id);
       if (op.to_muxed) console.log("      to(M)     :", op.to_muxed, "#", op.to_muxed_id);
@@ -65,26 +65,26 @@ async function main() {
   }
   rule();
 
-  console.log("✅  ما ينفع أي تطبيق/منصّة تعرفو (Available to the app):");
-  console.log("      • المبلغ (amount)");
-  console.log("      • عنوان المرسل (from_address)");
-  console.log("      • عنوان المستلم (to_address)");
-  console.log("      • المذكرة (memo)");
-  console.log("      • معرّف المعاملة (txid)");
-  console.log('      • نوع الأصل = "native"');
+  console.log("✅  What any app/exchange CAN see:");
+  console.log("      • amount");
+  console.log("      • sender address (from_address)");
+  console.log("      • recipient address (to_address)");
+  console.log("      • memo");
+  console.log("      • transaction id (txid)");
+  console.log('      • asset type = "native"');
   rule();
 
-  console.log("🚫  ما ينفعش تعرفو إطلاقاً (NOT available — impossible):");
-  console.log("      • هل العملة معدّنة أم مسحوبة من OKX/Bitget");
-  console.log("      • أي \"مصدر\" أو \"وسم\" أو \"taint\" للعملة");
-  console.log("      • تاريخ التعدين لكل وحدة");
-  console.log("      ← لأنه ببساطة ما فيه هك الحقل لا في السلسلة ولا في الـ SDK.");
+  console.log("🚫  What it CANNOT know (impossible):");
+  console.log("      • whether the coin was mined or withdrawn from OKX/Bitget");
+  console.log('      • any "origin", "tag" or "taint" of the coin');
+  console.log("      • a mining date per unit");
+  console.log("      <- simply because no such field exists on-chain or in the SDK.");
   rule();
-  console.log("ℹ️  ملاحظة عن عناوين M (Muxed Accounts, CAP-27):");
-  console.log("      • M = عنوان G + رقم؛ ما يوجدش على السلسلة (فقط G هو الحقيقي).");
-  console.log("      • الشبكة تعامله كأنك ما استعملتش muxing أبداً (نفس native π).");
-  console.log("      • لو ظهر from_muxed/to_muxed، هذي تعرّفك بالطرف الآخر فقط،");
-  console.log("        وليس بمصدر العملة. التمييز يبقى مستحيلاً.");
+  console.log("ℹ️  Note on M addresses (Muxed Accounts, CAP-27):");
+  console.log("      • M = a G address + a number; it does not exist on the ledger (only G is real).");
+  console.log("      • The network treats it exactly as if no muxing were used (same native pi).");
+  console.log("      • If from_muxed/to_muxed appear, they identify the counterparty only,");
+  console.log("        not the coin's origin. Differentiation remains impossible.");
   rule();
   console.log("");
 }

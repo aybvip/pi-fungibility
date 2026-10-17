@@ -2,14 +2,14 @@
 /**
  * coin-id-check.mjs
  * ---------------------------------------------------------------------------
- * يثبت إنّ بلوكشين Pi / Stellar ما عندهاش «معرّف لكل وحدة» (micro-π).
+ * Proves that the Pi / Stellar blockchain has NO per-unit (micro-pi) ID.
  *
- * النموذج المستعمل = Account / Balance  (رصيد رقمي واحد لكل حساب)
- *                    مو UTXO              (معرّف لكل قطعة نقدية)
+ * The model is Account / Balance (a single numeric balance per account),
+ * NOT UTXO (an ID per coin).
  *
- * بلا أي اعتماديات (fetch الأصلي في Node 18+).
+ * Zero dependencies (uses Node's built-in fetch, Node 18+).
  *
- * التشغيل:
+ * Usage:
  *   node examples/coin-id-check.mjs
  *   node examples/coin-id-check.mjs <G_ACCOUNT>
  * ---------------------------------------------------------------------------
@@ -25,53 +25,53 @@ async function api(path) {
   return res.json();
 }
 
-const rule = () => console.log("─".repeat(74));
+const rule = () => console.log("-".repeat(74));
 
 async function main() {
-  console.log("\n🪙  Pi / Stellar — هل لكل وحدة (micro-π) معرّف خاص؟");
+  console.log("\n🪙  Pi / Stellar — does every unit (micro-pi) have its own ID?");
   console.log("    account:", ACCOUNT);
   rule();
 
-  // 1) الرصيد: رقم واحد فقط — لا قائمة قطع ولا معرّفات.
+  // 1) Balance: just one number - no list of pieces, no IDs.
   const acc = await api(`/accounts/${ACCOUNT}`);
-  console.log("📦  raw balances (مباشرة من السلسلة):");
+  console.log("📦  raw balances (straight from the chain):");
   console.log(JSON.stringify(acc.balances, null, 2));
   rule();
 
   const native = acc.balances.find((b) => b.asset_type === "native");
-  console.log("🧮  الرصيد الأصلي (native π):");
-  console.log(`      balance = "${native.balance}"   ← رقم واحد فقط`);
-  console.log("      ← ما فيهش مصفوفة قطع، ولا معرّف لأي وحدة، ولا txid لكل π.");
+  console.log("🧮  Native balance (native pi):");
+  console.log(`      balance = "${native.balance}"   <- a single number only`);
+  console.log("      <- no array of pieces, no per-unit ID, no txid for each pi.");
   rule();
 
-  // 2) العمليات: المبالغ أرقام مجرّدة (scalars)، مو مراجع لقطع.
+  // 2) Operations: amounts are plain scalars, not references to pieces.
   const ops = await api(`/accounts/${ACCOUNT}/operations?order=desc&limit=5`);
-  console.log("🔁  آخر 5 عمليات (المبالغ مجرّدة):");
+  console.log("🔁  Last 5 operations (amounts are plain scalars):");
   for (const op of ops._embedded.records) {
-    const amt = op.amount ? `${op.amount} ${op.asset_type === "native" ? "π" : op.asset_code}` : op.type;
+    const amt = op.amount ? `${op.amount} ${op.asset_type === "native" ? "pi" : op.asset_code}` : op.type;
     console.log(`      id=${op.id}  type=${op.type}  amount=${amt}`);
   }
-  console.log("      ← الـid هنا معرّف *العملية*، مو معرّف *قطعة نقدية*.");
+  console.log("      <- this id identifies the *operation*, not a *coin*.");
   rule();
 
-  // 3) المعرّفات اللي توجد فعلاً — وشنو تعرّف.
-  console.log("🆔  المعرّفات الموجودة فعلاً في Pi/Stellar (ومهمّتها):");
-  console.log("      • G...   Account ID        → يعرّف *حساب*، مو قطعة");
-  console.log("      • M...   Muxed Account ID  → يعرّف *مستخدم داخل حساب مجمّع*");
-  console.log("      • C...   Contract ID       → يعرّف *عقد*");
-  console.log("      • txid   Transaction Hash  → يعرّف *معاملة*");
-  console.log("      • op.id  Operation ID      → يعرّف *عملية*");
-  console.log("      • cb-id  Claimable Balance → يعرّف *صندوق رصيد مقفول* (مو قطعة)");
-  console.log("      • ledger Ledger Sequence   → يعرّف *كتلة*");
-  console.log("      ← مافيش أي واحد منهم = «معرّف وحدة π».");
+  // 3) The IDs that actually exist - and what each identifies.
+  console.log("🆔  IDs that really exist on Pi/Stellar (and their purpose):");
+  console.log("      • G...   Account ID        -> identifies an *account*, not a piece");
+  console.log("      • M...   Muxed Account ID  -> identifies a *user inside a pooled account*");
+  console.log("      • C...   Contract ID       -> identifies a *contract*");
+  console.log("      • txid   Transaction Hash  -> identifies a *transaction*");
+  console.log("      • op.id  Operation ID      -> identifies an *operation*");
+  console.log("      • cb-id  Claimable Balance -> identifies a *locked balance container* (not a piece)");
+  console.log("      • ledger Ledger Sequence   -> identifies a *block*");
+  console.log("      <- none of them is a 'pi unit ID'.");
   rule();
 
-  // 4) الخلاصة.
-  console.log("✅  الخلاصة:");
-  console.log("      • Pi تستعمل نموذج Account/Balance (مثل بنك: رصيد = رقم).");
-  console.log("      • ما فيهاش UTXO (مثل بيتكوين: معرّف لكل مخرج).");
-  console.log("      • 1 π = 10,000,000 micro-π = مجرّد *خانة عشرية*، مو معرّف.");
-  console.log("      • لذلك «كل micro-π عندها ID» غلط، والتفرقة بالمصدر مستحيلة.");
+  // 4) Conclusion.
+  console.log("✅  Conclusion:");
+  console.log("      • Pi uses an Account/Balance model (like a bank: balance = a number).");
+  console.log("      • It has no UTXO (like Bitcoin: an ID per output).");
+  console.log("      • 1 pi = 10,000,000 micro-pi = merely a *decimal place*, not an ID.");
+  console.log("      • So 'every micro-pi has an ID' is false, and origin differentiation is impossible.");
   rule();
   console.log("");
 }

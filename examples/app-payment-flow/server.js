@@ -1,14 +1,15 @@
 /**
- * server.js — باكند التطبيق (Node + Express)
- * المصدر: https://docs.minepi.com/accept-payment/Payments
+ * server.js — the app backend (Node + Express)
+ * Source: https://docs.minepi.com/accept-payment/Payments
  *
- * الدليل:
- *   بعد ما تكمّل الدفع، الباكند يعمل GET /v2/payments/{paymentId} ويرجّع PaymentDTO.
- *   هذا الردّ الكامل — ونطبع مفاتيحه — ليثبت أنه لا يحتوي أي حقل "مصدر".
+ * The proof:
+ *   After a payment completes, the backend calls GET /v2/payments/{paymentId} and receives the
+ *   returned PaymentDTO. This is the complete response — and we print its keys — to show it
+ *   contains no "origin" field whatsoever.
  *
- * ⚠️ ملاحظة: PI_API_KEY سيرفر فقط — لا تكتبه في الفرونت.
+ * ⚠️ Note: PI_API_KEY is server-only — never put it in the frontend.
  *
- * التشغيل:
+ * Usage:
  *   npm i express
  *   PI_API_KEY=xxx node examples/app-payment-flow/server.js
  */
@@ -18,12 +19,12 @@ const app = express();
 app.use(express.json());
 
 const PI_API_BASE = "https://api.minepi.com/v2";
-const PI_API_KEY = process.env.PI_API_KEY; // <-- من Pi Developer Portal
+const PI_API_KEY = process.env.PI_API_KEY; // <-- from the Pi Developer Portal
 
-// ── المصادقة على الباكند ────────────────────────────────────────────────────
+// -- Backend authentication -------------------------------------------------
 const piHeaders = () => ({ Authorization: `Key ${PI_API_KEY}` });
 
-// ── الموافقة على الدفع (Phase I) ────────────────────────────────────────────
+// -- Approve the payment (Phase I) ------------------------------------------
 app.post("/api/payments/approve", async (req, res) => {
   const { paymentId } = req.body;
   try {
@@ -37,7 +38,7 @@ app.post("/api/payments/approve", async (req, res) => {
   }
 });
 
-// ── إكمال الدفع (Phase III) + طباعة حقول PaymentDTO ──────────────────────────
+// -- Complete the payment (Phase III) + print the PaymentDTO fields ----------
 app.post("/api/payments/complete", async (req, res) => {
   const { paymentId, txid } = req.body;
   try {
@@ -49,26 +50,26 @@ app.post("/api/payments/complete", async (req, res) => {
     const payment = await r.json();
 
     if (r.ok) {
-      // هذه هي البيانات الكاملة المتاحة للتطبيق عن الدفعة:
-      console.log("\n===== PaymentDTO الكامل من Platform API =====");
+      // This is the complete data the app has about the payment:
+      console.log("\n===== Full PaymentDTO from the Platform API =====");
       console.dir(payment, { depth: null });
 
       const keys = Object.keys(payment);
-      console.log("\nالحقول المتوفرة:", keys.join(", "));
+      console.log("\nAvailable fields:", keys.join(", "));
       console.log(
-        "\n🚫 هل يوجد حقل للمصدر (origin/mining/exchange)؟ ->",
+        "\n🚫 Is there an origin field (origin/mining/exchange)? ->",
         ["origin", "source", "mining", "exchange", "provenance"].some((k) => keys.includes(k))
-          ? "نعم"
-          : "لا — غير موجود"
+          ? "Yes"
+          : "No - not present"
       );
       console.log(
-        "👉 التطبيق يشوف فقط: amount + from_address + to_address + memo + txid."
+        "👉 The app sees only: amount + from_address + to_address + memo + txid."
       );
       console.log(
-        "👉 ما يقدرش يعرف: هل الـπ معدّنة أم مسحوبة من OKX/Bitget.\n"
+        "👉 It cannot know: whether the pi was mined or withdrawn from OKX/Bitget.\n"
       );
 
-      // هنا تسلّم المنتج الرقمي بعد التأكيد فقط
+      // Deliver the digital product only after confirmation, here.
     }
 
     res.status(r.status).json(payment);

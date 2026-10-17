@@ -1,42 +1,41 @@
-# مصادر رسمية (Official Sources) — تم التحقق منها
+# Official Sources — verified
 
-> كل الاقتباسات منقولة حرفياً من الوثائق الرسمية لـ Pi Network / Pi Apps.
+> All quotes are transcribed verbatim from Pi Network / Pi Apps official documentation.
 
 ---
 
-## 1. Pi Docs — الموقع الرسمي (2026)
+## 1. Pi Docs — official site (2026)
 - https://docs.minepi.com/
 
 ## 2. Pi Wallet & SDK (`window.Pi.Wallet`)
 - https://docs.minepi.com/use-native-features/Wallet
 
-اقتباسات:
-> «The Pi Network JS SDK exposes wallet-related operations and blockchain interactions via the `window.Pi.Wallet` module.»
-> «Transactions must be pre-signed; the SDK does not build or sign transactions for you. See [Stellar docs](https://developers.stellar.org/docs/tools/lab/transactions) on creating XDR.»
-> «Pi SDK authentication and payment features require the application to run inside the Pi Browser (or the Sandbox).»
+Quotes:
+> “The Pi Network JS SDK exposes wallet-related operations and blockchain interactions via the `window.Pi.Wallet` module.”
+> “Transactions must be pre-signed; the SDK does not build or sign transactions for you. See [Stellar docs](https://developers.stellar.org/docs/tools/lab/transactions) on creating XDR.”
+> “Pi SDK authentication and payment features require the application to run inside the Pi Browser (or the Sandbox).”
 
 ## 3. Accept a payment (U2A)
 - https://docs.minepi.com/accept-payment/Payments
 
-اقتباس (واجهة `createPayment`):
+`createPayment` interface:
 ```js
 window.Pi.createPayment(
   { amount: 1, memo: 'Unlock Premium', metadata: { feature: 'premium' } },
   { onReadyForServerApproval, onReadyForServerCompletion, onCancel, onError }
 );
 ```
-> «Deliver purchased features **only after** the backend receives a successful `/complete` response from Pi.»
+> “Deliver purchased features **only after** the backend receives a successful `/complete` response from Pi.”
 
 ## 4. Advanced Payments (A2U)
 - https://docs.minepi.com/accept-payment/PaymentsAdvanced
 
-اقتباس:
-> «The Pi blockchain is obviously the only source of truth for exchanging Pi.»
+Quote:
+> “The Pi blockchain is obviously the only source of truth for exchanging Pi.”
 
-## 5. Tokens — إثبات بروتوكول Stellar + الأصل الأصلي
+## 5. Tokens — proof of the Stellar protocol + the native asset
 - https://docs.minepi.com/use-native-features/Tokens
 
-اقتباس:
 ```js
 const StellarSDK = require("@stellar/stellar-sdk");
 const server = new StellarSDK.Horizon.Server("https://api.testnet.minepi.com");
@@ -51,9 +50,9 @@ updatedDistributorAccount.balances.forEach((balance) => {
   }
 });
 ```
-> ملاحظة: التوكنات تلزمها `trustline` + `issuer`، بينما الـ native ما عندهاش issuer.
+> Note: tokens require a `trustline` + `issuer`, while the native asset has neither.
 
-## 6. Platform API — تعريف `PaymentDTO` الكامل
+## 6. Platform API — full `PaymentDTO` definition
 - https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md
 - Base path: `https://api.minepi.com/v2`
 
@@ -79,7 +78,7 @@ updatedDistributorAccount.balances.forEach((balance) => {
   transaction: null | { txid: string, verified: boolean, _link: string },
 }
 ```
-> **لا يوجد أي حقل** لـ«مصدر العملة / تعدين / منصّة».
+> **No field** for “coin origin / mining / exchange”.
 
 ## 7. Community Developer Guide
 - https://pi-apps.github.io/community-developer-guide/
@@ -87,8 +86,8 @@ updatedDistributorAccount.balances.forEach((balance) => {
 ## 8. Pi SDK JS (GitHub)
 - https://github.com/pi-apps/pi-sdk-js
 
-اقتباس:
-> «`createPayment(paymentData)` – Begins a payment operation.»
+Quote:
+> “`createPayment(paymentData)` – Begins a payment operation.”
 ```ts
 interface PaymentData {
   amount: number;
@@ -97,47 +96,52 @@ interface PaymentData {
 }
 ```
 
-## 9. البلوكشين (Horizon API) — مصادر عامة
+## 9. Blockchain (Horizon API) — general references
 - Mainnet: `https://api.mainnet.minepi.com`
 - Testnet: `https://api.testnet.minepi.com`
-- مرجع Stellar للأصل الأصلي والـ base reserve: https://developers.stellar.org/docs/learn/fundamentals/stellar-data-structures/accounts
+- Stellar reference for the native asset and base reserve: https://developers.stellar.org/docs/learn/fundamentals/stellar-data-structures/accounts
 
 ## 10. Whitepaper / Tokenomics
 - https://minepi.com/white-paper
 - https://minepi.com/blog/mainnet-migrations-roadmap-and-tokenomics/
 
-## 11. Muxed Accounts (عناوين M) — CAP-27
+## 11. Muxed Accounts (`M...`) — CAP-27
 - Stellar — Pooled accounts / Muxed accounts / Memos:
   https://developers.stellar.org/docs/build/guides/transactions/pooled-accounts-muxed-accounts-memos
-  > «Muxed accounts **do not exist on the ledger**, but their shared underlying `GABC…` account does.»
-  > «There’s no validation on IDs and as far as the Stellar network is concerned, all supported operations **operate exactly as if you did not use a muxed account**.»
+  > “Muxed accounts **do not exist on the ledger**, but their shared underlying `GABC…` account does.”
+  > “There’s no validation on IDs and as far as the Stellar network is concerned, all supported operations **operate exactly as if you did not use a muxed account**.”
 - CAP-27 spec: https://github.com/stellar/stellar-protocol/blob/master/core/cap-0027.md
-- Bitget — عنوان إيداع Pi (يبدأ بـ M):
+- Bitget — Pi deposit address (starts with M):
   https://www.bitget.com/academy/how-to-securely-deposit-pi-coin-to-bitget
-  > «Your PI deposit address will appear (usually starting with "M").»
+  > “Your PI deposit address will appear (usually starting with "M").”
 
-## 12. نموذج الرصيد (Account/Balance) vs UTXO — «معرّف لكل micro-π»
-- Stellar — Accounts (رصيد رقمي واحد، الأصل الأصلي بلا issuer):
+## 12. Account/Balance model vs UTXO — “an ID per micro-π”
+- Stellar — Accounts (a single numeric balance; native asset has no issuer):
   https://developers.stellar.org/docs/learn/fundamentals/stellar-data-structures/accounts
 - UTXO vs Account model:
   https://www.alchemy.com/docs/utxo-vs-account-models
   https://bitcoin.stackexchange.com/questions/49853/utxo-model-vs-account-balance-model
-- اختبار مباشر: `examples/coin-id-check.mjs` (يبيّن أنّ الرصيد رقم واحد، والمعرّفات كلها لحسابات/معاملات، مو لوحدات).
+- Live test: `examples/coin-id-check.mjs`.
 
-## 13. ورقة MiCA الرسمية (Pi Network — MiCAR whitepaper)
+## 13. Official MiCA Whitepaper (Pi Network — MiCAR whitepaper)
 - 🔗 https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf
-- النشر: 2025-11-27 · بداية الإدراج: 2025-11-28 · الدولة المضيفة: مالطا.
-- اقتباسات حاسمة (نصّ حرفي):
-  > **F.2:** «Pi is the **native, fungible digital asset** of the Pi Network Layer 1 blockchain.»
-  > **F.14:** «**Functionally Fungible Group** Digital Token Identifier: **2Z2WZP5KM**»
-  > **G.3:** «The Pi token and its' on chain functionalities are **immutable**. No modifications to transactions or the current blockchain ledger history can be made by anyone, **including the issuer**.»
-  > **G.11 (Transfer Restrictions):** «Not applicable»
-  > **G.4:** «Pi tokens are only available through mining. Individuals… that have mined tokens may elect to **sell tokens on the secondary market**…»
-  > **E.2:** «The issuer is seeking admission to **secondary trading only**, through which the issuer will not gain any direct proceeds.»
+- Published: 2025-11-27 · Start of admission to trading: 2025-11-28 · Home Member State: Malta.
+- Key verbatim quotes:
+  > **F.2:** “Pi is the **native, fungible digital asset** of the Pi Network Layer 1 blockchain.”
+  > **F.14:** “**Functionally Fungible Group** Digital Token Identifier: **2Z2WZP5KM**”
+  > **G.3:** “The Pi token and its’ on chain functionalities are **immutable**. No modifications to transactions or the current blockchain ledger history can be made by anyone, **including the issuer**.”
+  > **G.11 (Transfer Restrictions):** “Not applicable”
+  > **G.4:** “Pi tokens are only available through mining. Individuals… that have mined tokens may elect to **sell tokens on the secondary market**…”
+  > **E.2:** “The issuer is seeking admission to **secondary trading only**, through which the issuer will not gain any direct proceeds.”
 
-## 14. «لا تشتروا Pi» — سياسة Enclosed Mainnet (منتهية)
-- Enclosed Network (firewall يمنع الاتصال الخارجي): https://minepi.com/blog/open-network-launch-date/
-  > «…the launch of the **Enclosed Network period**, which meant Mainnet was live but with a **firewall that prevents any external connectivity**.»
-- Open Network (انتُزع الـfirewall + CEX): https://minepi.com/blog/open-network/
-  > «With Open Network, **the firewall that was in place during Enclosed Network has been removed**.»
-  > «…**support for integrations with centralized exchanges (CEXs) and onramps to provide additional means of acquiring Pi**…»
+## 14. “Don’t buy Pi” — Enclosed Mainnet policy (now expired)
+- Enclosed Network (firewall blocks external connectivity): https://minepi.com/blog/open-network-launch-date/
+  > “…the launch of the **Enclosed Network period**, which meant Mainnet was live but with a **firewall that prevents any external connectivity**.”
+- Open Network (firewall removed + CEX): https://minepi.com/blog/open-network/
+  > “With Open Network, **the firewall that was in place during Enclosed Network has been removed**.”
+  > “…**support for integrations with centralized exchanges (CEXs) and onramps to provide additional means of acquiring Pi**…”
+
+## 15. Fungibility vs price — same asset, different venue prices
+- CryptoRank — Pi price spread across exchanges: https://cryptorank.io/price/pi-network-1/arbitrage
+- arb.sh — PI spread (OKX vs Bitget): https://arb.sh/arbitrage/crypto/pi/okx-vs-bitget
+- Investopedia — Kimchi Premium (same BTC, different price): https://www.investopedia.com/terms/k/kimchi-premium.asp

@@ -1,59 +1,68 @@
-# FAQ — «Pi قالت لا تشتروا Pi» (قبل 2025)
+# FAQ — “Pi said: don’t buy Pi” (before 2025)
 
-## الادّعاء
-> ناس يرسلوا إثبات (لقطات/بيانات) إنّ Pi Network كانت تقول: **«Do not buy Pi»** و **«buying or selling Pi is not allowed»**، قبل سنة 2025 — ويستنتجوا إنّ شراء π ممنوع أو إنّ π المنصّات مو شرعية.
+## The claim
+> People share proof (screenshots/statements) that Pi Network said **“Do not buy Pi”** and **“buying or selling
+> Pi is not allowed”** before 2025 — concluding that buying Pi is prohibited or that exchange Pi isn’t legitimate.
 
-## الجواب: هذي **سياسة Enclosed Mainnet** — انتهت رسمياً في **20 فبراير 2025**
+## The answer: this was **Enclosed Mainnet** policy — officially ended on **February 20, 2025**
 
-### 1. السياق الزمني (وقت القاعدة)
-في المرحلة **Enclosed Mainnet** (من ديسمبر 2021 إلى 20 فبراير 2025) كان هناك **جدار ناري (firewall)** يمنع أي اتصال خارجي.
+### 1. The time context (when the rule applied)
+During the **Enclosed Mainnet** phase (December 2021 → February 20, 2025) there was a **firewall** blocking all
+external connectivity.
 
-> **رسمي (Pi):** «The current Mainnet Phase 3 began in December 2021 with the launch of the **Enclosed Network period**, which meant Mainnet was live but with a **firewall that prevents any external connectivity**.»
+> **Official (Pi):** “The current Mainnet Phase 3 began in December 2021 with the launch of the **Enclosed Network
+> period**, which meant Mainnet was live but with a **firewall that prevents any external connectivity**.”
 > 🔗 https://minepi.com/blog/open-network-launch-date/ (2025-02-11)
 
-وبما أنّ Pi كانت **غير مُدرَجة على أي منصّة**، فكل من «يبيع Pi» كان **نصّاباً**:
-> «Do not buy Pi cryptocurrency from any crypto exchange. **Our Pi token is not listed on any crypto exchange.**» (توجيه Pi وقتها)
+And since Pi was **not listed on any exchange**, anyone “selling Pi” was a **scammer**:
+> “Do not buy Pi cryptocurrency from any crypto exchange. **Our Pi token is not listed on any crypto exchange**.”
+> (Pi’s guidance at the time)
 
-👉 فالقاعدة كانت **حماية من النصب** (لأنّ الشراء الشرعي كان أصلاً مستحيلاً)، **مو حكم على طبيعة العملة**.
+👉 So the rule was **anti-scam protection** (a legitimate purchase was impossible), **not a judgment about the
+asset’s nature**.
 
-### 2. القاعدة انتُسخت رسمياً — Open Network
-> **رسمي (Pi):** «With Open Network, **the firewall that was in place during Enclosed Network has been removed**.»
-> «Pioneers are also able to engage in **transactions beyond the Pi ecosystem**.»
-> «Open Network also brings **support for integrations with centralized exchanges (CEXs) and onramps to provide additional means of acquiring Pi** for use in the Pi ecosystem.»
+### 2. The rule was officially repealed — Open Network
+> **Official (Pi):** “With Open Network, **the firewall that was in place during Enclosed Network has been removed**.”
+> “Pioneers are also able to engage in **transactions beyond the Pi ecosystem**.”
+> “Open Network also brings **support for integrations with centralized exchanges (CEXs) and onramps to provide
+> additional means of acquiring Pi** for use in the Pi ecosystem.”
 > 🔗 https://minepi.com/blog/open-network/ (2025-02-19)
 
-👉 يعني **Pi نفسها** بعد 20 فبراير 2025 صارت **تَعتبر المنصّات وسيلة رسمية للشراء** («additional means of acquiring Pi»).
+👉 After Feb 20, 2025, **Pi itself** treats exchanges as an **official way to acquire Pi** (“additional means of
+acquiring Pi”).
 
-### 3. تأكيد قانوني إضافي — ورقة MiCA (نوفمبر 2025)
-> **F.2:** «…facilitate transfers and **lawful secondary-market trading on compliant platforms**.»
-> **E.2:** «The issuer is seeking admission to **secondary trading only**…»
+### 3. Legal corroboration — the MiCA whitepaper (Nov 2025)
+> **F.2:** “…facilitate transfers and **lawful secondary-market trading on compliant platforms**.”
+> **E.2:** “The issuer is seeking admission to **secondary trading only**…”
 > 🔗 https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf
 
-### 4. ليش هذا ما يخصّ الفطرة إطلاقاً
-- «لا تشتروا Pi» = **سياسة مؤقتة مرتبطة بالشبكة المغلقة**، مو **خاصية تقنية**.
-- **ما تفرّقش** بين π معدّنة و π منصّة، ولا تعني أنّهم أصلان مختلفان.
-- بالعكس: تأكّد إنّ **المصدر واحد = التعدين** (لا بيع أوّلي)، والمنصّات **سوق ثانوي**.
+### 4. Why this doesn’t touch fungibility at all
+- “Don’t buy Pi” was a **temporary policy tied to the closed network** — not a **technical property**.
+- It **does not differentiate** mined π from exchange π, and does not make them two different assets.
+- In fact it confirms **a single origin = mining** (no primary sale); exchanges are the **secondary market**.
 
 ---
 
-## الجدول: كيف تغيّرت القاعدة
-| الفترة | القاعدة الرسمية |
+## Table: how the rule changed
+| Period | Official rule |
 |---|---|
-| **Enclosed Mainnet** (ديسمبر 2021 – 20 فبراير 2025) | ممنوع الشراء/البيع · **firewall** يمنع الاتصال الخارجي · Pi غير مُدرَجة |
-| **Open Network** (20 فبراير 2025 – الآن) | **الـfirewall انتُزع** · تكامل **CEX** · «additional means of acquiring Pi» |
-| **MiCA whitepaper** (نوفمبر 2025) | «**lawful secondary-market trading**» · «admission to trading» |
+| **Enclosed Mainnet** (Dec 2021 → Feb 20, 2025) | buying/selling prohibited · **firewall** blocks external connectivity · Pi not listed |
+| **Open Network** (Feb 20, 2025 → now) | **firewall removed** · **CEX** integration · “additional means of acquiring Pi” |
+| **MiCA whitepaper** (Nov 2025) | “**lawful secondary-market trading**” · “admission to trading” |
 
 ---
 
-## الخلاصة
-> من يستشهد بـ «لا تشتروا Pi» يستشهد **بوثيقة منتهية الصلاحية**.
-> **Pi نفسها** نسختها رسمياً في **20 فبراير 2025** (Open Network)، وصارت المنصّات **وسيلة شراء معترف بها**.
+## Conclusion
+> Whoever cites “don’t buy Pi” is citing an **expired document**.
+> **Pi itself** repealed it on **February 20, 2025** (Open Network), and exchanges became an **officially
+> recognized way to buy**.
 
-وهذا — مرة أخرى — **لا يمسّ الفطرة**: ما زال π = π، بلا تفريق بين معدّنة ومنصّة.
+And once again, this **does nothing to fungibility**: π is still π, with no distinction between mined and
+exchange Pi.
 
 ---
 
-## المصادر الرسمية
+## Official sources
 - Open Network date announcement (firewall / Enclosed Network): https://minepi.com/blog/open-network-launch-date/
 - Open Network launch (firewall removed + CEX): https://minepi.com/blog/open-network/
 - MiCA whitepaper (secondary-market trading): https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf

@@ -1,33 +1,35 @@
-# PROOF — البرهان: صاحب التطبيق ما يقدرش يفرّق مصدر الـπ
+# PROOF — An app owner cannot tell where the π came from
 
-هدف هذا الملف: إثبات الادّعاء التالي بدليل رسمي + كود:
+This file proves the following claim with official evidence + code:
 
-> **لا يمكن لصاحب تطبيق Pi (ولا لمنصّة) أن يحدّد ما إذا كانت π الواصلة أصلها تعدين، أم مسحوبة من منصّة (OKX/Bitget)، أم من تطبيق آخر.**
-
----
-
-## 0) المنطق العام
-
-```
-        [ المُرسِل ]  (معدّن / OKX / Bitget / تطبيق)
-              |
-              |  عملية Stellar: payment { amount, asset_type: "native" }
-              v
-     [ بلوكشين Pi Mainnet ]  ← المصدر الوحيد للحقيقة
-              |
-              |  الحقول الظاهرة: amount, from, to, memo, txid
-              v
-   [ تطبيقك: Pi SDK + Platform API ]  ← ما عنده أي حقل "مصدر"
-```
-
-إذا كانت **البيانات المتاحة للتطبيق** لا تحتوي على حقل «مصدر»، و**البلوكشين** لا يسجّل مصدر الوحدات، إذن **يستحيل** التفريق.
+> **Neither a Pi app owner nor an exchange can determine whether an incoming π was originally mined, withdrawn
+> from an exchange (OKX/Bitget), or sent from another app.**
 
 ---
 
-## 1) البرهان على مستوى البلوكشين
+## 0) The general logic
 
-### 1.1 Pi = بروتوكول Stellar (رسمي)
-توثيق Pi الرسمي لإنشاء التوكنات يستعمل نفس مكتبة Stellar:
+```
+        [ SENDER ]  (miner / OKX / Bitget / app)
+              |
+              |  Stellar operation: payment { amount, asset_type: "native" }
+              v
+     [ Pi Mainnet blockchain ]  ← the only source of truth
+              |
+              |  visible fields: amount, from, to, memo, txid
+              v
+   [ your app: Pi SDK + Platform API ]  ← has no "origin" field
+```
+
+If the **data available to the app** contains no “origin” field, and the **blockchain** does not record the
+origin of individual units, then differentiation is **impossible**.
+
+---
+
+## 1) The proof at the blockchain level
+
+### 1.1 Pi = the Stellar protocol (official)
+Pi’s official docs for issuing tokens use the Stellar library:
 ```js
 const StellarSDK = require("@stellar/stellar-sdk");
 const server = new StellarSDK.Horizon.Server("https://api.testnet.minepi.com");
@@ -35,18 +37,18 @@ const NETWORK_PASSPHRASE = "Pi Testnet";
 ```
 🔗 https://docs.minepi.com/use-native-features/Tokens
 
-### 1.2 الأصل الأصلي (native) بلا issuer
-- أي توكن يلزمه `issuer` + `trustline` ويظهر بـ `asset_code/asset_issuer`.
-- الـ **native** ما عندوش لا issuer لا code.
-- ولهذا مصفوفة `balances` في ردّ الحساب تعطيك:
+### 1.2 The native asset has no issuer
+- Any token requires an `issuer` + `trustline` and shows `asset_code/asset_issuer`.
+- The **native** asset has neither issuer nor code.
+- So the account’s `balances` array gives you:
 ```json
 { "balance": "2.0000000", "asset_type": "native" }
 ```
-**لا يوجد حقل مصدر** ولا «تاريخ تعدين» على السلسلة.
+There is **no origin field** and no “mining history” on-chain.
 
-### 1.3 السلسلة تسجّل الأرصدة لا الحبات
-الحقل الوحيد المتعلق بالطرف الآخر هو **عنوان المرسل** (`from`) + **المذكرة** (`memo`).
-مثال حقيقي (شغّل `examples/provenance-check.mjs`):
+### 1.3 The ledger records balances, not coins
+The only fields about the counterparty are the **sender address** (`from`) and the **memo** (`memo`).
+A real example (run `examples/provenance-check.mjs`):
 ```
 type        : payment
 from        : G...
@@ -54,18 +56,18 @@ to          : G...
 amount      : 0.8000000
 asset_type  : native   (no issuer)
 ```
-العنوان يقول **مين**، مو **العملة من وين**.
+An address tells you **who**, not **where the coin came from**.
 
 ---
 
-## 2) البرهان على مستوى Pi Wallet SDK
+## 2) The proof at the Pi Wallet SDK level
 
-توثيق Pi الرسمي (Wallet & SDK):
-> «The Pi Network JS SDK exposes wallet-related operations ... via the `window.Pi.Wallet` module.»
-> «**Transactions must be pre-signed; the SDK does not build or sign transactions for you.**»
+Official Pi docs (Wallet & SDK):
+> “The Pi Network JS SDK exposes wallet-related operations … via the `window.Pi.Wallet` module.”
+> “**Transactions must be pre-signed; the SDK does not build or sign transactions for you.**”
 🔗 https://docs.minepi.com/use-native-features/Wallet
 
-وواجهة الدفع (`Pi.createPayment`) — الحقول المسموحة رسمياً:
+And the payment interface (`Pi.createPayment`) — officially allowed fields:
 ```js
 Pi.createPayment(
   { amount: 1, memo: 'Unlock Premium', metadata: { feature: 'premium' } },
@@ -74,14 +76,14 @@ Pi.createPayment(
 ```
 🔗 https://docs.minepi.com/accept-payment/Payments
 
-👉 **amount / memo / metadata فقط.** `metadata` كاتبها المطوّر نفسه، ماهي معلومة عن العملة.
-لذلك لا الـ SDK ولا العملية (payment من نوع native) تحمل أي معلومة عن مصدر الـπ.
+👉 **amount / memo / metadata only.** `metadata` is written by the developer — it is not information about the
+coin. So neither the SDK nor the operation (a native `payment`) carries any coin-origin data.
 
 ---
 
-## 3) البرهان على مستوى Platform API (`PaymentDTO`)
+## 3) The proof at the Platform API level (`PaymentDTO`)
 
-التعريف الرسمي الكامل (من `pi-platform-docs/platform_API.md`):
+The full official definition (from `pi-platform-docs/platform_API.md`):
 
 ```ts
 {
@@ -90,8 +92,8 @@ Pi.createPayment(
   amount: number,
   memo: string,
   metadata: Object,
-  from_address: string,      // عنوان المرسل فقط
-  to_address: string,        // عنوان المستلم فقط
+  from_address: string,      // sender address only
+  to_address: string,        // recipient address only
   direction: Direction,
   created_at: string,
   network: AppNetwork,
@@ -101,38 +103,55 @@ Pi.createPayment(
 ```
 🔗 https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md
 
-عدد الحقول = 0 تخصّ «مصدر العملة».
-وحتى الـ A2U (تطبيق يدفع للمستخدم) التوثيق الرسمي يقول:
-> «The Pi blockchain is obviously the only source of truth for exchanging Pi.»
+Number of fields about “coin origin” = **0**.
+Even for A2U (app paying a user), the official docs say:
+> “The Pi blockchain is obviously the only source of truth for exchanging Pi.”
 🔗 https://docs.minepi.com/accept-payment/PaymentsAdvanced
 
 ---
 
-## 4) خطوات التحقق بنفسك (Runnable)
+## 4) Verify it yourself (runnable)
 
 ```bash
-# 1) افحص معاملة على السلسلة مباشرة (بلا أي مكتبة)
+# 1) Inspect a transaction on-chain directly (no libraries)
 node examples/provenance-check.mjs
 
-# 2) شوف حقول PaymentDTO الرسمية ومافيهاش مصدر
+# 2) See the official PaymentDTO fields — no origin
 cat examples/payment-dto-sample.json
 
-# 3) اقرأ واجهة الدفع الرسمية
+# 3) Read the official payment interface
 cat examples/app-payment-flow/frontend.html
 ```
 
-**النتيجة:** في كل الطبقات، اللي تشوفو هو **مبلغ + عنوان + مذكرة**، **ومافيهش** «مصدر/تعدين/منصّة».
+**Result:** at every layer, all you see is **amount + address + memo**, and **no** “origin/mining/exchange”.
 
 ---
 
-## 5) الاستنتاج
+## 5) Official corroboration: the MiCA whitepaper
 
-| الطبقة | هل يوجد حقل «مصدر العملة»؟ |
+Pi’s **MiCA whitepaper** (Nov 2025) states:
+> **F.2:** “Pi is the **native, fungible digital asset** of the Pi Network Layer 1 blockchain.”
+> **F.14:** “**Functionally Fungible Group** Digital Token Identifier: 2Z2WZP5KM”
+> **G.3:** “The Pi token and its’ on chain functionalities are **immutable**. No modifications to transactions
+> or the current blockchain ledger history can be made by anyone, **including the issuer**.”
+> **G.11 (Transfer Restrictions):** “Not applicable”
+🔗 https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf
+
+See [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md).
+
+---
+
+## 6) Conclusion
+
+| Layer | “Coin origin” field? |
 |---|---|
-| البلوكشين (Horizon) | ❌ لا |
-| Pi Wallet SDK (`window.Pi`) | ❌ لا |
-| Platform API (`PaymentDTO`) | ❌ لا |
+| Blockchain (Horizon) | ❌ No |
+| Pi Wallet SDK (`window.Pi`) | ❌ No |
+| Platform API (`PaymentDTO`) | ❌ No |
+| Official MiCA whitepaper | ❌ No — instead: **“native, fungible”** |
 
-**إذن:** صاحب التطبيق — بالضبط مثل أي شخص آخر — **ما يمكنش** يفرّق بين π معدّنة و π جاية من OKX/Bitget. كلهم نفس الأصل الأصلي (native)، ومن نفس الحجم والقيمة والفطرة.
+**Therefore:** an app owner — exactly like everyone else — **cannot** distinguish mined π from π that came from
+OKX/Bitget. They are the same native asset, with the same value and the same nature.
 
-> ⚠️ استثناء واحد مهم: إذا المنصّة/التطبيق يستعمل **IOU أو توكن وسيط** (مو native)، فهذا يفرق — لأنه أصلاً مو π حقيقية على السلسلة. تحقّق دائماً من `asset_type` و `issuer`.
+> ⚠️ One important exception: if an app/exchange uses an **IOU or a wrapped token** (not native), that *is* a
+> different asset. Always check `asset_type` and `issuer`.

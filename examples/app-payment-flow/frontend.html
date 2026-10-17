@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!--
-  frontend.html — واجهة الدفع الرسمية (U2A: User-To-App)
-  المصدر: https://docs.minepi.com/accept-payment/Payments
+  frontend.html — the official payment interface (U2A: User-To-App)
+  Source: https://docs.minepi.com/accept-payment/Payments
 
-  ⚠️ النقطة المهمة (الدليل):
-     Pi.createPayment تقبل فقط: amount / memo / metadata
-     → مافيش أي حقل يوصف "مصدر" العملة الواصلة.
-     صاحب التطبيق ما يقدرش يعرف إذا المرسل عدّنها ولا سحبها من OKX/Bitget.
+  ⚠️ The key point (the proof):
+     Pi.createPayment accepts only: amount / memo / metadata
+     -> There is no field describing the "origin" of the incoming coin.
+     An app owner cannot know whether the sender mined it or withdrew it from OKX/Bitget.
 -->
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,25 +16,25 @@
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 </head>
 <body>
-  <h1>π — إثبات: التطبيق ما يفرّقش مصدر العملة</h1>
-  <p>الحقول المتاحة للتطبيق: <code>amount</code>, <code>memo</code>, <code>metadata</code> فقط.</p>
-  <button id="buy">ادفع 1 π</button>
+  <h1>π — Proof: an app cannot tell where a coin came from</h1>
+  <p>Fields available to the app: <code>amount</code>, <code>memo</code>, <code>metadata</code> only.</p>
+  <button id="buy">Pay 1 π</button>
   <pre id="log"></pre>
 
   <script>
-    Pi.init({ version: "2.0", sandbox: true }); // sandbox: false في الإنتاج
+    Pi.init({ version: "2.0", sandbox: true }); // sandbox: false in production
 
     const log = (m) => (document.getElementById("log").textContent += m + "\n");
 
     async function handleAuth() {
       const auth = await window.Pi.authenticate(["username", "payments"], onIncompletePayment);
-      log(`✅ مسجّل دخول: ${auth.user.username}`);
+      log(`✅ signed in: ${auth.user.username}`);
       return auth;
     }
 
     function onIncompletePayment(payment) {
-      // أرسل payment.identifier للباكند لإكمال الدفع المقطوع
-      log("⚠️ دفعة غير مكتملة: " + payment.identifier);
+      // Send payment.identifier to your backend to complete the interrupted payment
+      log("⚠️ incomplete payment: " + payment.identifier);
     }
 
     document.getElementById("buy").addEventListener("click", async () => {
@@ -45,8 +45,8 @@
           amount: 1,
           memo: "Unlock Premium",
           metadata: { feature: "premium" }
-          // ← الحقول المسموحة الرسمية: amount / memo / metadata
-          // ← لا يوجد حقل "origin" ولا "source" ولا "mined"
+          // <- the officially allowed fields: amount / memo / metadata
+          // <- there is no "origin", "source" or "mined" field
         },
         {
           onReadyForServerApproval: async (paymentId) => {
@@ -75,8 +75,8 @@
             log("   complete: " + r.status);
           },
 
-          onCancel: (paymentId) => log("✋ ملغاة: " + paymentId),
-          onError: (error, payment) => log("❌ خطأ: " + JSON.stringify(error) + " / " + JSON.stringify(payment)),
+          onCancel: (paymentId) => log("✋ cancelled: " + paymentId),
+          onError: (error, payment) => log("❌ error: " + JSON.stringify(error) + " / " + JSON.stringify(payment)),
         }
       );
     });

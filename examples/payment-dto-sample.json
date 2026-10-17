@@ -1,5 +1,5 @@
 {
-  "_comment": "نموذج ردّ رسمي من Platform API: GET https://api.minepi.com/v2/payments/{payment_id}",
+  "_comment": "Sample response from the Platform API: GET https://api.minepi.com/v2/payments/{payment_id}",
   "_source": "https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md",
   "_note_fields_that_prove_the_point": {
     "fields_that_exist": [
@@ -8,7 +8,7 @@
     "fields_that_DO_NOT_exist": [
       "origin", "source", "mining_status", "exchange", "coin_provenance", "taint"
     ],
-    "conclusion": "لا يوجد أي حقل يدل على مصدر الـPi (تعدين / منصّة / تطبيق)."
+    "conclusion": "No field indicates the origin of the Pi (mined / exchange / app)."
   },
   "identifier": "a1b2c3d4-0000-1111-2222-333344445555",
   "user_uid": "c0ffee00-aaaa-bbbb-cccc-ddddeeeeffff",

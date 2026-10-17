@@ -1,77 +1,86 @@
-# π = π — هل Pi على المنصّات هو نفسه Pi المُعدَّن؟
+# π = π — Is Pi on exchanges the same as mined Pi?
 
-> تحليل تقني موثّق عن **التكافؤ (Fungibility)** في بلوكشين **Pi Network**:
-> ليش **صاحب التطبيق** (App owner) — حتى باستعمال **Pi Wallet SDK** و **Platform API** — **ما يقدرش يفرّق** بين:
-> -π معدّنة (مُهاجَرة من التعدين)،
-> -π مسحوبة من منصّة مثل **OKX / Bitget**،
-> -π واصلة داخل تطبيق في **Pi Browser**.
+> A **source-verified** technical analysis of **fungibility** in the **Pi Network** blockchain:
+> why an **app owner** — even with the **Pi Wallet SDK** and **Platform API** — **cannot distinguish**
+> between mined π, π withdrawn from an exchange (OKX / Bitget), and π sent from inside a Pi Browser app.
 
 [![Pi Docs](https://img.shields.io/badge/Source-docs.minepi.com-6f42c1)](https://docs.minepi.com/)
 [![Pi Developer Guide](https://img.shields.io/badge/Source-pi--apps.github.io-2ea44f)](https://pi-apps.github.io/community-developer-guide/)
 [![Platform API](https://img.shields.io/badge/Source-platform__API-0969da)](https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md)
+[![MiCA Whitepaper](https://img.shields.io/badge/Source-MiCA%20Whitepaper-ff69b4)](https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
 
----
-
-## 🎯 الخلاصة (TL;DR)
-
-من ناحية البلوكشين، **كل π متطابقة تماماً**. الأصل الأصلي (**native**) **ما عندوش issuer ولا contract**، والسلسلة تسجّل **الأرصدة (balances)** مو **«حبات» موصوفة بمصدر**. لذلك:
-
-```
-π معدّنة = π من OKX/Bitget = π داخل تطبيق Pi Browser
-```
-
-**ما فيه حقل** اسمه «المصدر» أو «التعدين» أو «منصّة» — لا في البلوكشين، ولا في الـ SDK، ولا في Platform API.
-‏الشي الوحيد اللي صاحب التطبيق يشوفو هو: **المبلغ + عنوان المرسل + عنوان المستلم + المذكرة (memo) + txid**.
+🌍 **English** · [العربية](README.ar.md)
 
 ---
 
-## 📚 المصادر الرسمية (تم التحقق منها)
+## 🎯 TL;DR
 
-كل معلومة في هذا الريبو مأخوذة من الوثائق الرسمية لـ Pi Network:
+On-chain, **every π is identical**. The native asset has **no issuer and no contract**, and the ledger records
+**balances — not “coins” tagged with an origin**. Therefore:
 
-| المصدر | الرابط | الاستعمال |
+```
+mined π = π from OKX/Bitget = π from inside a Pi Browser app
+```
+
+There is **no field** called “origin”, “mining”, or “exchange” — not on-chain, not in the SDK, and not in the
+Platform API. All an app sees is: **amount + sender address + recipient address + memo + txid**.
+
+The official MiCA whitepaper says it plainly: Pi is the **“native, fungible digital asset”** and belongs to a
+**“Functionally Fungible Group”**.
+
+---
+
+## 📚 Official sources (verified)
+
+Everything in this repo is grounded in Pi Network’s official documentation:
+
+| Source | Link | Used for |
 |---|---|---|
-| Pi Docs (رسمي، 2026) | https://docs.minepi.com/ | Wallet SDK / Payments / Tokens |
-| Pi Wallet & SDK | https://docs.minepi.com/use-native-features/Wallet | `window.Pi.Wallet` + «pre-signed transactions» |
-| Accept a payment | https://docs.minepi.com/accept-payment/Payments | `Pi.createPayment` + الحقول المسموحة |
-| Advanced Payments (A2U) | https://docs.minepi.com/accept-payment/PaymentsAdvanced | «البلوكشين هو المصدر الوحيد للحقيقة» |
-| Tokens (Stellar SDK) | https://docs.minepi.com/use-native-features/Tokens | إثبات إنّ Pi بروتوكول Stellar وأنّ native بلا issuer |
-| Platform API | https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md | تعريف `PaymentDTO` كامل |
-| Community Dev Guide | https://pi-apps.github.io/community-developer-guide/ | نظرة عامة |
-| Pi SDK JS (GitHub) | https://github.com/pi-apps/pi-sdk-js | واجهة `createPayment` |
+| Pi Docs (official, 2026) | https://docs.minepi.com/ | Wallet SDK / Payments / Tokens |
+| Pi Wallet & SDK | https://docs.minepi.com/use-native-features/Wallet | `window.Pi.Wallet` + pre-signed transactions |
+| Accept a payment | https://docs.minepi.com/accept-payment/Payments | `Pi.createPayment` + allowed fields |
+| Advanced Payments (A2U) | https://docs.minepi.com/accept-payment/PaymentsAdvanced | “the blockchain is the only source of truth” |
+| Tokens (Stellar SDK) | https://docs.minepi.com/use-native-features/Tokens | Pi is Stellar-based; native has no issuer |
+| Platform API | https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md | Full `PaymentDTO` definition |
+| Community Dev Guide | https://pi-apps.github.io/community-developer-guide/ | Overview |
+| Pi SDK JS (GitHub) | https://github.com/pi-apps/pi-sdk-js | `createPayment` interface |
+| MiCA Whitepaper (PDF) | https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf | “native, fungible”, “Functionally Fungible Group” |
+| Stellar — Accounts | https://developers.stellar.org/docs/learn/fundamentals/stellar-data-structures/accounts | Account/Balance model |
+| Stellar — Muxed accounts | https://developers.stellar.org/docs/build/guides/transactions/pooled-accounts-muxed-accounts-memos | CAP-27 `M...` addresses |
 
-التفاصيل والاقتباسات الحرفية في [`docs/SOURCES.md`](docs/SOURCES.md).
+Full quotes and citations: [`docs/SOURCES.md`](docs/SOURCES.md).
 
 ---
 
-## 🧩 الدليل التقني على 3 طبقات
+## 🧩 The three-layer proof
 
-### الطبقة 1 — البلوكشين: الأصل الأصلي بلا هويّة (No issuer, No provenance)
-- Pi تستعمل بروتوكول **Stellar** (نفس `Horizon` API، نفس `@stellar/stellar-sdk`، نفس `networkPassphrase: "Pi Mainnet"`).
-- في Stellar: الأصل الأصلي **native** ما عندوش `asset_issuer`.
-- أي أصل آخر (token) يظهر بـ `asset_code` + `asset_issuer`، ويلزمه **trustline**.
-- → مافيش أي طريقة على السلسلة تحدد «من وين جات» الـπ.
+### Layer 1 — The blockchain: a native asset with no identity (no issuer, no provenance)
+- Pi uses the **Stellar protocol** (same `Horizon` API, same `@stellar/stellar-sdk`, same `networkPassphrase`).
+- On Stellar, the **native** asset has **no `asset_issuer`**.
+- Any other asset (a token) shows an `asset_code` + `asset_issuer` and needs a **trustline**.
+- → There is **no way** on-chain to determine where a π “came from”.
 
-**اختبار مباشر:**
+**Direct test:**
 ```json
 // GET https://api.mainnet.minepi.com/accounts/<G_ADDRESS>
-{ "balance": "2.0000000", "asset_type": "native" }   // ← بلا issuer، بلا مصدر
+{ "balance": "2.0000000", "asset_type": "native" }   // no issuer, no origin
 ```
 
-### الطبقة 2 — Pi Wallet SDK: `createPayment` ما فيهاش «مصدر»
+### Layer 2 — Pi Wallet SDK: `createPayment` has no “origin”
 ```js
-// توثيق Pi الرسمي
+// Official Pi docs
 Pi.createPayment(
   { amount: 1, memo: 'Unlock Premium', metadata: { feature: 'premium' } },
   { onReadyForServerApproval, onReadyForServerCompletion, onCancel, onError }
 );
 ```
-الحقول المسموحة: **amount / memo / metadata فقط**. مافيش أي حقل للمصدر.
-وتوثيق الـ Wallet صريح: «Transactions must be pre-signed; the SDK does not build or sign transactions for you» — يعني العملية Stellar XDR عادية (payment)، ما فيهاش أي تاغ لمصدر العملة.
+Allowed fields: **amount / memo / metadata only**. And the Wallet docs are explicit:
+*“Transactions must be pre-signed; the SDK does not build or sign transactions for you.”* — i.e. a plain Stellar
+`payment` of the native asset, with no tag describing the coin’s origin.
 
-### الطبقة 3 — Platform API: `PaymentDTO` بلا حقل «origin»
-الردّ الرسمي الكامل لـ `GET /v2/payments/{payment_id}`:
+### Layer 3 — Platform API: `PaymentDTO` has no “origin” field
+The full official response of `GET /v2/payments/{payment_id}`:
 ```ts
 {
   identifier, user_uid, amount, memo, metadata,
@@ -80,103 +89,71 @@ Pi.createPayment(
   transaction: { txid, verified, _link } | null
 }
 ```
-👉 **مافيه ولا حقل واحد** يوصف مصدر الـπ. حتى `from_address` يقولك **مين** بعث، مو **العملة من وين**.
+👉 **Not a single field** describes where the π came from. Even `from_address` tells you **who** sent it — not
+**where the coin came from**.
 
 ---
 
-## 🧪 الكود (قابل للتشغيل)
+## 🛡️ Counterarguments (fully answered)
 
-| الملف | الوصف |
+Every objection reduces to one of four things — **counterparty identity, asset type, balance state, or off-chain
+data** — never **coin provenance**.
+
+| Objection | Answer | Details |
+|---|---|---|
+| “Exchanges use **M** addresses, not **G**” | `M` = a **muxed account** (`G` + ID, CAP-27); identifies the **counterparty**, not the coin. Muxed accounts don’t exist on the ledger, and the network processes them *exactly as if muxing weren’t used*. | [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) |
+| “Every **micro-π** has its own ID” | Pi uses an **Account/Balance** model (one number), **not UTXO**. `1 π = 10,000,000 micro-π` is just decimal precision, not an ID. | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) |
+| “The **MiCA whitepaper** says Pi comes only from mining” | The same paper says Pi is **native, fungible**, in a **Functionally Fungible Group**, **immutable even by the issuer**, with **no transfer restrictions**, and that exchanges are the **secondary market**. | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) |
+| “Pi once said **‘don’t buy Pi’**” | That was **Enclosed Mainnet** policy (until **Feb 20, 2025**). Open Network **removed the firewall** and enabled **CEX integration** — Pi’s own blog says so. | [`docs/FAQ-DONT-BUY-PI.md`](docs/FAQ-DONT-BUY-PI.md) |
+| “Same coin, but **not the same price**” | **Fungibility ≠ price.** The same asset trades at different prices across venues (Bitcoin’s “Kimchi premium”, even the US dollar). Only an **IOU vs native** difference is real. | [`docs/FAQ-FUNGIBILITY-VS-PRICE.md`](docs/FAQ-FUNGIBILITY-VS-PRICE.md) |
+| **All other objections** (labeling, chain analysis, lockups, KYC, core-team data, governance…) | Catalogued with a refutation each. | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) |
+
+---
+
+## 🧪 Code (runnable)
+
+| File | Description |
 |---|---|
-| [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | سكربت **بلا اعتماديات** يشغّل على البلوكشين ويثبت شنو **ينفع/ما ينفعش** تعرفه عن عملة معيّنة |
-| [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | يثبت إنّ الرصيد رقم واحد — **مافيه معرّف لكل micro-π** |
-| [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | واجهة `Pi.createPayment` الرسمية (U2A) |
-| [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | باكند يتعامل مع `PaymentDTO` + يطبع مفاتيحه |
-| [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | نموذج `PaymentDTO` يبيّن غياب حقل المصدر |
-| [`PROOF.md`](PROOF.md) | البرهان خطوة-بخطوة |
-| [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) | الرد على اعتراض «المنصّات عندها عنوان M مو G» |
-| [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) | الرد على اعتراض «كل micro-π عندها معرّف ID» |
-| [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) | **كل الحجج الممكنة المتبقية** + الردّ على كل واحدة |
-| [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) | ورقة MiCA الرسمية: «native, fungible» + «Functionally Fungible Group» |
-| [`docs/FAQ-DONT-BUY-PI.md`](docs/FAQ-DONT-BUY-PI.md) | «Pi قالت لا تشتروا Pi» = سياسة Enclosed Mainnet (انتهت 20 فبراير 2025) |
-| [`docs/FAQ-FUNGIBILITY-VS-PRICE.md`](docs/FAQ-FUNGIBILITY-VS-PRICE.md) | «نفس العملة ≠ نفس السعر» — الفرق بين الفطرة والسعر |
+| [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | **Zero-dependency** script that queries the live chain and shows what an app **can / cannot** know about a coin |
+| [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | Proves the balance is a **single number** — there is **no per-micro-π ID** |
+| [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
+| [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | Backend handling `PaymentDTO` + printing its keys |
+| [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
+| [`PROOF.md`](PROOF.md) | The step-by-step proof |
 
-**تشغيل الاختبار:**
+**Run it:**
 ```bash
 node examples/provenance-check.mjs
-# أو على معاملة معيّنة:
+node examples/coin-id-check.mjs
+# or against a specific transaction:
 node examples/provenance-check.mjs <TXID>
 ```
 
-المخرجات تبيّن إنّ اللي تشوفو هو `amount / from / to / asset_type: "native"` **وخلاص** — ما فيه أثر لمصدر العملة.
-
 ---
 
-## ⚖️ الحدود والاستثناءات (مهم للدقة)
+## ⚖️ Limits and real distinctions (for accuracy)
 
-| الحالة | الفرق الحقيقي |
+| Case | The real difference |
 |---|---|
-| **قفل / Lockup** | يظهر كـ `claimable_balance` (له predicate زمني) ≠ `native`. فرق **حالة**، مو فرق أصل. |
-| **رصيد تعدين غير مُهاجر** | أصلاً مو على السلسلة (mobile balance) → قبل vs بعد. |
-| **IOU / توكين وسيط على منصّة** | ممكن يكون **مو** native π حقيقي. هذا الفرق الوحيد المهم عملياً. |
-| **Tokens (أصول أخرى)** | تظهر بـ `asset_code`+`asset_issuer`، ويلزمها trustline. |
+| **Lockup / claimable balance** | Shows as `claimable_balance` (with a time predicate) ≠ `native`. A difference of **state**, not of asset. |
+| **Unmigrated mining balance** | Not on-chain at all (in-app balance) → before vs after. |
+| **Exchange IOU / token** | May **not** be real native π. This is the only distinction that matters in practice. |
+| **Other tokens** | Show `asset_code` + `asset_issuer` and require a trustline. |
 
-> الخلاصة: الأصل الـ native الواحد = **fungible بالكامل**. أي تمييز حقيقي يكون في **الحالة** (مقفول/سائل/خارج الشبكة) أو **نوع الأصل** (native vs token) — **مو** في تاريخ التعدين.
-
----
-
-## 🛡️ اعتراض شائع: «المنصّات عندها عنوان M مو G!»
-
-**الرد باختصار:** عناوين **M** هي **Muxed Accounts** (CAP-27) = عنوان **G** + رقم. ما توجدش على السلسلة أصلاً، والشبكة تتعامل معاها **بالضبط** كأنك ما استعملت muxing أبداً. الـ M توصف **الطرف الآخر** (غالباً حساب منصّة مجمّع)، **مو مصدر العملة**.
-
-- ✅ صحيح: Bitget (وأخرى) تعطي عنوان إيداع Pi يبدأ بـ M.
-- ❌ غلط: إنّ هذا يخليك تفرّق بين π معدّنة و π مشتراة.
-- السبب: أي واحد يقدر يستعمل M، والسحب من المنصّة يجي من محفظة **G** ساخنة، والعملة نفسها native بلا ذاكرة.
-
-**التفصيل الكامل:** [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md)
-
-| المفهوم | ماذا يعطيك |
-|---|---|
-| **Address labeling** (G/M معروف لمنصّة) | ✅ **مين** الطرف الآخر |
-| **Coin provenance** (مصدر الوحدة) | ❌ **مستحيل** — لا يوجد حقل أصلاً |
+> Bottom line: the single native asset is **fully fungible**. Any real distinction is about **state**
+> (locked / liquid / off-chain) or **asset type** (native vs token/IOU) — never mining history.
 
 ---
 
-## 🛡️ اعتراض شائع: «كل micro-π عندها معرّف ID خاص!»
+## 🧠 Practical conclusions
 
-**الردّ:** Pi (مثل Stellar) تستعمل **نموذج Account/Balance** — الرصيد **رقم واحد** — **مو UTXO** (مثل بيتكوين، اللي فيه معرّف لكل مخرج).
-
-```json
-// GET /accounts/GC55...
-{ "balance": "2.0000000", "asset_type": "native" }   // ← رقم واحد، بلا قطع وبلا معرّفات
-```
-
-- `1 π = 10,000,000 micro-π` = **خانة عشرية رياضية**، مو معرّف.
-- المعرّفات الموجودة فعلاً: `G` (حساب)، `M` (مستخدم مجمّع)، `txid` (معاملة)، `op.id` (عملية)، `cb-id` (صندوق مقفول) — **ولا واحد منها معرّف «وحدة π»**.
-- **التفصيل:** [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) — والاختبار: `node examples/coin-id-check.mjs`
-
----
-
-## 🧠 النتائج العملية
-
-1. **القيمة واحدة** — ما فيه فرق سعري بسبب المصدر.
-2. **لا يمكن الفصل أو الوسم (no taint/segregation).**
-3. **الأمان** — أي تطبيق يستلم π، المبلغ يندمج في رصيدو فوراً؛ الثقة في **العنوان/المذكرة**، مو في «نوع العملة».
-4. **تحقّق دائماً من البلوكشين** — رقم π في منصّة/تطبيق ليس بالضرورة native π على السلسلة.
-
----
-
-## English Summary
-
-On **Pi Mainnet** (built on the **Stellar** protocol), Pi is the **native asset**: no issuer, no contract, and all units are fully fungible. The ledger records **balances, not coins**, so there is **no provenance / no taint** — neither the **Pi Wallet SDK** (`window.Pi`) nor the **Platform API** `PaymentDTO` exposes any field describing where a coin came from.
-
-- `Pi.createPayment(...)` accepts only **amount / memo / metadata**.
-- `PaymentDTO` exposes only **amount, from_address, to_address, direction, memo, metadata, txid** and status flags.
-- The Wallet SDK sends **pre-signed Stellar XDR transactions**; the chain only confirms a `payment` of `asset_type: "native"`.
-
-An app (or exchange) therefore **cannot tell** whether an incoming Pi was mined, withdrawn from OKX/Bitget, or sent by another app. The only real distinctions are **state** (locked `claimable_balance` vs liquid `native`) and **asset type** (native vs token/IOU) — never mining history.
-
-**Muxed accounts (M addresses):** a common counterargument is that exchanges use `M...` deposit addresses. True — but `M` is just a **muxed account** (`G...` + 64-bit ID, CAP-27). It identifies the **counterparty** (a pooled exchange account), not the **origin of the coins**. Muxed accounts don't exist on the ledger, and the network processes them *exactly as if muxing was not used*. So `M` vs `G` is **address labeling**, never **coin provenance**. See [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md).
+1. **One price basis** — there is no price difference by origin.
+2. **No segregation / no taint** — impossible on-chain.
+3. **Security** — an incoming π payment merges into the balance instantly; trust the **address + memo**, not a
+   “coin type”.
+4. **Always verify on-chain** — a number in an app/exchange is not necessarily native π on the ledger.
+5. **Anti-scam** — anyone claiming a “special / original mined / graded” Pi is lying; and any “buy/lock Pi”
+   scheme that doesn’t appear on-chain as a `claimable_balance` is a scam.
 
 ---
 
