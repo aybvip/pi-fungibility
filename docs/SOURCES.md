@@ -115,3 +115,11 @@ interface PaymentData {
 - Bitget — عنوان إيداع Pi (يبدأ بـ M):
   https://www.bitget.com/academy/how-to-securely-deposit-pi-coin-to-bitget
   > «Your PI deposit address will appear (usually starting with "M").»
+
+## 12. نموذج الرصيد (Account/Balance) vs UTXO — «معرّف لكل micro-π»
+- Stellar — Accounts (رصيد رقمي واحد، الأصل الأصلي بلا issuer):
+  https://developers.stellar.org/docs/learn/fundamentals/stellar-data-structures/accounts
+- UTXO vs Account model:
+  https://www.alchemy.com/docs/utxo-vs-account-models
+  https://bitcoin.stackexchange.com/questions/49853/utxo-model-vs-account-balance-model
+- اختبار مباشر: `examples/coin-id-check.mjs` (يبيّن أنّ الرصيد رقم واحد، والمعرّفات كلها لحسابات/معاملات، مو لوحدات).

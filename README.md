@@ -89,11 +89,13 @@ Pi.createPayment(
 | الملف | الوصف |
 |---|---|
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | سكربت **بلا اعتماديات** يشغّل على البلوكشين ويثبت شنو **ينفع/ما ينفعش** تعرفه عن عملة معيّنة |
+| [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | يثبت إنّ الرصيد رقم واحد — **مافيه معرّف لكل micro-π** |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | واجهة `Pi.createPayment` الرسمية (U2A) |
 | [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | باكند يتعامل مع `PaymentDTO` + يطبع مفاتيحه |
 | [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | نموذج `PaymentDTO` يبيّن غياب حقل المصدر |
 | [`PROOF.md`](PROOF.md) | البرهان خطوة-بخطوة |
 | [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) | الرد على اعتراض «المنصّات عندها عنوان M مو G» |
+| [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) | الرد على اعتراض «كل micro-π عندها معرّف ID» |
 
 **تشغيل الاختبار:**
 ```bash
@@ -133,6 +135,21 @@ node examples/provenance-check.mjs <TXID>
 |---|---|
 | **Address labeling** (G/M معروف لمنصّة) | ✅ **مين** الطرف الآخر |
 | **Coin provenance** (مصدر الوحدة) | ❌ **مستحيل** — لا يوجد حقل أصلاً |
+
+---
+
+## 🛡️ اعتراض شائع: «كل micro-π عندها معرّف ID خاص!»
+
+**الردّ:** Pi (مثل Stellar) تستعمل **نموذج Account/Balance** — الرصيد **رقم واحد** — **مو UTXO** (مثل بيتكوين، اللي فيه معرّف لكل مخرج).
+
+```json
+// GET /accounts/GC55...
+{ "balance": "2.0000000", "asset_type": "native" }   // ← رقم واحد، بلا قطع وبلا معرّفات
+```
+
+- `1 π = 10,000,000 micro-π` = **خانة عشرية رياضية**، مو معرّف.
+- المعرّفات الموجودة فعلاً: `G` (حساب)، `M` (مستخدم مجمّع)، `txid` (معاملة)، `op.id` (عملية)، `cb-id` (صندوق مقفول) — **ولا واحد منها معرّف «وحدة π»**.
+- **التفصيل:** [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) — والاختبار: `node examples/coin-id-check.mjs`
 
 ---
 
