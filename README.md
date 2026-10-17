@@ -106,6 +106,7 @@ data** — never **coin provenance**.
 | “The **MiCA whitepaper** says Pi comes only from mining” | The same paper says Pi is **native, fungible**, in a **Functionally Fungible Group**, **immutable even by the issuer**, with **no transfer restrictions**, and that exchanges are the **secondary market**. | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) |
 | “Pi once said **‘don’t buy Pi’**” | That was **Enclosed Mainnet** policy (until **Feb 20, 2025**). Open Network **removed the firewall** and enabled **CEX integration** — Pi’s own blog says so. | [`docs/FAQ-DONT-BUY-PI.md`](docs/FAQ-DONT-BUY-PI.md) |
 | “Same coin, but **not the same price**” | **Fungibility ≠ price.** The same asset trades at different prices across venues (Bitcoin’s “Kimchi premium”, even the US dollar). Only an **IOU vs native** difference is real. | [`docs/FAQ-FUNGIBILITY-VS-PRICE.md`](docs/FAQ-FUNGIBILITY-VS-PRICE.md) |
+| **“I bought π on an exchange, put it in the same wallet as my mined π, then sent some to a friend — can they tell?”** | **No — and it is deterministic, not a loophole.** The ledger has no per-unit identity, so per-coin origin is **not an observable**. Includes the honest account-level-vs-unit-level distinction. | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.md) |
 | **All other objections** (labeling, chain analysis, lockups, KYC, core-team data, governance…) | Catalogued with a refutation each. | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) |
 
 ---
@@ -116,6 +117,7 @@ data** — never **coin provenance**.
 |---|---|
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | **Zero-dependency** script that queries the live chain and shows what an app **can / cannot** know about a coin |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | Proves the balance is a **single number** — there is **no per-micro-π ID** |
+| [`examples/mixing-check.mjs`](examples/mixing-check.mjs) | Live proof for the exact **“mined + bought, then send”** scenario: commingling → scalar balance → origin-less payment |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | Backend handling `PaymentDTO` + printing its keys |
 | [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -142,6 +144,25 @@ node examples/provenance-check.mjs <TXID>
 
 > Bottom line: the single native asset is **fully fungible**. Any real distinction is about **state**
 > (locked / liquid / off-chain) or **asset type** (native vs token/IOU) — never mining history.
+
+---
+
+## 🧭 Scope — what this repo proves (and what it does not)
+
+**Proven ✅**
+- Pi is a **native, fungible** asset with **no per-unit identity** → per-coin origin is **not an observable**.
+- An app / exchange / recipient **cannot distinguish** mined π from exchange-bought π from the
+  **ledger / SDK / Platform-API** data.
+- The distinction is **undefined** (information-theoretic), not merely *hidden*.
+
+**Not claimed ❌**
+- Nothing about **price** or future value (fungibility ≠ price — see [`docs/FAQ-FUNGIBILITY-VS-PRICE.md`](docs/FAQ-FUNGIBILITY-VS-PRICE.md)).
+- It does **not** claim you can hide that you *ever* used an exchange **at the account level**: if an exchange
+  address is publicly labeled, transaction-graph analysis may link **accounts** — never **coins**.
+- No independent audit is claimed; instead, **everything is verifiable** by running the code and reading the
+  official sources.
+
+> Precise claim: **“A payment carries no observable per-coin origin.”** No more, no less.
 
 ---
 
