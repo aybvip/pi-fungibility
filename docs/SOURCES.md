@@ -134,3 +134,10 @@ interface PaymentData {
   > **G.11 (Transfer Restrictions):** «Not applicable»
   > **G.4:** «Pi tokens are only available through mining. Individuals… that have mined tokens may elect to **sell tokens on the secondary market**…»
   > **E.2:** «The issuer is seeking admission to **secondary trading only**, through which the issuer will not gain any direct proceeds.»
+
+## 14. «لا تشتروا Pi» — سياسة Enclosed Mainnet (منتهية)
+- Enclosed Network (firewall يمنع الاتصال الخارجي): https://minepi.com/blog/open-network-launch-date/
+  > «…the launch of the **Enclosed Network period**, which meant Mainnet was live but with a **firewall that prevents any external connectivity**.»
+- Open Network (انتُزع الـfirewall + CEX): https://minepi.com/blog/open-network/
+  > «With Open Network, **the firewall that was in place during Enclosed Network has been removed**.»
+  > «…**support for integrations with centralized exchanges (CEXs) and onramps to provide additional means of acquiring Pi**…»

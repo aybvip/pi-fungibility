@@ -98,6 +98,7 @@ Pi.createPayment(
 | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) | الرد على اعتراض «كل micro-π عندها معرّف ID» |
 | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) | **كل الحجج الممكنة المتبقية** + الردّ على كل واحدة |
 | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) | ورقة MiCA الرسمية: «native, fungible» + «Functionally Fungible Group» |
+| [`docs/FAQ-DONT-BUY-PI.md`](docs/FAQ-DONT-BUY-PI.md) | «Pi قالت لا تشتروا Pi» = سياسة Enclosed Mainnet (انتهت 20 فبراير 2025) |
 
 **تشغيل الاختبار:**
 ```bash
