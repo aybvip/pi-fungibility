@@ -123,3 +123,14 @@ interface PaymentData {
   https://www.alchemy.com/docs/utxo-vs-account-models
   https://bitcoin.stackexchange.com/questions/49853/utxo-model-vs-account-balance-model
 - اختبار مباشر: `examples/coin-id-check.mjs` (يبيّن أنّ الرصيد رقم واحد، والمعرّفات كلها لحسابات/معاملات، مو لوحدات).
+
+## 13. ورقة MiCA الرسمية (Pi Network — MiCAR whitepaper)
+- 🔗 https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf
+- النشر: 2025-11-27 · بداية الإدراج: 2025-11-28 · الدولة المضيفة: مالطا.
+- اقتباسات حاسمة (نصّ حرفي):
+  > **F.2:** «Pi is the **native, fungible digital asset** of the Pi Network Layer 1 blockchain.»
+  > **F.14:** «**Functionally Fungible Group** Digital Token Identifier: **2Z2WZP5KM**»
+  > **G.3:** «The Pi token and its' on chain functionalities are **immutable**. No modifications to transactions or the current blockchain ledger history can be made by anyone, **including the issuer**.»
+  > **G.11 (Transfer Restrictions):** «Not applicable»
+  > **G.4:** «Pi tokens are only available through mining. Individuals… that have mined tokens may elect to **sell tokens on the secondary market**…»
+  > **E.2:** «The issuer is seeking admission to **secondary trading only**, through which the issuer will not gain any direct proceeds.»
