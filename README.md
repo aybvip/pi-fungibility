@@ -12,6 +12,10 @@
 
 🌍 **English** · [العربية](README.ar.md)
 
+> 🔐 **Independent & safe by design.** Unofficial analysis with **read-only** tools. **No** wallet
+> connection, **no** passphrase, **no** keys, **no** signing, **no** dependencies. Audit it — see
+> [`SECURITY.md`](SECURITY.md). Details: [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.md).
+
 ---
 
 ## 🎯 TL;DR
@@ -108,6 +112,7 @@ data** — never **coin provenance**.
 | “Same coin, but **not the same price**” | **Fungibility ≠ price.** The same asset trades at different prices across venues (Bitcoin’s “Kimchi premium”, even the US dollar). Only an **IOU vs native** difference is real. | [`docs/FAQ-FUNGIBILITY-VS-PRICE.md`](docs/FAQ-FUNGIBILITY-VS-PRICE.md) |
 | **“I bought π on an exchange, put it in the same wallet as my mined π, then sent some to a friend — can they tell?”** | **No — and it is deterministic, not a loophole.** The ledger has no per-unit identity, so per-coin origin is **not an observable**. Includes the honest account-level-vs-unit-level distinction. | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.md) |
 | **“Can the Core Team set a different price for mined vs exchange Pi, or stop you selling?”** | **No — not on-chain.** No origin to target, no price field, no issuer controls. Their power is off-chain/app-level only. | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
+| **“It’s just an unofficial GitHub repo — must be a scam/phishing.”** | **Audit, don’t trust.** This repo is read-only: no wallet, no passphrase, no keys, no signing, no deps. And “Pi not listed / network closed” is outdated (Open Network 2025-02-20). | [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](SECURITY.md) |
 | **All other objections** (labeling, chain analysis, lockups, KYC, core-team data, governance…) | Catalogued with a refutation each. | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) |
 
 ---

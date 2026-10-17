@@ -15,6 +15,10 @@
 
 📄 **النطاق الكامل — شنوّة مثبت وشنوّة موش مدّعى:** [`docs/SCOPE.ar.md`](docs/SCOPE.ar.md) · 🌍 [English](docs/SCOPE.md)
 
+> 🔐 **مستقل وآمن بالتصميم.** تحليل غير رسمي بأدوات **للقراءة فقط**. **بلا** ربط محفظة، **بلا** عبارة سرية،
+> **بلا** مفاتيح، **بلا** توقيع، **بلا** مكتبات. افحصو — شوف [`SECURITY.ar.md`](SECURITY.ar.md).
+> التفاصيل: [`docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md).
+
 ---
 
 ## 🎯 الخلاصة (TL;DR)
@@ -102,6 +106,7 @@ Pi.createPayment(
 | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) | الرد على اعتراض «كل micro-π عندها معرّف ID» |
 | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) | **هل الفريق يفرض سعر مختلف/يمنع البيع؟** لا — على مستوى البروتوكول مستحيل |
 | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.ar.md) | **«خلطت معدَّنة + مشرية وبعثت — ينجّم يشوف الفرق؟»** برهان حتمي |
+| [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md) | **«مستودع GitHub عشوائي = نصب؟»** افحص ما تثقش + تصحيح «Pi موش مدرجة» |
 | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) | **كل الحجج الممكنة المتبقية** + الردّ على كل واحدة |
 | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) | ورقة MiCA الرسمية: «native, fungible» + «Functionally Fungible Group» |
 | [`docs/FAQ-DONT-BUY-PI.md`](docs/FAQ-DONT-BUY-PI.md) | «Pi قالت لا تشتروا Pi» = سياسة Enclosed Mainnet (انتهت 20 فبراير 2025) |
