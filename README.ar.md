@@ -13,6 +13,8 @@
 [![Platform API](https://img.shields.io/badge/Source-platform__API-0969da)](https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
 
+📄 **النطاق الكامل — شنوّة مثبت وشنوّة موش مدّعى:** [`docs/SCOPE.ar.md`](docs/SCOPE.ar.md) · 🌍 [English](docs/SCOPE.md)
+
 ---
 
 ## 🎯 الخلاصة (TL;DR)

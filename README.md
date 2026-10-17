@@ -163,6 +163,7 @@ node examples/provenance-check.mjs <TXID>
   official sources.
 
 > Precise claim: **“A payment carries no observable per-coin origin.”** No more, no less.
+> Full standalone statement: [`docs/SCOPE.md`](docs/SCOPE.md).
 
 ---
 
