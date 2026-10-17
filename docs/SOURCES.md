@@ -145,3 +145,14 @@ interface PaymentData {
 - CryptoRank — Pi price spread across exchanges: https://cryptorank.io/price/pi-network-1/arbitrage
 - arb.sh — PI spread (OKX vs Bitget): https://arb.sh/arbitrage/crypto/pi/okx-vs-bitget
 - Investopedia — Kimchi Premium (same BTC, different price): https://www.investopedia.com/terms/k/kimchi-premium.asp
+
+## 16. Issuer powers / no price control — “can they set a different price or block sales?”
+- **No origin to target:** native asset has no per-unit identity (see §12).
+- **No price in the protocol:** a payment is `bal(S) -= a ; bal(D) += a` — there is no price field.
+- **No asset-level controls on native:** the issuer powers (freeze/clawback) exist only for *issued* assets;
+  native Pi has **no issuer**. See Stellar — Accounts (§9) and MiCA G.11 “Transfer Restrictions: Not applicable” (§13).
+- **Immutability even by the issuer:** MiCA **G.3** (§13).
+- **Where their power lies:** off-chain — Pi Browser/app platform, SDK/Platform-API keys, KYC, migration
+  (see §1, §2, §6).
+- **Only a different *asset*** (IOU / wrapped / token) can carry different rules/price — not native Pi.
+  See `docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`.

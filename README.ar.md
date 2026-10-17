@@ -100,6 +100,7 @@ Pi.createPayment(
 | [`PROOF.md`](PROOF.md) | البرهان خطوة-بخطوة |
 | [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) | الرد على اعتراض «المنصّات عندها عنوان M مو G» |
 | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) | الرد على اعتراض «كل micro-π عندها معرّف ID» |
+| [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) | **هل الفريق يفرض سعر مختلف/يمنع البيع؟** لا — على مستوى البروتوكول مستحيل |
 | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.ar.md) | **«خلطت معدَّنة + مشرية وبعثت — ينجّم يشوف الفرق؟»** برهان حتمي |
 | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) | **كل الحجج الممكنة المتبقية** + الردّ على كل واحدة |
 | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) | ورقة MiCA الرسمية: «native, fungible» + «Functionally Fungible Group» |

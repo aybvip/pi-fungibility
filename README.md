@@ -107,6 +107,7 @@ data** — never **coin provenance**.
 | “Pi once said **‘don’t buy Pi’**” | That was **Enclosed Mainnet** policy (until **Feb 20, 2025**). Open Network **removed the firewall** and enabled **CEX integration** — Pi’s own blog says so. | [`docs/FAQ-DONT-BUY-PI.md`](docs/FAQ-DONT-BUY-PI.md) |
 | “Same coin, but **not the same price**” | **Fungibility ≠ price.** The same asset trades at different prices across venues (Bitcoin’s “Kimchi premium”, even the US dollar). Only an **IOU vs native** difference is real. | [`docs/FAQ-FUNGIBILITY-VS-PRICE.md`](docs/FAQ-FUNGIBILITY-VS-PRICE.md) |
 | **“I bought π on an exchange, put it in the same wallet as my mined π, then sent some to a friend — can they tell?”** | **No — and it is deterministic, not a loophole.** The ledger has no per-unit identity, so per-coin origin is **not an observable**. Includes the honest account-level-vs-unit-level distinction. | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.md) |
+| **“Can the Core Team set a different price for mined vs exchange Pi, or stop you selling?”** | **No — not on-chain.** No origin to target, no price field, no issuer controls. Their power is off-chain/app-level only. | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
 | **All other objections** (labeling, chain analysis, lockups, KYC, core-team data, governance…) | Catalogued with a refutation each. | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) |
 
 ---

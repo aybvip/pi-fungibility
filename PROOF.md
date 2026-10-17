@@ -24,6 +24,12 @@ This file proves the following claim with official evidence + code:
 If the **data available to the app** contains no “origin” field, and the **blockchain** does not record the
 origin of individual units, then differentiation is **impossible**.
 
+> ⚠️ **Precise scope (avoid a common misreading).** This proves that **per-coin origin** is not observable —
+> **not** that “nothing is knowable about transfers”. The **account-level transaction graph is observable**:
+> an analyst can see *which accounts* transacted (e.g. an inflow from a labeled exchange hot-wallet), but that
+> is a fact about the **account over time**, never about the **units it sends**. See
+> [`docs/SCOPE.md`](docs/SCOPE.md) §4 and [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.md) §3.
+
 ---
 
 ## 1) The proof at the blockchain level
