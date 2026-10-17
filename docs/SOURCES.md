@@ -105,3 +105,13 @@ interface PaymentData {
 ## 10. Whitepaper / Tokenomics
 - https://minepi.com/white-paper
 - https://minepi.com/blog/mainnet-migrations-roadmap-and-tokenomics/
+
+## 11. Muxed Accounts (عناوين M) — CAP-27
+- Stellar — Pooled accounts / Muxed accounts / Memos:
+  https://developers.stellar.org/docs/build/guides/transactions/pooled-accounts-muxed-accounts-memos
+  > «Muxed accounts **do not exist on the ledger**, but their shared underlying `GABC…` account does.»
+  > «There’s no validation on IDs and as far as the Stellar network is concerned, all supported operations **operate exactly as if you did not use a muxed account**.»
+- CAP-27 spec: https://github.com/stellar/stellar-protocol/blob/master/core/cap-0027.md
+- Bitget — عنوان إيداع Pi (يبدأ بـ M):
+  https://www.bitget.com/academy/how-to-securely-deposit-pi-coin-to-bitget
+  > «Your PI deposit address will appear (usually starting with "M").»

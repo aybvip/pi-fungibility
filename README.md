@@ -93,6 +93,7 @@ Pi.createPayment(
 | [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | باكند يتعامل مع `PaymentDTO` + يطبع مفاتيحه |
 | [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | نموذج `PaymentDTO` يبيّن غياب حقل المصدر |
 | [`PROOF.md`](PROOF.md) | البرهان خطوة-بخطوة |
+| [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) | الرد على اعتراض «المنصّات عندها عنوان M مو G» |
 
 **تشغيل الاختبار:**
 ```bash
@@ -118,6 +119,23 @@ node examples/provenance-check.mjs <TXID>
 
 ---
 
+## 🛡️ اعتراض شائع: «المنصّات عندها عنوان M مو G!»
+
+**الرد باختصار:** عناوين **M** هي **Muxed Accounts** (CAP-27) = عنوان **G** + رقم. ما توجدش على السلسلة أصلاً، والشبكة تتعامل معاها **بالضبط** كأنك ما استعملت muxing أبداً. الـ M توصف **الطرف الآخر** (غالباً حساب منصّة مجمّع)، **مو مصدر العملة**.
+
+- ✅ صحيح: Bitget (وأخرى) تعطي عنوان إيداع Pi يبدأ بـ M.
+- ❌ غلط: إنّ هذا يخليك تفرّق بين π معدّنة و π مشتراة.
+- السبب: أي واحد يقدر يستعمل M، والسحب من المنصّة يجي من محفظة **G** ساخنة، والعملة نفسها native بلا ذاكرة.
+
+**التفصيل الكامل:** [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md)
+
+| المفهوم | ماذا يعطيك |
+|---|---|
+| **Address labeling** (G/M معروف لمنصّة) | ✅ **مين** الطرف الآخر |
+| **Coin provenance** (مصدر الوحدة) | ❌ **مستحيل** — لا يوجد حقل أصلاً |
+
+---
+
 ## 🧠 النتائج العملية
 
 1. **القيمة واحدة** — ما فيه فرق سعري بسبب المصدر.
@@ -136,6 +154,8 @@ On **Pi Mainnet** (built on the **Stellar** protocol), Pi is the **native asset*
 - The Wallet SDK sends **pre-signed Stellar XDR transactions**; the chain only confirms a `payment` of `asset_type: "native"`.
 
 An app (or exchange) therefore **cannot tell** whether an incoming Pi was mined, withdrawn from OKX/Bitget, or sent by another app. The only real distinctions are **state** (locked `claimable_balance` vs liquid `native`) and **asset type** (native vs token/IOU) — never mining history.
+
+**Muxed accounts (M addresses):** a common counterargument is that exchanges use `M...` deposit addresses. True — but `M` is just a **muxed account** (`G...` + 64-bit ID, CAP-27). It identifies the **counterparty** (a pooled exchange account), not the **origin of the coins**. Muxed accounts don't exist on the ledger, and the network processes them *exactly as if muxing was not used*. So `M` vs `G` is **address labeling**, never **coin provenance**. See [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md).
 
 ---
 

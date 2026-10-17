@@ -57,6 +57,10 @@ async function main() {
         ? 'native  (Pi — no issuer, cannot be traced to an origin)'
         : `${op.asset_code}/${op.asset_issuer}  (custom token)`;
       console.log("      asset     :", kind);
+      // حقول Muxed (CAP-27): تزيد معلومة عن *الطرف الآخر* فقط، مو عن مصدر العملة.
+      // (Stellar: muxed accounts don't exist on the ledger.)
+      if (op.from_muxed) console.log("      from(M)   :", op.from_muxed, "#", op.from_muxed_id);
+      if (op.to_muxed) console.log("      to(M)     :", op.to_muxed, "#", op.to_muxed_id);
     }
   }
   rule();
@@ -75,6 +79,12 @@ async function main() {
   console.log("      • أي \"مصدر\" أو \"وسم\" أو \"taint\" للعملة");
   console.log("      • تاريخ التعدين لكل وحدة");
   console.log("      ← لأنه ببساطة ما فيه هك الحقل لا في السلسلة ولا في الـ SDK.");
+  rule();
+  console.log("ℹ️  ملاحظة عن عناوين M (Muxed Accounts, CAP-27):");
+  console.log("      • M = عنوان G + رقم؛ ما يوجدش على السلسلة (فقط G هو الحقيقي).");
+  console.log("      • الشبكة تعامله كأنك ما استعملتش muxing أبداً (نفس native π).");
+  console.log("      • لو ظهر from_muxed/to_muxed، هذي تعرّفك بالطرف الآخر فقط،");
+  console.log("        وليس بمصدر العملة. التمييز يبقى مستحيلاً.");
   rule();
   console.log("");
 }
