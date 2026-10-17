@@ -1,0 +1,33 @@
+$ node examples/provenance-check.mjs
+
+🔎  Pi Mainnet — Coin Provenance Check
+    txid: e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c
+────────────────────────────────────────────────────────────────────────
+📄  Transaction
+    hash       : e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c
+    ledger     : 27024280
+    source     : GBWKGBVDEJO3JKRV7IUBHXMBE7A2JYHOGMUMKEO2XM5RFIRBRVSYHTZA
+    memo       : text "VV352v94UwCxraXcrr75XYHSHUrT"
+    successful : true
+────────────────────────────────────────────────────────────────────────
+⚙️   Operations (1)
+    type        : payment
+      from      : GBWKGBVDEJO3JKRV7IUBHXMBE7A2JYHOGMUMKEO2XM5RFIRBRVSYHTZA
+      to        : GC55LFCTGSDPDMNDIOHZVVA4CYCUF4IKI2SUGHWCJA2PCLPKH4HMDMIU
+      amount    : 0.8000000
+      asset     : native  (Pi — no issuer, cannot be traced to an origin)
+────────────────────────────────────────────────────────────────────────
+✅  ما ينفع أي تطبيق/منصّة تعرفو (Available to the app):
+      • المبلغ (amount)
+      • عنوان المرسل (from_address)
+      • عنوان المستلم (to_address)
+      • المذكرة (memo)
+      • معرّف المعاملة (txid)
+      • نوع الأصل = "native"
+────────────────────────────────────────────────────────────────────────
+🚫  ما ينفعش تعرفو إطلاقاً (NOT available — impossible):
+      • هل العملة معدّنة أم مسحوبة من OKX/Bitget
+      • أي "مصدر" أو "وسم" أو "taint" للعملة
+      • تاريخ التعدين لكل وحدة
+      ← لأنه ببساطة ما فيه هك الحقل لا في السلسلة ولا في الـ SDK.
+────────────────────────────────────────────────────────────────────────

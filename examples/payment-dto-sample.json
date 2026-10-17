@@ -1,0 +1,35 @@
+{
+  "_comment": "نموذج ردّ رسمي من Platform API: GET https://api.minepi.com/v2/payments/{payment_id}",
+  "_source": "https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md",
+  "_note_fields_that_prove_the_point": {
+    "fields_that_exist": [
+      "amount", "from_address", "to_address", "memo", "metadata", "transaction.txid"
+    ],
+    "fields_that_DO_NOT_exist": [
+      "origin", "source", "mining_status", "exchange", "coin_provenance", "taint"
+    ],
+    "conclusion": "لا يوجد أي حقل يدل على مصدر الـPi (تعدين / منصّة / تطبيق)."
+  },
+  "identifier": "a1b2c3d4-0000-1111-2222-333344445555",
+  "user_uid": "c0ffee00-aaaa-bbbb-cccc-ddddeeeeffff",
+  "amount": 1,
+  "memo": "Unlock Premium",
+  "metadata": { "feature": "premium" },
+  "from_address": "GC55LFCTGSDPDMNDIOHZVVA4CYCUF4IKI2SUGHWCJA2PCLPKH4HMDMIU",
+  "to_address": "GATL6CXWJ2YDW62DKW3MRRBLF2BTTW77IGURXZO5ZUXL2XWPIDD73QP7",
+  "direction": "user_to_app",
+  "created_at": "2026-10-02T01:02:26Z",
+  "network": "Pi Network",
+  "status": {
+    "developer_approved": true,
+    "transaction_verified": true,
+    "developer_completed": true,
+    "cancelled": false,
+    "user_cancelled": false
+  },
+  "transaction": {
+    "txid": "687c72e111a302ca825e033d1280373aebb1f9db4e4602573fb3b8b1589a1171",
+    "verified": true,
+    "_link": "https://api.mainnet.minepi.com/transactions/687c72e111a302ca825e033d1280373aebb1f9db4e4602573fb3b8b1589a1171"
+  }
+}

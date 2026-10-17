@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+  frontend.html — واجهة الدفع الرسمية (U2A: User-To-App)
+  المصدر: https://docs.minepi.com/accept-payment/Payments
+
+  ⚠️ النقطة المهمة (الدليل):
+     Pi.createPayment تقبل فقط: amount / memo / metadata
+     → مافيش أي حقل يوصف "مصدر" العملة الواصلة.
+     صاحب التطبيق ما يقدرش يعرف إذا المرسل عدّنها ولا سحبها من OKX/Bitget.
+-->
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pi Payment — Provenance Demo</title>
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+</head>
+<body>
+  <h1>π — إثبات: التطبيق ما يفرّقش مصدر العملة</h1>
+  <p>الحقول المتاحة للتطبيق: <code>amount</code>, <code>memo</code>, <code>metadata</code> فقط.</p>
+  <button id="buy">ادفع 1 π</button>
+  <pre id="log"></pre>
+
+  <script>
+    Pi.init({ version: "2.0", sandbox: true }); // sandbox: false في الإنتاج
+
+    const log = (m) => (document.getElementById("log").textContent += m + "\n");
+
+    async function handleAuth() {
+      const auth = await window.Pi.authenticate(["username", "payments"], onIncompletePayment);
+      log(`✅ مسجّل دخول: ${auth.user.username}`);
+      return auth;
+    }
+
+    function onIncompletePayment(payment) {
+      // أرسل payment.identifier للباكند لإكمال الدفع المقطوع
+      log("⚠️ دفعة غير مكتملة: " + payment.identifier);
+    }
+
+    document.getElementById("buy").addEventListener("click", async () => {
+      const auth = await handleAuth();
+
+      window.Pi.createPayment(
+        {
+          amount: 1,
+          memo: "Unlock Premium",
+          metadata: { feature: "premium" }
+          // ← الحقول المسموحة الرسمية: amount / memo / metadata
+          // ← لا يوجد حقل "origin" ولا "source" ولا "mined"
+        },
+        {
+          onReadyForServerApproval: async (paymentId) => {
+            log("→ onReadyForServerApproval: " + paymentId);
+            const r = await fetch("/api/payments/approve", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${auth.accessToken}`,
+              },
+              body: JSON.stringify({ paymentId }),
+            });
+            log("   approve: " + r.status);
+          },
+
+          onReadyForServerCompletion: async (paymentId, txid) => {
+            log("→ onReadyForServerCompletion: " + paymentId + " / " + txid);
+            const r = await fetch("/api/payments/complete", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${auth.accessToken}`,
+              },
+              body: JSON.stringify({ paymentId, txid }),
+            });
+            log("   complete: " + r.status);
+          },
+
+          onCancel: (paymentId) => log("✋ ملغاة: " + paymentId),
+          onError: (error, payment) => log("❌ خطأ: " + JSON.stringify(error) + " / " + JSON.stringify(payment)),
+        }
+      );
+    });
+  </script>
+</body>
+</html>
