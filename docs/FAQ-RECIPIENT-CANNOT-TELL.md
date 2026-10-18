@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "If I mix mined π with π bought on an exchange and send some to a friend, can they tell the difference?"
+faq_answer: "No. Receiving π merges the amount into a single scalar balance, and the resulting payment is a plain native payment with no origin field. The recipient sees an amount, a sender and an optional memo - not the history of the units. Classifying the sent π by origin is therefore not possible."
+---
 # FAQ — “I mixed mined Pi with Pi bought on an exchange, then sent some to a friend. Can they tell the difference?”
 
 > This file is the **direct answer** to the one concrete question:

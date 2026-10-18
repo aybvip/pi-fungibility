@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "Does every micro-π have its own ID, so mined Pi can be told apart from exchange Pi?"
+faq_answer: "No. Pi uses an Account/Balance model, not UTXO. The ledger stores one scalar balance per account - for example balance 2.0000000 - with no per-unit identifier, no per-unit txid and no origin field. 1 π = 10,000,000 micro-π is only a decimal scale, not an ID. The IDs that do exist (G account, M muxed, C contract, txid) identify accounts, contracts or transactions, never a coin unit."
+---
 # FAQ — “Every micro-π has its own ID, so you can tell them apart?”
 
 ## The claim

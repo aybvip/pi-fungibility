@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "Does the Pi Wallet SDK or the Platform API expose where the π came from?"
+faq_answer: "No. The official surfaces are fully enumerated and no field carries per-unit origin. The SDK builds a native-asset payment with amount, destination and a sender-written memo. The U2A createPayment call takes only amount, memo and metadata. The Platform API PaymentDTO returns identifier, user_uid, amount, memo, metadata, from_address, to_address, direction, created_at, network, status and transaction.txid - each of which identifies a counterparty, an asset type, a state, or sender-written data."
+---
 # FAQ — “The SDK or Platform API must expose where the π came from — otherwise how does the app know?”
 
 > Objection: *“The Pi Wallet SDK and the Platform API know everything about a payment. Somewhere in those

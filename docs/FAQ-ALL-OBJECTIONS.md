@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "What objections to Pi fungibility remain, and are they all answered?"
+faq_answer: "They are catalogued and each one is answered. The unifying rule: any piece of information on the ledger tells you only one of four things - counterparty identity, asset type, amount, or timing - and never a per-unit origin. Arguments that claim otherwise reduce to one of those four, or to an off-chain fact such as an exchange's internal bookkeeping."
+---
 # FAQ — Every remaining objection (and each one refuted)
 
 > The golden rule that exposes every argument:

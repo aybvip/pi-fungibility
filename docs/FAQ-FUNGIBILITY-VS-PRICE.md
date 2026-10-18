@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "The same coin trades at different prices - does that mean mined π and exchange π are different things?"
+faq_answer: "No. Fungibility is a property of the asset on the ledger; price is a property of the market you trade in. The same native π can trade at different prices on different venues because of liquidity, fees, spreads and demand. That is a market difference, not an on-chain difference, and the ledger records no per-unit origin either way."
+---
 # FAQ — “Same coin = same price?”
 
 ## The claim

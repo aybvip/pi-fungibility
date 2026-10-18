@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "The MiCA whitepaper says Pi is only available through mining - does that make mined π special?"
+faq_answer: "No, and the paper says the opposite. It classifies Pi as the native, fungible digital asset of the Pi Network Layer 1 blockchain, places it in a functionally fungible group, states that the token is immutable even by the issuer, sets transfer restrictions to not applicable, and describes exchanges as the secondary market where mined tokens are resold. A distribution statement is not a per-unit origin field."
+---
 # FAQ — The official MiCA whitepaper: “Pi is only available through mining”
 
 > Source: **MiCA Whitepaper — Pi Network** (a mandatory document under the EU’s MiCAR regulation).

@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "Is an exchange's balance really backed by the π it owes you?"
+faq_answer: "That is a different question and this repository does not claim it. Three claims are kept separate: (A) fungibility of native π - proven from the ledger; (B) that a specific deposit is a native on-chain payment - verifiable case by case from the transaction hash; (C) that an exchange's internal balance is reserve-backed - NOT claimed, because that is an off-chain fact."
+---
 # FAQ — Three different claims: don’t blend them
 
 > A precise separation of what is **proven**, what is **verifiable case-by-case**, and what is **not claimed**.

@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "Exchanges hand out M addresses instead of G addresses - does that reveal where the π came from?"
+faq_answer: "No. A muxed M address is a G account plus a 64-bit ID that names a counterparty inside a pooled account, for accounting. It identifies who, not a coin unit. The underlying G account is what holds the scalar balance, and neither the address nor the payment carries any per-unit origin."
+---
 # FAQ — “Exchanges have an **M** address, not a **G** address — so you can tell them apart?”
 
 ## The claim

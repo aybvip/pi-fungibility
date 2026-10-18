@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "Pi said 'don't buy Pi' - does that make bought π a different asset?"
+faq_answer: "No. That guidance belonged to the Enclosed Mainnet period, which ended with the Open Network launch on 2025-02-20. It was a policy statement about acquiring π, not a property recorded on the ledger, and it never created a per-unit origin field. The MiCA whitepaper now describes exchanges as the secondary market where mined π is resold."
+---
 # FAQ — “Pi said: don’t buy Pi” (before 2025)
 
 ## The claim

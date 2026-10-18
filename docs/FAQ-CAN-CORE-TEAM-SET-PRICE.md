@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "Can the Pi Core Team charge a different price for mined π than for exchange π, or stop you selling?"
+faq_answer: "No. On-chain there is one native asset with no issuer, no contract and no transfer restriction, and the ledger records no origin for a payment. A price that depends on where a unit was mined cannot be enforced at the protocol level. Any such difference could only be an off-chain policy of one particular service, not a property of the asset."
+---
 # FAQ — Can the Pi Core Team set a **different price** for mined Pi vs exchange Pi, or stop you selling them at the same price?
 
 ## The question

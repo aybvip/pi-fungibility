@@ -1,0 +1,26 @@
+---
+layout: default
+---
+{{ content }}
+
+{% if page.faq_question and page.faq_answer %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "url": {{ page.url | absolute_url | jsonify }},
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": {{ page.faq_question | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ page.faq_answer | jsonify }}
+      }
+    }
+  ]
+}
+</script>
+{% endif %}

@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "Pi now has Soroban smart contracts and ecosystem tokens - can a contract tag a coin's origin?"
+faq_answer: "No. The contract-facing token interface exposes only scalars: balance, allowance, transfer, transfer_from and approve. There is no per-unit identity to read. Ecosystem tokens issued through PiRC are a separate asset and do not change the native asset; a contract cannot observe an origin that the ledger never recorded."
+---
 # FAQ — “Pi now has Soroban smart contracts and ecosystem tokens — so you *can* tag a coin’s origin now?”
 
 > Objection: *“Pi has added smart contracts (Soroban) and a token launchpad. A smart contract can store

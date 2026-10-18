@@ -1,3 +1,8 @@
+---
+layout: faq
+faq_question: "Is this just an unofficial GitHub repository - is it a scam or phishing?"
+faq_answer: "Caution is fair. The repository is unofficial and says so plainly, and it is read-only by design: no wallet, no passphrase, no keys, no signing and no transactions - only GET requests to public endpoints. Every script can be read and run locally with Node 18+ and no dependencies, and the status 'not independently audited' is stated explicitly."
+---
 # FAQ — “It’s just a random GitHub repo, so it must be a scam / phishing”
 
 ## The objection (generic form)
