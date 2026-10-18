@@ -16,7 +16,7 @@
   ✅  coin-id-check.mjs      balance is one scalar (no per-unit ID)
   ✅  mixing-check.mjs       mined+bought mixed -> origin-less payment
   ✅  verify-deposit.mjs     a specific transfer is native on Mainnet (Claim B)
-  ✅  self-test.mjs          unit tests + end-to-end (21 checks)
+  ✅  self-test.mjs          unit tests + transport failures + end-to-end (29 checks)
 ==============================================================================
   7 passed, 0 failed  (7 checks)
   note: online checks depend on https://api.mainnet.minepi.com (read-only).

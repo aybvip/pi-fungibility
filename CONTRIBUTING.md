@@ -57,7 +57,7 @@ Requires **Node 18+** and network access (only the live examples need the networ
 
 ```bash
 node examples/run-all.mjs            # everything at once (+ summary); add --offline for no network
-node examples/self-test.mjs          # offline unit tests + online end-to-end (21 checks)
+node examples/self-test.mjs          # 26 offline checks + 3 online end-to-end (29 total)
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
 node examples/exhaustive-check.mjs   # offline EXHAUSTIVE bounded check (all 1452 histories)
 node examples/provenance-check.mjs   # live: no origin field on chain

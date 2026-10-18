@@ -4,6 +4,46 @@
 
 ---
 
+## 0. Version pinning — the exact revision of every source used
+
+Every source below was retrieved and cross-checked on **2026-10-18**. Links rot and pages change silently, so
+wherever the source is a Git repository the **commit that last touched the cited file** is recorded. Where the
+source is a living website or a PDF, the best available pin is given instead.
+
+| Source | Pin | Revision date |
+|---|---|---|
+| `pi-apps/pi-platform-docs` — `platform_API.md` (full `PaymentDTO`) | commit `cb704b9` | 2024-08-28 |
+| `pi-apps/pi-sdk-integration-guide` — `README.md` (A2U flow) | commit `9b263cd` | 2023-01-27 |
+| `pi-apps/pi-sdk-js` — `package.json` (`createPayment`) | commit `a6a5055` · published `@pinetwork/pi-sdk-js@2.0.0` | 2026-03-19 |
+| `PiNetwork/PiRC` — `PiRC1/ReadMe.md` (ecosystem tokens) | commit `c50d516` | 2026-02-20 |
+| `PiNetwork/PiRC` — `PiRC2/ReadMe.md` (subscription contract) | commit `dc86dfd` | 2026-04-17 |
+| `PiNetwork/SmartContracts` — `README.md` (reference implementation) | commit `d5b3915` | 2026-04-17 |
+| `stellar/stellar-protocol` — `core/cap-0027.md` (muxed `M…` accounts) | commit `b378cf3` | 2020-07-14 |
+| **MiCA Whitepaper — Pi Network (PDF)** | **SHA-256** `9c0dd64e622433cdaed077216e917fe87a34e3733b08a0c6886eba844d8ae61e` (632 317 bytes) | published 2025-11-27 |
+| `docs.minepi.com` (Wallet / Payments / Tokens) | living site — no revision available | retrieved 2026-10-18 |
+| `pi-apps.github.io/community-developer-guide` | living site — no revision available | retrieved 2026-10-18 |
+
+Verify the PDF pin yourself:
+
+```bash
+curl -sL https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf -o mica.pdf
+sha256sum mica.pdf        # macOS/Linux
+certutil -hashfile mica.pdf SHA256   # Windows
+# expected: 9c0dd64e622433cdaed077216e917fe87a34e3733b08a0c6886eba844d8ae61e
+```
+
+Verify a repository pin yourself:
+
+```bash
+git clone --filter=blob:none https://github.com/pi-apps/pi-platform-docs
+git -C pi-platform-docs log -1 --format='%h %cs' -- platform_API.md    # -> cb704b9 2024-08-28
+```
+
+> **Why this matters:** a claim is only as good as the revision it was read from. If an upstream file changes,
+> this table records exactly which version the conclusions in this repository rest on.
+
+---
+
 ## 1. Pi Docs — official site (2026)
 - https://docs.minepi.com/
 

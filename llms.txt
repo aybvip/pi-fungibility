@@ -23,7 +23,8 @@
 - [README](https://github.com/aybvip/pi-fungibility/blob/main/README.md) — overview, four-layer proof, FAQ table
 - [PROOF](https://github.com/aybvip/pi-fungibility/blob/main/PROOF.md) — step-by-step proof
 - [SCOPE](https://github.com/aybvip/pi-fungibility/blob/main/docs/SCOPE.md) — what is proven vs **not** claimed
-- [SOURCES](https://github.com/aybvip/pi-fungibility/blob/main/docs/SOURCES.md) — verbatim quotes from official sources
+- [VERIFICATION](https://github.com/aybvip/pi-fungibility/blob/main/docs/VERIFICATION.md) — last verified date, what ran where (local vs CI), what it does not prove
+- [SOURCES](https://github.com/aybvip/pi-fungibility/blob/main/docs/SOURCES.md) — verbatim quotes from official sources, with pinned revisions (§0)
 - [INDEX](https://github.com/aybvip/pi-fungibility/blob/main/docs/INDEX.md) — every file, by file and by question
 
 ## Question-specific answers

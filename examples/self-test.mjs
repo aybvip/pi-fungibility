@@ -2,7 +2,7 @@
 /**
  * self-test.mjs
  * ---------------------------------------------------------------------------
- * Automated checks for verify-deposit.mjs. Three layers:
+ * Automated checks for verify-deposit.mjs. Four layers:
  *
  *   LAYER 0 — OFFLINE (pure): input validation helpers in lib.mjs.
  *
@@ -12,11 +12,16 @@
  *       (1) the SAME operation must be native AND reach the expected address;
  *       (2) a FAILED transaction (successful=false) can never be VERIFIED.
  *
- *   LAYER 2 — ONLINE (read-only): run the real CLI against a known, stable Pi
+ *   LAYER 2 — OFFLINE (no network): the HTTP client's failure handling, tested
+ *     with an injected transport. Asserts that an HTTP error status, an invalid
+ *     JSON body, a connection failure and a timeout each raise a clear Error
+ *     instead of crashing or silently returning `undefined`.
+ *
+ *   LAYER 3 — ONLINE (read-only): run the real CLI against a known, stable Pi
  *     Mainnet transaction and assert the end-to-end result.
  *
  * Exit code 0 = all pass; 1 = at least one failure. Zero dependencies.
- * Requires network for Layer 2 only.
+ * Requires network for Layer 3 only.
  *
  * Usage:  node examples/self-test.mjs
  * ---------------------------------------------------------------------------
@@ -26,7 +31,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { evaluate } from "./verify-deposit.mjs";
-import { isTxHash, isGAddress, isMAddress, isAddress } from "./lib.mjs";
+import { api, DEFAULT_TIMEOUT_MS, isTxHash, isGAddress, isMAddress, isAddress } from "./lib.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TOOL = join(HERE, "verify-deposit.mjs");
@@ -178,9 +183,149 @@ console.log("\nLayer 1 — offline unit tests (evaluate)\n");
 }
 
 // ---------------------------------------------------------------------------
-// LAYER 2 — online end-to-end (real CLI on a stable tx)
+// LAYER 2 — offline transport failure handling (injected fetch, no network)
 // ---------------------------------------------------------------------------
-console.log("\nLayer 2 — online end-to-end (real CLI)\n");
+console.log("\nLayer 2 — offline transport failures (injected fetch)\n");
+
+const fakeOk = (body) => ({
+  ok: true,
+  status: 200,
+  statusText: "OK",
+  json: async () => body,
+  text: async () => JSON.stringify(body),
+});
+
+const fakeHttp = (status, statusText, body) => ({
+  ok: false,
+  status,
+  statusText,
+  text: async () => body,
+  json: async () => {
+    throw new Error("not json");
+  },
+});
+
+/** Assert that `fn()` rejects with an Error whose message matches `pattern`. */
+async function expectThrow(name, fn, pattern) {
+  try {
+    await fn();
+    check(name, false, "resolved instead of throwing");
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    const good = err instanceof Error && pattern.test(msg);
+    check(name, good, good ? "" : `got ${JSON.stringify(msg).slice(0, 150)}`);
+  }
+}
+
+/** Assert that `fn()` resolves and the value satisfies `predicate`. */
+async function expectValue(name, fn, predicate) {
+  try {
+    const v = await fn();
+    check(name, predicate(v), JSON.stringify(v).slice(0, 150));
+  } catch (err) {
+    check(name, false, `threw ${err.message}`);
+  }
+}
+
+// The happy path must be unchanged by the timeout refactor.
+await expectValue(
+  "injected 200 + JSON -> parsed value",
+  () => api("/ping", { fetch: async () => fakeOk({ hello: "world" }), timeoutMs: 0 }),
+  (v) => v && v.hello === "world"
+);
+
+// HTTP 500 -> a clear error naming the status, with a snippet of the body.
+await expectThrow(
+  "HTTP 500 -> Error names status + shows body snippet",
+  () =>
+    api("/transactions/x", {
+      fetch: async () => fakeHttp(500, "Internal Server Error", "upstream boom"),
+      timeoutMs: 0,
+    }),
+  /^500 Internal Server Error -> \/transactions\/x[\s\S]*upstream boom$/
+);
+
+// HTTP 429 (rate limited) -> still a clear status error, never a silent pass.
+await expectThrow(
+  "HTTP 429 -> Error names status",
+  () =>
+    api("/transactions/x", {
+      fetch: async () => fakeHttp(429, "Too Many Requests", "slow down"),
+      timeoutMs: 0,
+    }),
+  /^429 Too Many Requests -> \/transactions\/x/
+);
+
+// 200 but the body is not JSON (e.g. an HTML error page from a proxy).
+await expectThrow(
+  "200 + non-JSON body -> invalid JSON error",
+  () =>
+    api("/transactions/x", {
+      fetch: async () => ({
+        ok: true,
+        status: 200,
+        statusText: "OK",
+        json: async () => {
+          throw new SyntaxError("Unexpected token <");
+        },
+      }),
+      timeoutMs: 0,
+    }),
+  /^invalid JSON -> \/transactions\/x/
+);
+
+// Connection failure (DNS / refused) -> network error naming the host.
+await expectThrow(
+  "connection failure -> network error names the host",
+  () =>
+    api("/transactions/x", {
+      fetch: async () => {
+        throw new Error("getaddrinfo ENOTFOUND api.mainnet.minepi.com");
+      },
+      timeoutMs: 0,
+    }),
+  /^network error -> https:\/\/api\.mainnet\.minepi\.com[\s\S]*ENOTFOUND/
+);
+
+// Timeout -> a hung socket is aborted and reported; the process never hangs.
+const hangingFetch = (_url, { signal } = {}) =>
+  new Promise((_resolve, reject) => {
+    if (signal) {
+      signal.addEventListener("abort", () =>
+        reject(Object.assign(new Error("The operation was aborted"), { name: "AbortError" }))
+      );
+    }
+  });
+
+await expectThrow(
+  "timeout -> aborted and reported, never hangs",
+  () => api("/transactions/x", { fetch: hangingFetch, timeoutMs: 40 }),
+  /^timeout after 40ms -> /
+);
+
+// The default budget must be a real, finite, positive number.
+check(
+  "default timeout is a finite positive budget",
+  Number.isFinite(DEFAULT_TIMEOUT_MS) && DEFAULT_TIMEOUT_MS > 0,
+  String(DEFAULT_TIMEOUT_MS)
+);
+
+// A custom base is honoured (this is what lets the failure tests run offline).
+await expectValue(
+  "custom base is honoured",
+  () =>
+    api("/ping", {
+      base: "https://example.test",
+      fetch: async () => fakeOk({ base: "example.test" }),
+      timeoutMs: 0,
+    }),
+  (v) => v.base === "example.test"
+);
+
+// ---------------------------------------------------------------------------
+// LAYER 3 — online end-to-end (real CLI on a stable tx)
+// ---------------------------------------------------------------------------
+console.log("\nLayer 3 — online end-to-end (real CLI)\n");
 
 function run(...args) {
   return execFileSync(process.execPath, [TOOL, ...args], { encoding: "utf8" });

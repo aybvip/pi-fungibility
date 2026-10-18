@@ -17,15 +17,15 @@ Every document is written in **English** (`*.md`).
 | [`PROOF.md`](../PROOF.md) | Step-by-step proof that an app owner cannot tell where π came from |
 | [`SCOPE.md`](SCOPE.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
 | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) | **Audit status:** not independently audited — what that means, and how to do one |
+| [`VERIFICATION.md`](VERIFICATION.md) | **Verification status:** last verified date, what ran where (local vs CI), live Mainnet vs offline layers, how to read a red build, and what is **not** verified |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) | How to contribute: report findings, zero-dep rules, add a FAQ |
 | [`THREAT-MODEL.md`](THREAT-MODEL.md) | **Threat model:** assets, actors, capabilities, trust assumptions, attacks, out-of-scope |
 | [`SECURITY.md`](../SECURITY.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
 | [`DISCLAIMER.md`](../DISCLAIMER.md) | Independent & unofficial; no financial advice; no custody; no warranty |
-| [`SOURCES.md`](SOURCES.md) | All official sources, with verbatim quotes (§1–§22) |
-| [`index.html`](index.html) | Website landing page (GitHub Pages) |
-| [`llms.txt`](llms.txt) | Machine-readable index for AI tools / LLM crawlers (site copy) |
+| [`SOURCES.md`](SOURCES.md) | All official sources, with verbatim quotes (§0–§22); §0 pins each source's exact revision |
+| [`index.html`](../index.html) | Website landing page (GitHub Pages) |
+| [`llms.txt`](../llms.txt) | Machine-readable index for AI tools / LLM crawlers |
 | [`CITATION.cff`](../CITATION.cff) | Citation metadata (GitHub “Cite this repository”) |
-| [`llms.txt`](../llms.txt) | Machine-readable index for AI tools / LLM crawlers (repo copy) |
 | [`LICENSE`](../LICENSE) | MIT |
 
 ### Docs — FAQ (one per objection)
@@ -51,11 +51,11 @@ Every document is written in **English** (`*.md`).
 | [`coin-id-check.mjs`](../examples/coin-id-check.mjs) | Shows the balance is **one scalar** — no per-unit ID |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | Live demo: commingling → scalar balance → **origin-less** payment |
 | [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real native Pi payment on Mainnet (Claim B) |
-| [`self-test.mjs`](../examples/self-test.mjs) | Automated checks: offline unit tests (same-op rule, failed-tx gate) + online end-to-end |
+| [`self-test.mjs`](../examples/self-test.mjs) | Automated checks: offline unit tests (same-op rule, failed-tx gate) + offline transport-failure handling (HTTP 500/429, invalid JSON, connection failure, timeout) + online end-to-end |
 | [`model-check.mjs`](../examples/model-check.mjs) | Executable ledger model + property check (2000 seeds, offline): scalar state, non-injective history→state |
 | [`exhaustive-check.mjs`](../examples/exhaustive-check.mjs) | Exhaustive bounded check (offline): enumerates all 1452 histories; origin-invisibility for every one |
 | [`run-all.mjs`](../examples/run-all.mjs) | Runs every check and prints a summary (`--offline` to skip network) |
-| [`lib.mjs`](../examples/lib.mjs) | Shared helpers: robust API client (status + body on error) and strkey validation |
+| [`lib.mjs`](../examples/lib.mjs) | Shared helpers: read-only API client (timeout + clear errors on HTTP/JSON/connection failures), strkey validation |
 | [`regenerate-snapshots.mjs`](../examples/regenerate-snapshots.mjs) | Maintenance tool: rewrites the `*-output.txt` snapshots as clean UTF-8/LF |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | Backend handling `PaymentDTO`; prints its keys |
@@ -83,6 +83,7 @@ Every document is written in **English** (`*.md`).
 | Is this repo a scam / phishing? | [`FAQ-UNOFFICIAL-REPO-SCAM.md`](FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](../SECURITY.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) |
 | What exactly is proven — and not? | [`SCOPE.md`](SCOPE.md) |
 | Has this been independently audited? | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) |
+| Has anyone actually **run** this, when, and where? | [`VERIFICATION.md`](VERIFICATION.md) |
 | Who could attack this, and what do we assume? | [`THREAT-MODEL.md`](THREAT-MODEL.md) |
 | Any other objection (lockups, KYC, governance…)? | [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) |
 | Which official sources back all this? | [`SOURCES.md`](SOURCES.md) |
@@ -94,7 +95,7 @@ Every document is written in **English** (`*.md`).
 ```bash
 node examples/run-all.mjs            # everything at once (+ summary); add --offline to skip network
 
-node examples/self-test.mjs          # offline unit tests + online end-to-end (21 checks)
+node examples/self-test.mjs          # 26 offline checks + 3 online end-to-end (29 total)
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
 node examples/exhaustive-check.mjs   # offline exhaustive bounded check (all 1452 histories)
 node examples/provenance-check.mjs

@@ -25,11 +25,22 @@ Layer 1 — offline unit tests (evaluate)
   PASS ✅  undefined records + no address -> NO_NATIVE_PAYMENT
   PASS ✅  null op entry tolerated -> VERIFIED
 
-Layer 2 — online end-to-end (real CLI)
+Layer 2 — offline transport failures (injected fetch)
+
+  PASS ✅  injected 200 + JSON -> parsed value
+  PASS ✅  HTTP 500 -> Error names status + shows body snippet
+  PASS ✅  HTTP 429 -> Error names status
+  PASS ✅  200 + non-JSON body -> invalid JSON error
+  PASS ✅  connection failure -> network error names the host
+  PASS ✅  timeout -> aborted and reported, never hangs
+  PASS ✅  default timeout is a finite positive budget
+  PASS ✅  custom base is honoured
+
+Layer 3 — online end-to-end (real CLI)
 
   PASS ✅  correct recipient -> VERIFIED (and SUCCEEDED)
   PASS ✅  wrong recipient -> NOT VERIFIED
   PASS ✅  no address -> reports the number of native payment(s)
 
-21 passed, 0 failed
+29 passed, 0 failed
 
