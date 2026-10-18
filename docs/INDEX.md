@@ -41,6 +41,7 @@ Every document is written in **English** (`*.md`).
 | [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) | **“Doesn’t the SDK / Platform API expose where the π came from?”** (no — full field enumeration) |
 | [`FAQ-SMART-CONTRACTS-AND-TOKENS.md`](FAQ-SMART-CONTRACTS-AND-TOKENS.md) | **“Pi now has Soroban smart contracts and ecosystem tokens — so you can tag a coin’s origin now?”** (no — scalars only; tokens are a different asset) |
 | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) | “Exchanges use `M` addresses, not `G`” |
+| [`FAQ-EXCHANGE-ADDRESSES-OBSERVED.md`](FAQ-EXCHANGE-ADDRESSES-OBSERVED.md) | “These two exchange addresses — can you trace a coin’s origin?” |
 | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) | “The MiCA whitepaper says Pi comes only from mining” |
 | [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) | “Pi once said *don’t buy Pi*” (Enclosed Mainnet; ended 2025-02-20) |
 | [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md) | “Same coin ≠ same price” |
@@ -82,6 +83,8 @@ Every document is written in **English** (`*.md`).
 | Doesn’t the SDK / Platform API expose the origin? | [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) |
 | Do Soroban smart contracts / ecosystem tokens change fungibility? | [`FAQ-SMART-CONTRACTS-AND-TOKENS.md`](FAQ-SMART-CONTRACTS-AND-TOKENS.md) |
 | Exchanges use `M`, not `G`? | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) |
+| Two concrete exchange addresses (Bitget/OKX) — what do they show? | [`FAQ-EXCHANGE-ADDRESSES-OBSERVED.md`](FAQ-EXCHANGE-ADDRESSES-OBSERVED.md) |
+| Bought vs mined — what does the chain see vs off-chain records? | [`FAQ-TAX-SOURCING.md`](FAQ-TAX-SOURCING.md) |
 | Can the Core Team set a different price / block sales? | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
 | Is an exchange’s on-chain balance really backed? | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |
 | The MiCA whitepaper says “only through mining”? | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) |
@@ -104,7 +107,7 @@ Every document is written in **English** (`*.md`).
 ```bash
 node examples/run-all.mjs            # everything at once (+ summary); add --offline to skip network
 
-node examples/self-test.mjs          # 26 offline checks + 3 online end-to-end (29 total)
+node examples/self-test.mjs          # 34 offline checks + 3 online end-to-end (37 total)
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
 node examples/exhaustive-check.mjs   # offline exhaustive bounded check (all 1452 histories)
 node examples/provenance-check.mjs
