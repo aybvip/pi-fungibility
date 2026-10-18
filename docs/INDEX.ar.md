@@ -44,7 +44,7 @@
 | [`provenance-check.mjs`](../examples/provenance-check.mjs) | يقرا معاملة حقيقية على السلسلة؛ يوريك **ما فماش خانة مصدر** |
 | [`coin-id-check.mjs`](../examples/coin-id-check.mjs) | يوريك الرصيد **رقم واحد** — بلا ID لكل وحدة |
 | [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | يتحقّق إنّ تحويلًا **معيّنًا** دفعة Pi أصلية على Mainnet (الادّعاء B) |
-| [`self-test.mjs`](../examples/self-test.mjs) | اختبار آلي لمطابقة «لكل عملية» (صحيح → VERIFIED، غالط → NOT VERIFIED) |
+| [`self-test.mjs`](../examples/self-test.mjs) | اختبارات آلية: بلا شبكة (قاعدة نفس العملية، بوّابة المعاملة الفاشلة) + أونلاين |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | عرض حيّ: خلط → رصيد رقم واحد → دفعة **بلا مصدر** |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | مسار `Pi.createPayment` الرسمي (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | سيرفر يعالج `PaymentDTO`؛ يطبع مفاتيحه |
@@ -78,7 +78,7 @@
 ## الجزء 3 — شغّل البراهين
 
 ```bash
-node examples/self-test.mjs          # 3 تأكيدات (صحيح/غالط/بلا عنوان)
+node examples/self-test.mjs          # اختبارات وحدة بلا شبكة + أونلاين (11 فحص)
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
 node examples/verify-deposit.mjs <TXID> [عنوان_المستلم]

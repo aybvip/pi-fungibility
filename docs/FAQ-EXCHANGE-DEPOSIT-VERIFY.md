@@ -45,20 +45,24 @@ node examples/verify-deposit.mjs <TXID>
 node examples/verify-deposit.mjs <TXID> <EXCHANGE_ONCHAIN_ADDRESS>
 ```
 It confirms (from the **public** API, the source of truth):
+- the transaction **succeeded** (`successful: true`) — a **required** condition, not just displayed;
 - an operation of type `payment` with `asset_type: "native"`;
 - `from` → `to` and the amount;
 - optionally, that `to` is the address you expected.
 
-> 🔧 **Correctness note (per operation).** A Pi/Stellar transaction can contain **multiple operations**.
-> So the tool does **not** test “is there a native payment?” and “does some op reach the address?” as two
-> independent facts. It requires the **same single operation** to be **both** native **and** directed to the
-> expected recipient — otherwise the verdict is **NOT VERIFIED**. This avoids a misleading result.
-> (It also accepts the muxed `M…` form of the recipient via CAP-27.)
+> 🔧 **Two correctness rules.**
+> **(1) Same operation.** A Pi/Stellar transaction can contain **multiple operations**. So the tool does
+> **not** test “is there a native payment?” and “does some op reach the address?” as two independent facts.
+> It requires the **same single operation** to be **both** native **and** directed to the expected recipient
+> — otherwise the verdict is **NOT VERIFIED**. (It also accepts the muxed `M…` form via CAP-27.)
+> **(2) Transaction succeeded.** Horizon returns the operations of a **failed** transaction too, but they
+> **did not take effect**. So `successful: true` is a **hard gate**: a failed tx can **never** be `VERIFIED`
+> (the tool reports `NOT VERIFIED — transaction did not succeed`).
 >
-> Run the automated check: `node examples/self-test.mjs` — it asserts that the **correct** recipient
-> gives `VERIFIED` while a **wrong** recipient gives `NOT VERIFIED` (see
-> [`examples/self-test-output.txt`](../examples/self-test-output.txt)). It also runs in **CI** on every
-> push/PR ([`.github/workflows/self-test.yml`](../.github/workflows/self-test.yml)).
+> Run the automated check: `node examples/self-test.mjs` — it has **offline unit tests** (pure `evaluate()`,
+> no network: correct vs wrong recipient, the **failed-tx gate**, and the **multi-op same-op rule**) plus
+> **online** end-to-end checks (see [`examples/self-test-output.txt`](../examples/self-test-output.txt)).
+> It also runs in **CI** on every push/PR ([`.github/workflows/self-test.yml`](../.github/workflows/self-test.yml)).
 
 > ⚠️ Practical notes:
 > - Exchange **deposit** addresses are often **`M…`** muxed accounts (CAP-27) — see

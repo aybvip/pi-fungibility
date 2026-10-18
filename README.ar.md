@@ -108,7 +108,7 @@ Pi.createPayment(
 |---|---|
 | [`examples/mixing-check.mjs`](examples/mixing-check.mjs) | برهان حيّ لسيناريو **«معدَّنة + مشرية ثم بعث»**: خلط → رصيد رقم واحد → دفعة بلا مصدر |
 | [`examples/verify-deposit.mjs`](examples/verify-deposit.mjs) | يتحقّق إنّ تحويلًا **معيّنًا** هو دفعة **Pi أصلية على Mainnet** (الادّعاء B)؛ ويوضّح شنوّة ما يثبتوش السجلّ (C) |
-| [`examples/self-test.mjs`](examples/self-test.mjs) | اختبار آلي: عنوان صحيح → **VERIFIED**، عنوان غالط → **NOT VERIFIED** (يثبّت إصلاح «لكل عملية») |
+| [`examples/self-test.mjs`](examples/self-test.mjs) | اختبارات آلية: **بلا شبكة** (قاعدة نفس العملية، بوّابة المعاملة الفاشلة) + **أونلاين** (صحيح → VERIFIED، غالط → NOT VERIFIED) |
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | سكربت **بلا اعتماديات** يشغّل على البلوكشين ويثبت شنو **ينفع/ما ينفعش** تعرفه عن عملة معيّنة |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | يثبت إنّ الرصيد رقم واحد — **مافيه معرّف لكل micro-π** |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | واجهة `Pi.createPayment` الرسمية (U2A) |

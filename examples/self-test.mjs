@@ -2,16 +2,19 @@
 /**
  * self-test.mjs
  * ---------------------------------------------------------------------------
- * A tiny automated check of verify-deposit.mjs.
+ * Automated checks for verify-deposit.mjs. Two layers:
  *
- * It runs the tool three times against a known, stable Pi Mainnet transaction
- * and ASSERTS the difference:
- *   1. correct recipient   -> "VERIFIED" (same op is native AND to the address)
- *   2. wrong recipient     -> "NOT VERIFIED" (the fix: we must not mix facts)
- *   3. no address given    -> reports the number of native payment(s)
+ *   LAYER 1 — OFFLINE (pure, no network): unit-test the exported `evaluate()`
+ *     decision function with synthetic transactions. This pins the two
+ *     correctness rules and cannot be flaky:
+ *       (1) the SAME operation must be native AND reach the expected address;
+ *       (2) a FAILED transaction (successful=false) can never be VERIFIED.
+ *
+ *   LAYER 2 — ONLINE (read-only): run the real CLI against a known, stable Pi
+ *     Mainnet transaction and assert the end-to-end result.
  *
  * Exit code 0 = all pass; 1 = at least one failure. Zero dependencies.
- * Requires network (read-only) like the other tools.
+ * Requires network for Layer 2 only.
  *
  * Usage:  node examples/self-test.mjs
  * ---------------------------------------------------------------------------
@@ -20,6 +23,7 @@
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { evaluate } from "./verify-deposit.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TOOL = join(HERE, "verify-deposit.mjs");
@@ -28,36 +32,129 @@ const TOOL = join(HERE, "verify-deposit.mjs");
 const TX = "e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c";
 const GOOD = "GC55LFCTGSDPDMNDIOHZVVA4CYCUF4IKI2SUGHWCJA2PCLPKH4HMDMIU"; // actual recipient
 const BAD = "GBYXQJ6ZHXNLR6EFVLYW5DJPKLACXTYS2ZL4U3YF66R3UQEA7D5LSEYU"; // not the recipient
+const OTHER = "GBWKGBVDEJO3JKRV7IUBHXMBE7A2JYHOGMUMKEO2XM5RFIRBRVSYHTZA"; // some other account
 
 let pass = 0;
 let fail = 0;
-function check(name, cond) {
+function check(name, cond, extra) {
   if (cond) {
     console.log(`  PASS ✅  ${name}`);
     pass++;
   } else {
-    console.error(`  FAIL ❌  ${name}`);
+    console.error(`  FAIL ❌  ${name}${extra ? `  -> ${extra}` : ""}`);
     fail++;
   }
 }
+
+const nativePay = (from, to, amount = "1.0000000", extra = {}) => ({
+  type: "payment",
+  asset_type: "native",
+  amount,
+  from,
+  to,
+  ...extra,
+});
+
+// ---------------------------------------------------------------------------
+// LAYER 1 — offline unit tests of evaluate()
+// ---------------------------------------------------------------------------
+console.log("\n🧪  self-test: verify-deposit.mjs\n");
+console.log("Layer 1 — offline unit tests (evaluate)\n");
+
+// 1) succeeded + native payment to expected address
+{
+  const tx = { successful: true };
+  const r = evaluate(tx, [nativePay(OTHER, GOOD)], GOOD);
+  check("succeeded + native to expected -> VERIFIED", r.verdict === "VERIFIED", r.verdict);
+}
+
+// 2) succeeded + native payment to a DIFFERENT address
+{
+  const tx = { successful: true };
+  const r = evaluate(tx, [nativePay(OTHER, OTHER)], GOOD);
+  check("succeeded + native to wrong address -> NOT_VERIFIED", r.verdict === "NOT_VERIFIED", r.verdict);
+}
+
+// 3) THE NEW GATE: FAILED tx with a native payment to the expected address
+{
+  const tx = { successful: false };
+  const r = evaluate(tx, [nativePay(OTHER, GOOD)], GOOD);
+  check(
+    "FAILED tx (successful=false) -> NOT_VERIFIED_TX_FAILED (gate)",
+    r.verdict === "NOT_VERIFIED_TX_FAILED",
+    r.verdict
+  );
+}
+
+// 4) MULTI-OP: one op is native (to elsewhere), another op reaches GOOD but is NOT native
+{
+  const tx = { successful: true };
+  const records = [
+    nativePay(OTHER, OTHER), // native, but wrong destination
+    { type: "payment", asset_type: "credit_alphanum4", asset_code: "USDC", amount: "5.0000000", from: OTHER, to: GOOD },
+  ];
+  const r = evaluate(tx, records, GOOD);
+  check(
+    "multi-op: native elsewhere + non-native to expected -> NOT_VERIFIED (same-op rule)",
+    r.verdict === "NOT_VERIFIED",
+    r.verdict
+  );
+}
+
+// 5) multi-op: SAME op is native AND to expected -> VERIFIED
+{
+  const tx = { successful: true };
+  const records = [
+    { type: "payment", asset_type: "credit_alphanum4", asset_code: "USDC", amount: "5.0000000", from: OTHER, to: OTHER },
+    nativePay(OTHER, GOOD),
+  ];
+  const r = evaluate(tx, records, GOOD);
+  check("multi-op: same op native + to expected -> VERIFIED", r.verdict === "VERIFIED", r.verdict);
+}
+
+// 6) no address given: succeeded tx with a native payment -> NATIVE_PRESENT
+{
+  const tx = { successful: true };
+  const r = evaluate(tx, [nativePay(OTHER, GOOD)], null);
+  check("no address + succeeded + native -> NATIVE_PRESENT", r.verdict === "NATIVE_PRESENT", r.verdict);
+}
+
+// 7) no address given + no native payment -> NO_NATIVE_PAYMENT
+{
+  const tx = { successful: true };
+  const r = evaluate(
+    tx,
+    [{ type: "payment", asset_type: "credit_alphanum4", asset_code: "USDC", amount: "1.0000000", from: OTHER, to: GOOD }],
+    null
+  );
+  check("no address + only non-native -> NO_NATIVE_PAYMENT", r.verdict === "NO_NATIVE_PAYMENT", r.verdict);
+}
+
+// 8) muxed M... recipient accepted
+{
+  const tx = { successful: true };
+  const M = "MAAAAAAAAAAAAAAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMM";
+  const r = evaluate(tx, [nativePay(OTHER, OTHER, "1.0000000", { to_muxed: M })], M);
+  check("muxed M... recipient accepted -> VERIFIED", r.verdict === "VERIFIED", r.verdict);
+}
+
+// ---------------------------------------------------------------------------
+// LAYER 2 — online end-to-end (real CLI on a stable tx)
+// ---------------------------------------------------------------------------
+console.log("\nLayer 2 — online end-to-end (real CLI)\n");
 
 function run(...args) {
   return execFileSync(process.execPath, [TOOL, ...args], { encoding: "utf8" });
 }
 
-console.log("\n🧪  self-test: verify-deposit.mjs\n");
-
 const outGood = run(TX, GOOD);
 check(
-  "correct recipient -> VERIFIED (same op is native AND to the address)",
-  /VERIFIED: a SINGLE operation/.test(outGood) && !/NOT VERIFIED/.test(outGood)
+  "correct recipient -> VERIFIED (and SUCCEEDED)",
+  /VERIFIED: the transaction SUCCEEDED/.test(outGood) && !/NOT VERIFIED/.test(outGood)
 );
 
 const outBad = run(TX, BAD);
-check(
-  "wrong recipient -> NOT VERIFIED (this is the bug fix)",
-  /NOT VERIFIED: no single operation/.test(outBad)
-);
+check("wrong recipient -> NOT VERIFIED", /NOT VERIFIED: no single operation/.test(outBad));
 
 const outNoAddr = run(TX);
 check(

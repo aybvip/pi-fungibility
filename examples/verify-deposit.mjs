@@ -6,8 +6,9 @@
  * payment on Pi Mainnet** — e.g. a deposit into an exchange's on-chain address.
  *
  * It proves what the LEDGER can prove:
- *   - an operation of type "payment" with asset_type "native"
- *   - from address -> to address, and the amount
+ *   - the transaction SUCCEEDED (tx.successful === true), AND
+ *   - an operation of type "payment" with asset_type "native", AND
+ *   - from address -> to address, and the amount, AND
  *   - optionally, that the **same operation** goes TO a specific address
  *
  * It does NOT (and cannot) prove what is off-chain:
@@ -15,36 +16,34 @@
  *   - that the exchange's total internal liabilities are fully backed on-chain.
  *   (Those are counterparty/reserve claims — see docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md.)
  *
- * NOTE ON CORRECTNESS (important):
- *   A Stellar/Pi transaction can contain MULTIPLE operations. Therefore we must
- *   NOT test "is there a native payment?" and "does some op reach the expected
- *   address?" as two independent facts — that could be misleading. Instead, we
- *   require the SAME single operation to be BOTH native AND directed to the
- *   expected recipient (when one is given).
+ * TWO CORRECTNESS RULES (important):
+ *   (1) A Stellar/Pi transaction can contain MULTIPLE operations. So we must NOT
+ *       test "is there a native payment?" and "does some op reach the expected
+ *       address?" as two independent facts. The SAME single operation must be
+ *       BOTH native AND directed to the expected recipient.
+ *   (2) A FAILED transaction still returns its operations from Horizon, but they
+ *       did NOT take effect. So `tx.successful` is a REQUIRED gate, not merely
+ *       displayed. A failed tx can never yield "VERIFIED".
  *
  * Zero dependencies (Node 18+ built-in fetch).
  *
  * Usage:
  *   node examples/verify-deposit.mjs                       # uses a default sample tx
  *   node examples/verify-deposit.mjs <TXID>
- *   node examples/verify-deposit.mjs <TXID> <TO_ADDRESS>   # also require the same op to reach TO_ADDRESS
+ *   node examples/verify-deposit.mjs <TXID> <TO_ADDRESS>   # require the same op to reach TO_ADDRESS
+ *
+ * The pure decision function `evaluate()` is exported so it can be unit-tested
+ * offline (see examples/self-test.mjs).
  * ---------------------------------------------------------------------------
  */
+
+import { pathToFileURL } from "node:url";
 
 const BASE = "https://api.mainnet.minepi.com";
 
 // A real Pi Mainnet transaction (native payment) used as the default sample.
 const DEFAULT_TX =
   "e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c";
-
-const txid = process.argv[2] || DEFAULT_TX;
-const toAddress = process.argv[3] || null; // optional: expected recipient (e.g. exchange deposit address)
-
-async function api(path) {
-  const res = await fetch(BASE + path, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText} -> ${path}`);
-  return res.json();
-}
 
 const rule = (c = "-") => console.log(c.repeat(78));
 
@@ -55,7 +54,75 @@ function goesTo(op, addr) {
   return op.to === addr || op.to_muxed === addr;
 }
 
+/**
+ * Pure decision function — no network. Given the transaction record, its
+ * operations, and an optional expected recipient, return the verdict.
+ *
+ * @returns {{
+ *   txOk: boolean,
+ *   nativePayments: number,
+ *   sameOpVerified: boolean,
+ *   ops: Array<object>,
+ *   verdict: "VERIFIED"|"NOT_VERIFIED_TX_FAILED"|"NOT_VERIFIED"|"NATIVE_PRESENT"|"NO_NATIVE_PAYMENT"
+ * }}
+ */
+export function evaluate(tx, records, toAddress) {
+  const txOk = tx && tx.successful === true;
+
+  let nativePayments = 0;
+  let sameOpVerified = false;
+  const ops = [];
+
+  for (const op of records) {
+    if (op.type !== "payment") {
+      ops.push({ type: op.type });
+      continue;
+    }
+    const isNative = op.asset_type === "native";
+    if (isNative) nativePayments++;
+
+    // RULE (1): the SAME operation must satisfy both conditions.
+    const toExpected = goesTo(op, toAddress);
+    const matches = isNative && (!toAddress || toExpected);
+    if (matches) sameOpVerified = true;
+
+    ops.push({
+      type: "payment",
+      isNative,
+      amount: op.amount,
+      asset_code: op.asset_code,
+      from: op.from,
+      to: op.to,
+      to_muxed: op.to_muxed,
+      to_muxed_id: op.to_muxed_id,
+      toExpected,
+      matches,
+    });
+  }
+
+  // RULE (2): a failed transaction can never be VERIFIED.
+  let verdict;
+  if (!txOk) {
+    verdict = "NOT_VERIFIED_TX_FAILED";
+  } else if (!toAddress) {
+    verdict = nativePayments > 0 ? "NATIVE_PRESENT" : "NO_NATIVE_PAYMENT";
+  } else {
+    verdict = sameOpVerified ? "VERIFIED" : "NOT_VERIFIED";
+  }
+
+  return { txOk, nativePayments, sameOpVerified, ops, verdict };
+}
+
+async function api(path) {
+  const res = await fetch(BASE + path, { headers: { Accept: "application/json" } });
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText} -> ${path}`);
+  return res.json();
+}
+
 async function main() {
+  const txid = process.argv[2] || DEFAULT_TX;
+  const toAddress = process.argv[3] || null; // optional: expected recipient
+
   console.log("\n🔗  Pi Mainnet — verify one native Pi payment (e.g. a deposit)");
   console.log("    txid:", txid);
   if (toAddress) console.log("    expected recipient:", toAddress);
@@ -66,54 +133,53 @@ async function main() {
   console.log("    hash       :", tx.hash);
   console.log("    ledger     :", tx.ledger);
   console.log("    source     :", tx.source_account);
-  console.log("    successful :", tx.successful);
+  console.log("    successful :", tx.successful, tx.successful === true ? "(REQUIRED for VERIFIED)" : "(FAILED — cannot be VERIFIED)");
   console.log("    memo       :", tx.memo_type, tx.memo ? JSON.stringify(tx.memo) : "-");
   rule();
 
   const ops = await api(`/transactions/${txid}/operations`);
   const records = ops._embedded.records;
+
+  const r = evaluate(tx, records, toAddress);
+
   console.log(`⚙️   Operations (${records.length}) — matched PER OPERATION`);
-
-  // Correctness: a single flag for "the SAME operation is native and (if asked)
-  // goes to the expected recipient". Never split this across two variables.
-  let sameOpVerified = false; // Claim B, per the caller's request
-  let nativePayments = 0;
-
-  for (const op of records) {
+  for (const op of r.ops) {
     if (op.type !== "payment") {
       console.log("    -", op.type);
       continue;
     }
-    const isNative = op.asset_type === "native";
-    if (isNative) nativePayments++;
-
-    const toExpected = goesTo(op, toAddress);
-    const ok = isNative && (!toAddress || toExpected);
-    if (ok) sameOpVerified = true;
-
-    console.log(`    - payment ${op.amount} ${isNative ? "native (Pi)" : op.asset_code}`);
+    console.log(`    - payment ${op.amount} ${op.isNative ? "native (Pi)" : op.asset_code}`);
     console.log(`        from : ${op.from}`);
     console.log(`        to   : ${op.to}`);
     if (op.to_muxed) console.log(`        to(M): ${op.to_muxed} # ${op.to_muxed_id}`);
-    console.log(`        native=${isNative}  to_expected=${toAddress ? toExpected : "n/a"}  =>  ${ok ? "MATCH ✅" : "no"}`);
+    console.log(
+      `        native=${op.isNative}  to_expected=${toAddress ? op.toExpected : "n/a"}  =>  ${op.matches ? "MATCH ✅" : "no"}`
+    );
   }
   rule("=");
 
   console.log("✅  What the LEDGER proves (Claim B):");
-  if (!toAddress) {
-    console.log(
-      `    • this transaction contains ${nativePayments} native Pi payment(s) on Pi Mainnet.`
-    );
-    console.log("    • (pass a TO_ADDRESS to require that the SAME op reaches it)");
-  } else {
-    if (sameOpVerified) {
-      console.log("    • VERIFIED: a SINGLE operation is BOTH a native Pi payment");
-      console.log("      AND directed to the expected recipient.");
-    } else {
+  switch (r.verdict) {
+    case "VERIFIED":
+      console.log("    • VERIFIED: the transaction SUCCEEDED, and a SINGLE operation is BOTH a");
+      console.log("      native Pi payment AND directed to the expected recipient.");
+      break;
+    case "NOT_VERIFIED_TX_FAILED":
+      console.log("    • NOT VERIFIED: the transaction did NOT succeed (successful=false).");
+      console.log("      Horizon still returns its operations, but they DID NOT take effect.");
+      break;
+    case "NOT_VERIFIED":
       console.log("    • NOT VERIFIED: no single operation is both a native Pi payment");
       console.log("      and directed to the expected recipient.");
       console.log("      (a native payment elsewhere in the tx does NOT count.)");
-    }
+      break;
+    case "NATIVE_PRESENT":
+      console.log(`    • this SUCCEEDED transaction contains ${r.nativePayments} native Pi payment(s) on Pi Mainnet.`);
+      console.log("    • (pass a TO_ADDRESS to require that the SAME op reaches it)");
+      break;
+    case "NO_NATIVE_PAYMENT":
+      console.log("    • this transaction contains NO native Pi payment.");
+      break;
   }
   rule();
 
@@ -126,14 +192,19 @@ async function main() {
   console.log("ℹ️  Scope note:");
   console.log("    Claim A (fungibility): a native Pi payment carries no observable");
   console.log("      per-unit mining origin on the ledger — see docs/SCOPE.md.");
-  console.log("    Claim B (this tool): a specific transfer IS a real on-chain native payment;");
-  console.log("      it is checked PER OPERATION (the same op must be native AND to the address).");
+  console.log("    Claim B (this tool): the tx must SUCCEED, and the SAME op must be");
+  console.log("      native AND to the address (checked PER OPERATION).");
   console.log("    Claim C: reserve backing — NOT claimed here.");
   rule();
   console.log("");
 }
 
-main().catch((err) => {
-  console.error("\n❌ ERROR:", err.message);
-  process.exit(1);
-});
+// Only run main() when executed directly (so `evaluate` stays importable/testable).
+const invokedDirectly =
+  process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (invokedDirectly) {
+  main().catch((err) => {
+    console.error("\n❌ ERROR:", err.message);
+    process.exit(1);
+  });
+}

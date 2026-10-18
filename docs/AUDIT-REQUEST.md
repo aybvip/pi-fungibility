@@ -61,7 +61,7 @@ Requires only **Node 18+** (no npm, no dependencies) and network access.
 git clone https://github.com/aybvip/pi-fungibility
 cd pi-fungibility
 
-node examples/self-test.mjs          # 3 checks: correct -> VERIFIED, wrong -> NOT VERIFIED, no-addr count
+node examples/self-test.mjs          # 8 offline unit tests (evaluate) + 3 online end-to-end checks
 node examples/coin-id-check.mjs      # no per-micro-π identifier on the ledger
 node examples/provenance-check.mjs   # a live account with many inbound payments, one scalar balance
 node examples/mixing-check.mjs       # mined + bought -> one balance -> origin-less payment

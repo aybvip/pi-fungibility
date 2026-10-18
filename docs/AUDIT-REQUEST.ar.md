@@ -60,7 +60,7 @@
 git clone https://github.com/aybvip/pi-fungibility
 cd pi-fungibility
 
-node examples/self-test.mjs          # 3 فحوصات: صحيح -> VERIFIED، غالط -> NOT VERIFIED، بلا عنوان -> عدد
+node examples/self-test.mjs          # 8 اختبارات وحدة (evaluate) + 3 فحوصات أونلاين طرف-لطرف
 node examples/coin-id-check.mjs      # ما فماش معرّف لكل micro-π على السجلّ
 node examples/provenance-check.mjs   # حساب حيّ باستقبالات كثيرة، ورصيد رقم واحد
 node examples/mixing-check.mjs       # معدَّنة + مشرية -> رصيد واحد -> دفعة بلا مصدر
