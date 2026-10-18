@@ -85,6 +85,7 @@ Every document is written in **English** (`*.md`).
 | Exchanges use `M`, not `G`? | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) |
 | Two concrete exchange addresses (Bitget/OKX) — what do they show? | [`FAQ-EXCHANGE-ADDRESSES-OBSERVED.md`](FAQ-EXCHANGE-ADDRESSES-OBSERVED.md) |
 | Bought vs mined — what does the chain see vs off-chain records? | [`FAQ-TAX-SOURCING.md`](FAQ-TAX-SOURCING.md) |
+| Same price, but different privileges (history-based)? | [`FAQ-SOURCE-VS-PRIVILEGES.md`](FAQ-SOURCE-VS-PRIVILEGES.md) |
 | Can the Core Team set a different price / block sales? | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
 | Is an exchange’s on-chain balance really backed? | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |
 | The MiCA whitepaper says “only through mining”? | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) |
