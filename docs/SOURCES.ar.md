@@ -141,3 +141,44 @@ interface PaymentData {
 - Open Network (انتُزع الـfirewall + CEX): https://minepi.com/blog/open-network/
   > «With Open Network, **the firewall that was in place during Enclosed Network has been removed**.»
   > «…**support for integrations with centralized exchanges (CEXs) and onramps to provide additional means of acquiring Pi**…»
+
+## 15. التكافؤ مقابل السعر — نفس الأصل، سعر مختلف حسب المنصّة
+- CryptoRank — فرق سعر Pi بين المنصّات: https://cryptorank.io/price/pi-network-1/arbitrage
+- arb.sh — فرق PI (OKX مقابل Bitget): https://arb.sh/arbitrage/crypto/pi/okx-vs-bitget
+- Investopedia — علاوة الكيمتشي (نفس BTC، سعر مختلف): https://www.investopedia.com/terms/k/kimchi-premium.asp
+
+## 16. صلاحيات المُصدِر / بلا تحكّم بالسعر — «ينجّموا يفرضوا سعر مختلف ولا يمنعوا البيع؟»
+- **ما فماش مصدر تستهدفه:** الأصل الأصلي بلا هوية لكل وحدة (شوف §12).
+- **ما فماش سعر في البروتوكول:** الدفعة `bal(S) -= a ; bal(D) += a` — ما فماش خانة سعر.
+- **ما فماش تحكّم على الأصل الأصلي:** صلاحيات المُصدِر (تجميد/clawback) موجودة برك للأصول *المُصدَرة*؛
+  الـPi الأصلية **بلا مُصدِر**. شوف Stellar — Accounts (§9) وMiCA G.11 «Transfer Restrictions: Not applicable» (§13).
+- **عدم القابلية للتغيير حتى من المُصدِر:** MiCA **G.3** (§13).
+- **وين تكمن قوّتهم:** برّا السلسلة — Pi Browser/منصّة التطبيق، مفاتيح SDK/Platform-API، KYC، الترحيل
+  (شوف §1، §2، §6).
+- **غير *أصل مختلف*** (IOU / ملفوف / توكن) ينجّم يحمل قواعد/سعر مختلف — مو الـPi الأصلية.
+  شوف `docs/FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md`.
+
+## 17. دليل تكامل الـSDK الرسمي (GitHub) — دفعات A2U
+- https://github.com/pi-apps/pi-sdk-integration-guide
+  اقتباسات حرفية:
+  > «The Pi blockchain is obviously the **source of truth** for exchanging Pi. The Pi backend is used to improve the end-user experience (e.g. provide users understandable memos on their wallet, and link backs to your app, **while preserving user and developer privacy by not making this information public on the chain**) and to assist developers in avoiding to make payment mistakes (e.g. double payments due to server faults)»
+  > «Your Pi SDK implementation needs to both be able to **sign and submit blockchain transactions using the Stellar SDK** and send additional API calls to the Pi backend using standard https libraries.»
+  خطوة «بناء المعاملة» (حرفيًا)، وتوري إنّ الدفعة **الأصل الأصلي** + memo كتبو التطبيق:
+  ```js
+  let payment = StellarSdk.Operation.payment({
+    destination: recipientAddress,
+    asset: StellarSdk.Asset.native(),   // الأصل الأصلي — بلا issuer
+    amount: body.amount.toString()
+  });
+  // ...
+  .addMemo(StellarSdk.Memo.text(paymentIdentifier));  // memo = معرّف الدفعة تبع التطبيق
+  ```
+- فحص حيّ: `examples/app-payment-flow/server.js` (يطبع مفاتيح `PaymentDTO`).
+
+## 18. توثيق Platform الرسمي (GitHub) — مسار الدفع
+- https://github.com/pi-apps/pi-platform-docs/blob/master/payments.md
+  اقتباس حرفي:
+  > «Payments are **wrappers around blockchain transactions**, which enable your app, the Pi Blockchain, and the Pi Servers to be all synchronized when the user submits a blockchain transaction to pay for something in your app.»
+  > ثلاث مراحل، كلها مبنية على **معرّف الدفعة + txid** (عمرها ما على مصدر عملة): «Payment creation and Server-Side Approval»، «User interaction and blockchain transaction»، «Server-Side Completion».
+- ملاحظة على المرايا طرف-ثالث: الـwikis المولّدة آليًا لهاذي المستودعات (مثلاً *DeepWiki* «Payment Flow | pi-apps/pi-platform-docs») **غير رسمية**، وسمّي خاناتها (camelCase `paymentId`/`toAddress`) ينجّم ما يطابقش الـAPI الحقيقي. استشهد بالمستودعات الرسمية فوق.
+- شوف زادة: `docs/FAQ-SDK-PLATFORM-API-FIELDS.ar.md` (تعداد خانات الـSDK/API كامل).

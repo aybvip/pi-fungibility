@@ -156,6 +156,9 @@ See [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md).
 | Platform API (`PaymentDTO`) | ❌ No |
 | Official MiCA whitepaper | ❌ No — instead: **“native, fungible”** |
 
+> Field-by-field enumeration of the whole SDK + Platform API surface:
+> [`docs/FAQ-SDK-PLATFORM-API-FIELDS.md`](docs/FAQ-SDK-PLATFORM-API-FIELDS.md).
+
 **Therefore:** an app owner — exactly like everyone else — **cannot** distinguish mined π from π that came from
 OKX/Bitget. They are the same native asset, with the same value and the same nature.
 

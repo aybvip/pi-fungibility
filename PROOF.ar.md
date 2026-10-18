@@ -132,6 +132,10 @@ cat examples/app-payment-flow/frontend.html
 | البلوكشين (Horizon) | ❌ لا |
 | Pi Wallet SDK (`window.Pi`) | ❌ لا |
 | Platform API (`PaymentDTO`) | ❌ لا |
+| ورقة MiCA الرسمية | ❌ لا — بل: **«native, fungible»** |
+
+> تعداد الخانات كامل في سطح الـSDK + Platform API:
+> [`docs/FAQ-SDK-PLATFORM-API-FIELDS.ar.md`](docs/FAQ-SDK-PLATFORM-API-FIELDS.ar.md).
 
 **إذن:** صاحب التطبيق — بالضبط مثل أي شخص آخر — **ما يمكنش** يفرّق بين π معدّنة و π جاية من OKX/Bitget. كلهم نفس الأصل الأصلي (native)، ومن نفس الحجم والقيمة والفطرة.
 

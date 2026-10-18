@@ -122,6 +122,7 @@ Pi.createPayment(
 | [`PROOF.md`](PROOF.md) | البرهان خطوة-بخطوة |
 | [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) | الرد على اعتراض «المنصّات عندها عنوان M مو G» |
 | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) | الرد على اعتراض «كل micro-π عندها معرّف ID» |
+| [`docs/FAQ-SDK-PLATFORM-API-FIELDS.md`](docs/FAQ-SDK-PLATFORM-API-FIELDS.ar.md) | الرد على اعتراض «الـSDK / Platform API لازم يبيّنوا من وين جات الـπ» |
 | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) | **هل الفريق يفرض سعر مختلف/يمنع البيع؟** لا — على مستوى البروتوكول مستحيل |
 | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.ar.md) | **«خلطت معدَّنة + مشرية وبعثت — ينجّم يشوف الفرق؟»** برهان حتمي |
 | [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) | **«التكافؤ شيء، لكن رصيد المنصّة مدعوم؟»** 3 ادّعاءات: A مثبت، B يُتحقّق، C موش مدّعى |
@@ -185,6 +186,18 @@ node examples/provenance-check.mjs <TXID>
 - `1 π = 10,000,000 micro-π` = **خانة عشرية رياضية**، مو معرّف.
 - المعرّفات الموجودة فعلاً: `G` (حساب)، `M` (مستخدم مجمّع)، `txid` (معاملة)، `op.id` (عملية)، `cb-id` (صندوق مقفول) — **ولا واحد منها معرّف «وحدة π»**.
 - **التفصيل:** [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) — والاختبار: `node examples/coin-id-check.mjs`
+
+---
+
+## 🛡️ اعتراض شائع: «الـSDK / Platform API ما يبيّنوش من وين جات الـπ؟»
+
+**الردّ:** سطح الـSDK/API **معدّد بالكامل** في توثيق Pi نفسه — وما فماش خانة واحدة تحمل مصدر الوحدة:
+
+- `createPayment` يقبل برك: `amount` / `memo` / `metadata` (الـmemo والـmetadata يكتبهم المرسل).
+- دفعة A2U تُبنى بـ`Asset.native()` + `Memo.text(paymentIdentifier)` — أي **أصل أصلي** + memo كتبو التطبيق.
+- `PaymentDTO`: `identifier, user_uid, amount, memo, metadata, from_address, to_address, direction, created_at, network, status, transaction.txid` — **ما فماش `origin`**.
+
+- **التفصيل:** [`docs/FAQ-SDK-PLATFORM-API-FIELDS.ar.md`](docs/FAQ-SDK-PLATFORM-API-FIELDS.ar.md) — المصادر: [`docs/SOURCES.ar.md`](docs/SOURCES.ar.md) §17–§18
 
 ---
 

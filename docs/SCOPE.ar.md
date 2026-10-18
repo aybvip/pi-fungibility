@@ -83,7 +83,7 @@
 
 | المجموعة | المحور | اعتراض نموذجي | الجواب |
 |---|---|---|---|
-| **A** | معرّف / عنوان | «كل micro-π عندها ID» · «المنصّات تستعمل `M` موش `G`» | → [`FAQ-MICRO-PI-ID.ar.md`](FAQ-MICRO-PI-ID.ar.md) · [`FAQ-MUXED-M-VS-G.ar.md`](FAQ-MUXED-M-VS-G.ar.md) |
+| **A** | معرّف / عنوان / واجهة | «كل micro-π عندها ID» · «المنصّات تستعمل `M` موش `G`» · «الـSDK/API لازم يبيّن المصدر» | → [`FAQ-MICRO-PI-ID.ar.md`](FAQ-MICRO-PI-ID.ar.md) · [`FAQ-MUXED-M-VS-G.ar.md`](FAQ-MUXED-M-VS-G.ar.md) · [`FAQ-SDK-PLATFORM-API-FIELDS.ar.md`](FAQ-SDK-PLATFORM-API-FIELDS.ar.md) |
 | **B** | تحليل / تتبّع | «تنجّم تتّبع الشبكة باش تستنتج المصدر» | → §4 فوق + [`FAQ-RECIPIENT-CANNOT-TELL.ar.md`](FAQ-RECIPIENT-CANNOT-TELL.ar.md) |
 | **C** | حالة / نوع / شبكة | «Pi المقفولة مختلفة» · «العملة المغلّفة تتتبّع» | → [`FAQ-ALL-OBJECTIONS.ar.md`](FAQ-ALL-OBJECTIONS.ar.md) (المجموعة C) |
 | **D** | خارج السلسلة | «المنصّة/الفريق يعرف» · «KYC يربطها» | → [`FAQ-ALL-OBJECTIONS.ar.md`](FAQ-ALL-OBJECTIONS.ar.md) (المجموعة D) |

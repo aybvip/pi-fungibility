@@ -23,7 +23,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`THREAT-MODEL.md`](THREAT-MODEL.md) · [`THREAT-MODEL.ar.md`](THREAT-MODEL.ar.md) | **Threat model:** assets, actors, capabilities, trust assumptions, attacks, out-of-scope |
 | [`SECURITY.md`](../SECURITY.md) · [`SECURITY.ar.md`](../SECURITY.ar.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
 | [`DISCLAIMER.md`](../DISCLAIMER.md) · [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) | Independent & unofficial; no financial advice; no custody; no warranty |
-| [`SOURCES.md`](SOURCES.md) · [`SOURCES.ar.md`](SOURCES.ar.md) | All official sources, with verbatim quotes (§1–§16) |
+| [`SOURCES.md`](SOURCES.md) · [`SOURCES.ar.md`](SOURCES.ar.md) | All official sources, with verbatim quotes (§1–§18) |
 | [`LICENSE`](../LICENSE) | MIT |
 
 ### Docs — FAQ (one per objection)
@@ -33,6 +33,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) · [.ar](FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) | **“Can the Core Team set a different price by origin, or block sales?”** (no — on-chain) |
 | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) · [.ar](FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) | **“Is an exchange’s balance really backed?”** → three claims: A fungibility (proven), B a specific deposit (verifiable), C reserve backing (not claimed) |
 | [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) · [.ar](FAQ-MICRO-PI-ID.ar.md) | “Every micro-π has its own ID” |
+| [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) · [.ar](FAQ-SDK-PLATFORM-API-FIELDS.ar.md) | **“Doesn’t the SDK / Platform API expose where the π came from?”** (no — full field enumeration) |
 | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) · [.ar](FAQ-MUXED-M-VS-G.ar.md) | “Exchanges use `M` addresses, not `G`” |
 | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) · [.ar](MICA-WHITEPAPER.ar.md) | “The MiCA whitepaper says Pi comes only from mining” |
 | [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) · [.ar](FAQ-DONT-BUY-PI.ar.md) | “Pi once said *don’t buy Pi*” (Enclosed Mainnet; ended 2025-02-20) |
@@ -68,6 +69,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | Can the recipient tell mined from bought (after mixing)? | [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) |
 | Doesn’t the transaction graph reveal the origin? | [`SCOPE.md`](SCOPE.md) §4 · [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) §3 |
 | Every micro-π has an ID? | [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) |
+| Doesn’t the SDK / Platform API expose the origin? | [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) |
 | Exchanges use `M`, not `G`? | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) |
 | Can the Core Team set a different price / block sales? | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
 | Is an exchange’s on-chain balance really backed? | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |

@@ -19,6 +19,7 @@
 | A5 | “`source_account` reveals the origin” | It identifies **who sent** (an account), not the **origin of the units**. |
 | A6 | “The Operation ID settles it” | `op.id` identifies the **operation**, not a coin. |
 | A7 | “The wallet address itself is proof” | An address = **account identity**. Any account (person/exchange) can send and receive the same native π. |
+| A8 | “The SDK / Platform API must expose where the π came from” | Pi’s own docs **enumerate the whole surface** (`amount`/`memo`/`metadata`, `from_address`/`to_address`, `status`, `txid`) — **no** origin field exists. → `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` |
 
 ---
 
@@ -95,5 +96,5 @@ concept that does not exist** on the Pi blockchain (no issuer, no UTXO, no origi
 
 ## Sources
 - `docs/SOURCES.md` (all official sources)
-- `docs/FAQ-MICRO-PI-ID.md` · `docs/FAQ-MUXED-M-VS-G.md` · `PROOF.md`
+- `docs/FAQ-MICRO-PI-ID.md` · `docs/FAQ-MUXED-M-VS-G.md` · `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` · `PROOF.md`
 - Live tests: `examples/coin-id-check.mjs` · `examples/provenance-check.mjs`

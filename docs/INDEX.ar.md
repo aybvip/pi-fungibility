@@ -23,7 +23,7 @@
 | [`THREAT-MODEL.ar.md`](THREAT-MODEL.ar.md) · [`THREAT-MODEL.md`](THREAT-MODEL.md) | **نموذج التهديد:** الأصول، الفاعلون، القدرات، فرضيات الثقة، الهجمات، برّا النطاق |
 | [`SECURITY.ar.md`](../SECURITY.ar.md) · [`SECURITY.md`](../SECURITY.md) | للقراءة فقط: بلا محفظة/عبارة/مفاتيح/توقيع/مكتبات؛ كيفاش تفحص |
 | [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) | مستقل وغير رسمي؛ بلا نصيحة مالية؛ بلا وصاية؛ بلا ضمان |
-| [`SOURCES.ar.md`](SOURCES.ar.md) · [`SOURCES.md`](SOURCES.md) | كل المصادر الرسمية بالاقتباسات الحرفية (§1–§16) |
+| [`SOURCES.ar.md`](SOURCES.ar.md) · [`SOURCES.md`](SOURCES.md) | كل المصادر الرسمية بالاقتباسات الحرفية (§1–§18) |
 | [`LICENSE`](../LICENSE) | MIT |
 
 ### Docs — أسئلة (سؤال لكل اعتراض)
@@ -33,6 +33,7 @@
 | [`FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) · [EN](FAQ-CAN-CORE-TEAM-SET-PRICE.md) | **«الفريق ينجّم يفرض سعر مختلف/يمنع البيع؟»** (لا — على السلسلة) |
 | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) · [EN](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) | **«رصيد المنصّة مدعوم؟»** → 3 ادّعاءات: A مثبت، B يُتحقّق، C موش مدّعى |
 | [`FAQ-MICRO-PI-ID.ar.md`](FAQ-MICRO-PI-ID.ar.md) · [EN](FAQ-MICRO-PI-ID.md) | «كل micro-π عندها ID» |
+| [`FAQ-SDK-PLATFORM-API-FIELDS.ar.md`](FAQ-SDK-PLATFORM-API-FIELDS.ar.md) · [EN](FAQ-SDK-PLATFORM-API-FIELDS.md) | **«الـSDK / Platform API ما يبيّنوش من وين جات الـπ؟»** (لا — تعداد الخانات كامل) |
 | [`FAQ-MUXED-M-VS-G.ar.md`](FAQ-MUXED-M-VS-G.ar.md) · [EN](FAQ-MUXED-M-VS-G.md) | «المنصّات تستعمل عناوين `M` موش `G`» |
 | [`MICA-WHITEPAPER.ar.md`](MICA-WHITEPAPER.ar.md) · [EN](MICA-WHITEPAPER.md) | «ورقة MiCA تقول Pi من التعدين برك» |
 | [`FAQ-DONT-BUY-PI.ar.md`](FAQ-DONT-BUY-PI.ar.md) · [EN](FAQ-DONT-BUY-PI.md) | «Pi قالوا *ما تشريش Pi*» (Enclosed Mainnet؛ خلصت 2025-02-20) |
@@ -68,6 +69,7 @@
 | المُرْسَل إليه ينجّم يفرّق (بعد الخلط)؟ | [`FAQ-RECIPIENT-CANNOT-TELL.ar.md`](FAQ-RECIPIENT-CANNOT-TELL.ar.md) |
 | موش شبكة المعاملات تكشف المصدر؟ | [`SCOPE.ar.md`](SCOPE.ar.md) §4 · [`FAQ-RECIPIENT-CANNOT-TELL.ar.md`](FAQ-RECIPIENT-CANNOT-TELL.ar.md) §3 |
 | كل micro-π عندها ID؟ | [`FAQ-MICRO-PI-ID.ar.md`](FAQ-MICRO-PI-ID.ar.md) |
+| الـSDK / Platform API ما يبيّنوش المصدر؟ | [`FAQ-SDK-PLATFORM-API-FIELDS.ar.md`](FAQ-SDK-PLATFORM-API-FIELDS.ar.md) |
 | المنصّات تستعمل `M` موش `G`؟ | [`FAQ-MUXED-M-VS-G.ar.md`](FAQ-MUXED-M-VS-G.ar.md) |
 | الفريق ينجّم يفرض سعر مختلف/يمنع البيع؟ | [`FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) |
 | رصيد المنصّة مدعوم فعلاً؟ | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) |

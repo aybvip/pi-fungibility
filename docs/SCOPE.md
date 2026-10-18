@@ -82,7 +82,7 @@ This is the distinction that resolves the most common objection
 
 | Group | Theme | Representative objection | Answer |
 |---|---|---|---|
-| **A** | Identifier / address | “Every micro-π has an ID” · “exchanges use `M`, not `G`” | → [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) · [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) |
+| **A** | Identifier / address / interface | “Every micro-π has an ID” · “exchanges use `M`, not `G`” · “the SDK/API must expose the origin” | → [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) · [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) · [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) |
 | **B** | Analysis / tracing | “You can follow the tx graph to infer origin” | → §4 above + [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) |
 | **C** | State / type / network | “locked π is different” · “wrapped/token π is traceable” | → [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) (Group C) |
 | **D** | Off-chain | “the exchange/Core Team knows” · “KYC links it” | → [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) (Group D) |

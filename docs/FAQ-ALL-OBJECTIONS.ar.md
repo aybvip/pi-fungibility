@@ -17,6 +17,7 @@
 | A5 | «الـ`source_account` في العملية يكشف الأصل» | يعرّف **من أرسل** (حساب)، مو **مصدر الحبات**. |
 | A6 | «رقم الـOperation ID يحلّ القضية» | الـ`op.id` يعرّف **العملية**، مو قطعة نقدية. |
 | A7 | «عنوان المحفظة نفسه دليل» | العنوان = **هوية حساب**. أي حساب (شخص/منصّة) يقدر يستقبل ويرسل نفس الـnative π. |
+| A8 | «الـSDK / Platform API لازم يبيّنوا من وين جات الـπ» | توثيق Pi نفسه **يعدّد السطح كامل** (`amount`/`memo`/`metadata`، `from_address`/`to_address`، `status`، `txid`) — **ما فماش** خانة مصدر. → `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` |
 
 ---
 
@@ -92,5 +93,5 @@
 
 ## المصادر
 - `docs/SOURCES.md` (كل المصادر الرسمية)
-- `docs/FAQ-MICRO-PI-ID.md` · `docs/FAQ-MUXED-M-VS-G.md` · `PROOF.md`
+- `docs/FAQ-MICRO-PI-ID.md` · `docs/FAQ-MUXED-M-VS-G.md` · `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` · `PROOF.md`
 - اختبارات مباشرة: `examples/coin-id-check.mjs` · `examples/provenance-check.mjs`

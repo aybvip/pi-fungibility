@@ -156,3 +156,38 @@ interface PaymentData {
   (see §1, §2, §6).
 - **Only a different *asset*** (IOU / wrapped / token) can carry different rules/price — not native Pi.
   See `docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`.
+
+## 17. Official SDK Integration Guide (GitHub) — A2U payments
+- https://github.com/pi-apps/pi-sdk-integration-guide
+  Verbatim quotes:
+  > “The Pi blockchain is obviously the **source of truth** for exchanging Pi. The Pi backend is used to
+  > improve the end-user experience (e.g. provide users understandable memos on their wallet, and link backs
+  > to your app, **while preserving user and developer privacy by not making this information public on the
+  > chain**) and to assist developers in avoiding to make payment mistakes (e.g. double payments due to
+  > server faults)”
+  > “Your Pi SDK implementation needs to both be able to **sign and submit blockchain transactions using the
+  > Stellar SDK** and send additional API calls to the Pi backend using standard https libraries.”
+  Build-the-transaction step (verbatim), showing the payment is the **native asset** plus an app-written memo:
+  ```js
+  let payment = StellarSdk.Operation.payment({
+    destination: recipientAddress,
+    asset: StellarSdk.Asset.native(),   // native asset — no issuer
+    amount: body.amount.toString()
+  });
+  // ...
+  .addMemo(StellarSdk.Memo.text(paymentIdentifier));  // memo = app's own payment id
+  ```
+- Live check: `examples/app-payment-flow/server.js` (prints the `PaymentDTO` keys).
+
+## 18. Official Platform docs (GitHub) — Payment flow
+- https://github.com/pi-apps/pi-platform-docs/blob/master/payments.md
+  Verbatim quote:
+  > “Payments are **wrappers around blockchain transactions**, which enable your app, the Pi Blockchain, and
+  > the Pi Servers to be all synchronized when the user submits a blockchain transaction to pay for something
+  > in your app.”
+  > Three phases, all keyed on the **payment id + txid** (never a coin origin): “Payment creation and
+  > Server-Side Approval”, “User interaction and blockchain transaction”, “Server-Side Completion”.
+- Note on third-party mirrors: auto-generated wikis of these repos (e.g. *DeepWiki* “Payment Flow |
+  pi-apps/pi-platform-docs”) are **unofficial**, and their field names (camelCase `paymentId`/`toAddress`) may
+  not match the real API. Cite the official repos above.
+- See also: `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` (the full SDK/API field enumeration).
