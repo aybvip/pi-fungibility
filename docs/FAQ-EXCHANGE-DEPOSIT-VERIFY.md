@@ -49,6 +49,12 @@ It confirms (from the **public** API, the source of truth):
 - `from` → `to` and the amount;
 - optionally, that `to` is the address you expected.
 
+> 🔧 **Correctness note (per operation).** A Pi/Stellar transaction can contain **multiple operations**.
+> So the tool does **not** test “is there a native payment?” and “does some op reach the address?” as two
+> independent facts. It requires the **same single operation** to be **both** native **and** directed to the
+> expected recipient — otherwise the verdict is **NOT VERIFIED**. This avoids a misleading result.
+> (It also accepts the muxed `M…` form of the recipient via CAP-27.)
+
 > ⚠️ Practical notes:
 > - Exchange **deposit** addresses are often **`M…`** muxed accounts (CAP-27) — see
 >   [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md). The underlying `G…` account is what exists on the ledger.
