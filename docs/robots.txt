@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://aybvip.github.io/pi-fungibility/sitemap.xml
