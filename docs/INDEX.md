@@ -46,6 +46,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | Live demo: commingling → scalar balance → **origin-less** payment |
 | [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real native Pi payment on Mainnet (Claim B) |
 | [`self-test.mjs`](../examples/self-test.mjs) | Automated checks: offline unit tests (same-op rule, failed-tx gate) + online end-to-end |
+| [`model-check.mjs`](../examples/model-check.mjs) | Executable ledger model + property check (2000 seeds, offline): scalar state, non-injective history→state |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | Backend handling `PaymentDTO`; prints its keys |
 | [`payment-dto-sample.json`](../examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -79,6 +80,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 
 ```bash
 node examples/self-test.mjs          # offline unit tests + online end-to-end (11 checks)
+node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
 node examples/verify-deposit.mjs <TXID> [TO_ADDRESS]
