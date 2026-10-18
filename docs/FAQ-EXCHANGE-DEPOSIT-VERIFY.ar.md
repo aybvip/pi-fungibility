@@ -56,7 +56,8 @@ node examples/verify-deposit.mjs <TXID> <EXCHANGE_ONCHAIN_ADDRESS>
 >
 > شغّل الفحص الآلي: `node examples/self-test.mjs` — يثبّت إنّ العنوان **الصحيح** يعطي `VERIFIED`
 > والعنوان **الغالط** يعطي `NOT VERIFIED` (شوف
-> [`examples/self-test-output.txt`](../examples/self-test-output.txt)).
+> [`examples/self-test-output.txt`](../examples/self-test-output.txt)). ويمشي زادة في **CI** مع كل
+> push/PR ([`.github/workflows/self-test.yml`](../.github/workflows/self-test.yml)).
 
 > ⚠️ ملاحظات عملية:
 > - عناوين **الإيداع** في المنصّات غالبًا **`M…`** (حسابات muxed، CAP-27) — شوف

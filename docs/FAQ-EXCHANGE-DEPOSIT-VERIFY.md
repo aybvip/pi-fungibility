@@ -57,7 +57,8 @@ It confirms (from the **public** API, the source of truth):
 >
 > Run the automated check: `node examples/self-test.mjs` — it asserts that the **correct** recipient
 > gives `VERIFIED` while a **wrong** recipient gives `NOT VERIFIED` (see
-> [`examples/self-test-output.txt`](../examples/self-test-output.txt)).
+> [`examples/self-test-output.txt`](../examples/self-test-output.txt)). It also runs in **CI** on every
+> push/PR ([`.github/workflows/self-test.yml`](../.github/workflows/self-test.yml)).
 
 > ⚠️ Practical notes:
 > - Exchange **deposit** addresses are often **`M…`** muxed accounts (CAP-27) — see
