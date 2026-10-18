@@ -29,6 +29,7 @@
 
 ## Question-specific answers
 
+- [Can’t you just follow the transactions and see which π came from where?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-TRANSACTION-VS-COIN.md) — you can trace the *transaction*, never the *coin* (three levels)
 - [Every micro-π has an ID?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-MICRO-PI-ID.md) — Account/Balance model, not UTXO
 - [Exchanges use M, not G?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-MUXED-M-VS-G.md) — muxed accounts identify the counterparty
 - [Does the SDK / Platform API expose the origin?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-SDK-PLATFORM-API-FIELDS.md) — no; full field enumeration
@@ -47,6 +48,8 @@ node examples/verify-deposit.mjs <TXID> [TO_ADDRESS]
 
 ## Status
 
+- **Last verified: 2026-10-18** — all checks pass locally and in CI (Node 20/22), including live read-only Mainnet reads.
+  See [VERIFICATION](https://github.com/aybvip/pi-fungibility/blob/main/docs/VERIFICATION.md).
 - **Not independently audited** — self-verified and reproducible, which is not the same as a third-party audit.
   See [AUDIT-REQUEST](https://github.com/aybvip/pi-fungibility/blob/main/docs/AUDIT-REQUEST.md).
 - Independent & unofficial: not affiliated with Pi Network.

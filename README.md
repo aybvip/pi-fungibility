@@ -49,6 +49,37 @@ The official MiCA whitepaper says it plainly: Pi is the **“native, fungible di
 
 ---
 
+## 🔎 Transaction vs. coin — the distinction that decides the argument
+
+You **can** trace **transactions**. You **cannot** trace **coins**.
+
+| Level | Unit of information | Traceable? | What you get |
+|---|---|---|---|
+| **1 — Transaction / operation** | `txid` · `ledger` | ✅ fully public | who sent, to whom, how much, when, the memo |
+| **2 — Account** | `G…` / `M…` | ✅ as a graph | you can label addresses and measure flows between them |
+| **3 — Coin / unit** (micro-π) | — | ❌ **does not exist** | ❌ “this π was mined” / “this π came from OKX” |
+
+A worked example — following the *money* is not following the *coins*:
+
+| Event | What the ledger shows |
+|---|---|
+| You deposit 100 π to an exchange | `payment 100 native → <venue G…>` — ✅ visible |
+| You withdraw 100 π weeks later | `payment 100 native → <your G…>` — ✅ visible |
+| *“the 100 π I withdrew are the 100 π I deposited”* | ❌ **not provable** — the venue pools its funds, and the unit has no identity |
+
+> This is not *“we don’t know”*. It is *“there is no such property”*. Receiving π **merges** the amount into a
+> single scalar balance, so the map **history → state is non-injective** — the per-unit information is *destroyed*,
+> not *concealed* (`examples/model-check.mjs`, 2 000 seeds; `examples/exhaustive-check.mjs`, all 1 452 histories).
+
+**The honest boundary:** the absence of per-unit origin does **not** hide that you ever used an exchange **at the
+account level**. If a venue’s address is publicly labeled, address-level analysis can link **accounts** — never
+**coins**. Anything said about *“where your money came from”* is an **inference about an account**, not a **fact
+about a coin**.
+
+Full treatment: [`docs/FAQ-TRANSACTION-VS-COIN.md`](docs/FAQ-TRANSACTION-VS-COIN.md).
+
+---
+
 ## ✅ Verification status
 
 **Last verified: 2026-10-18** — `node examples/run-all.mjs` → **all checks passed** (exit code `0`), on Node 24
@@ -152,6 +183,7 @@ data** — never **coin provenance**.
 
 | Objection | Answer | Details |
 |---|---|---|
+| **“You can follow the transactions — so you *can* tell where the π came from”** | **You can trace the *transaction*, never the *coin*.** Transactions and accounts are fully traceable; the individual unit is not stored at all. Receiving π merges the amount into one scalar balance, so per-unit origin is not *hidden* — it *does not exist*. | [`docs/FAQ-TRANSACTION-VS-COIN.md`](docs/FAQ-TRANSACTION-VS-COIN.md) |
 | “Exchanges use **M** addresses, not **G**” | `M` = a **muxed account** (`G` + ID, CAP-27); identifies the **counterparty**, not the coin. The `M` is a `G` account plus a 64-bit id — the `G` account is what exists on the ledger — and the network processes the payment *exactly as if muxing weren’t used*. | [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) |
 | “Every **micro-π** has its own ID” | Pi uses an **Account/Balance** model (one number), **not UTXO**. `1 π = 10,000,000 micro-π` is just decimal precision, not an ID. | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) |
 | **“Doesn’t the SDK / Platform API expose where the π came from?”** | **No.** Pi’s own docs enumerate the **entire** SDK/API surface — `amount`, `memo`, `metadata`, `from_address`, `to_address`, `status`, `txid`… Not one field carries per-unit origin. | [`docs/FAQ-SDK-PLATFORM-API-FIELDS.md`](docs/FAQ-SDK-PLATFORM-API-FIELDS.md) |

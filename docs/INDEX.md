@@ -31,6 +31,7 @@ Every document is written in **English** (`*.md`).
 ### Docs — FAQ (one per objection)
 | File | Question it answers |
 |---|---|
+| [`FAQ-TRANSACTION-VS-COIN.md`](FAQ-TRANSACTION-VS-COIN.md) | **“You can follow the transactions — so you can tell where the π came from?”** → you can trace the *transaction*, never the *coin* (three levels + the honest account-level boundary) |
 | [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) | **“I mixed mined + bought π, then sent some — can the recipient tell?”** (deterministic proof) |
 | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) | **“Can the Core Team set a different price by origin, or block sales?”** (no — on-chain) |
 | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) | **“Is an exchange’s balance really backed?”** → three claims: A fungibility (proven), B a specific deposit (verifiable), C reserve backing (not claimed) |
@@ -70,6 +71,7 @@ Every document is written in **English** (`*.md`).
 |---|---|
 | Are mined π and exchange π the same? | [`README.md`](../README.md) TL;DR · [`PROOF.md`](../PROOF.md) |
 | Can the recipient tell mined from bought (after mixing)? | [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) |
+| Can’t you just follow the transactions and see which π came from where? | [`FAQ-TRANSACTION-VS-COIN.md`](FAQ-TRANSACTION-VS-COIN.md) |
 | Doesn’t the transaction graph reveal the origin? | [`SCOPE.md`](SCOPE.md) §4 · [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) §3 |
 | Every micro-π has an ID? | [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) |
 | Doesn’t the SDK / Platform API expose the origin? | [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) |
