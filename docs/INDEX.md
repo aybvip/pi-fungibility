@@ -25,6 +25,7 @@ Every document is written in **English** (`*.md`).
 | [`SOURCES.md`](SOURCES.md) | All official sources, with verbatim quotes (§0–§22); §0 pins each source's exact revision |
 | [`index.html`](../index.html) | Website landing page (GitHub Pages) |
 | [`llms.txt`](../llms.txt) | Machine-readable index for AI tools / LLM crawlers |
+| [`DEPLOY-MIRRORS.md`](DEPLOY-MIRRORS.md) | **Mirrors:** why GitHub Pages is canonical, how the mirror config keeps `rel="canonical"` on the canonical host, and the Netlify / Cloudflare Pages settings |
 | [`CITATION.cff`](../CITATION.cff) | Citation metadata (GitHub “Cite this repository”) |
 | [`LICENSE`](../LICENSE) | MIT |
 

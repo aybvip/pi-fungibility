@@ -1,0 +1,35 @@
+# Mirror build config — used ONLY when deploying to Netlify / Cloudflare Pages.
+#
+#   bundle exec jekyll build --config _config.yml,_config.mirror.yml
+#
+# Why this file exists
+# --------------------
+# `_config.yml` targets a GitHub Pages *project* site:
+#
+#     url:     https://aybvip.github.io
+#     baseurl: /pi-fungibility
+#
+# Every generated link therefore begins with `/pi-fungibility/...`. That is
+# correct on the canonical host, but the mirrors are served from the ROOT of
+# their own hostname, so those links would all 404.
+#
+# The fix is NOT simply `--baseurl ""` — that would also break the canonical
+# tag, because `jekyll-seo-tag` builds it as `site.url + site.baseurl + page.url`,
+# and dropping the baseurl would yield `https://aybvip.github.io/docs/...`
+# (a page that does not exist).
+#
+# Instead, fold the subpath into `url` and empty `baseurl`:
+#
+#     url:     https://aybvip.github.io/pi-fungibility   <- subpath moved here
+#     baseurl: ""                                        <- links are now root-relative
+#
+# which yields, simultaneously:
+#
+#     canonical / og:url / sitemap  ->  https://aybvip.github.io/pi-fungibility/docs/...  (correct)
+#     internal + asset links        ->  /docs/... , /assets/...                          (work at mirror root)
+#
+# Net effect: the mirrors are pure redundancy. Google, IndexNow and every
+# crawler are told the canonical copy is the GitHub Pages one.
+
+url: "https://aybvip.github.io/pi-fungibility"
+baseurl: ""

@@ -1,0 +1,36 @@
+# Netlify mirror of the canonical site: https://aybvip.github.io/pi-fungibility/
+#
+# This build is REDUNDANCY only. Every page it produces carries a canonical
+# tag pointing back at the GitHub Pages copy (see _config.mirror.yml), so this
+# mirror adds no SEO surface and cannot split ranking.
+#
+# Set in the Netlify UI (Build & deploy):
+#   Base directory  :  (blank — repo root)
+#   Build command   :  see `command` below (already set here)
+#   Publish directory: _site
+#
+# If a Netlify site is currently linked to a DIFFERENT repository, unlink it
+# first — this file is for the pi-fungibility site only.
+
+[build]
+  # --config merges the mirror overrides on top of the canonical _config.yml.
+  command = "bundle install && bundle exec jekyll build --config _config.yml,_config.mirror.yml"
+  publish = "_site"
+
+[build.environment]
+  RUBY_VERSION = "3.2"
+  NODE_VERSION = "20"
+
+# The site is entirely static and read-only: no functions, no forms, no
+# server-side anything. Redirect any stray legacy payment-app routes away so a
+# stale link cannot appear to be a live endpoint.
+[[redirects]]
+  from = "/payment/*"
+  to = "/404.html"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

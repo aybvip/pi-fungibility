@@ -29,6 +29,10 @@
 🌐 **Website:** <https://aybvip.github.io/pi-fungibility/> · 📄 **Machine-readable index for AI tools:**
 [`llms.txt`](llms.txt) · 📌 **Cite this work:** [`CITATION.cff`](CITATION.cff)
 
+> GitHub Pages is the **canonical** host. Every rendered page emits a `rel="canonical"`
+> tag pointing here, so optional mirrors (Netlify / Cloudflare Pages) add reach and
+> redundancy **without** splitting search ranking — see [`docs/DEPLOY-MIRRORS.md`](docs/DEPLOY-MIRRORS.md).
+
 ---
 
 ## 🎯 TL;DR
