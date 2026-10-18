@@ -22,7 +22,7 @@ These are **account-level attributes**, not a property of individual coins.
 
 - **DEX/AMM require fungibility.** Automated market makers treat every unit of the same asset identically. Two "types" of π would require separate pools or a complex wrapper.
 - **1 π = 1 π on-chain.** The ledger has a single scalar balance per account and no `origin`/`class` field for native π. Splitting would require a different asset (token/IOU) with trustlines, not the native asset.
-- **Fungibility is a protocol property.** As this repo proves, native π carries **no observable per-unit origin** ([`FAQ-TRANSACTION-VS-COIN.md`](FAQ-TRANSACTION-VS-COIN.md), [`FAQ-SOURCE-VS-PRICE-LEDGER.md`](FAQ-TAX-SOURCING.md)).
+- **Fungibility is a protocol property.** As this repo proves, native π carries **no observable per-unit origin** ([`FAQ-TRANSACTION-VS-COIN.md`](FAQ-TRANSACTION-VS-COIN.md), [`FAQ-TAX-SOURCING.md`](FAQ-TAX-SOURCING.md)).
 
 ## How history-based privileges work without breaking fungibility
 
