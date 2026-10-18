@@ -18,6 +18,7 @@
 | [`README.ar.md`](../README.ar.md) · [`README.md`](README.md) | **ابدأ من هنا.** الخلاصة، المصادر الرسمية، البرهان 3 طبقات، جدول الأسئلة، النطاق، الكود |
 | [`PROOF.ar.md`](../PROOF.ar.md) · [`PROOF.md`](../PROOF.md) | البرهان خطوة بخطوة إنّ صاحب التطبيق ما يعرفش منين جاءت الـπ |
 | [`docs/SCOPE.ar.md`](SCOPE.ar.md) · [`SCOPE.md`](SCOPE.md) | **النطاق الدقيق:** شنوّة مثبت مقابل **شنوّة موش مدّعى** (+ تحقّق مستقل) |
+| [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) · [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) | **حالة التدقيق:** موش مدقّق من طرف ثالث — شنوّة يعني هذا، وكيفاش تدير واحد |
 | [`SECURITY.ar.md`](../SECURITY.ar.md) · [`SECURITY.md`](../SECURITY.md) | للقراءة فقط: بلا محفظة/عبارة/مفاتيح/توقيع/مكتبات؛ كيفاش تفحص |
 | [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) | مستقل وغير رسمي؛ بلا نصيحة مالية؛ بلا وصاية؛ بلا ضمان |
 | [`SOURCES.ar.md`](SOURCES.ar.md) · [`SOURCES.md`](SOURCES.md) | كل المصادر الرسمية بالاقتباسات الحرفية (§1–§16) |
@@ -68,6 +69,7 @@
 | نفس العملة بسعر مختلف؟ | [`FAQ-FUNGIBILITY-VS-PRICE.ar.md`](FAQ-FUNGIBILITY-VS-PRICE.ar.md) |
 | هذا المستودع نصب/تصيّد؟ | [`FAQ-UNOFFICIAL-REPO-SCAM.ar.md`](FAQ-UNOFFICIAL-REPO-SCAM.ar.md) · [`SECURITY.ar.md`](../SECURITY.ar.md) · [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) |
 | شنوّة مثبت بالضبط — وشنوّة لا؟ | [`SCOPE.ar.md`](SCOPE.ar.md) |
+| هل تمّ تدقيقه من طرف ثالث؟ | [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) |
 | أي اعتراض آخر (قفل، KYC، حوكمة…)؟ | [`FAQ-ALL-OBJECTIONS.ar.md`](FAQ-ALL-OBJECTIONS.ar.md) |
 | أي مصادر رسمية تسند كل هذا؟ | [`SOURCES.ar.md`](SOURCES.ar.md) |
 
@@ -76,8 +78,10 @@
 ## الجزء 3 — شغّل البراهين
 
 ```bash
+node examples/self-test.mjs          # 3 تأكيدات (صحيح/غالط/بلا عنوان)
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
+node examples/verify-deposit.mjs <TXID> [عنوان_المستلم]
 node examples/mixing-check.mjs
 node examples/mixing-check.mjs <حساب_المُرسِل>
 ```
@@ -86,4 +90,5 @@ Node 18+ · **بلا مكتبات** · **للقراءة فقط** (شوف [`SECUR
 ---
 
 > **π = π.** مثبت: الدفعة ما فيهاش **مصدر لكل عملة، مرصود**.
-> موش مدّعى: السعر، إخفاء الهوية، تكافؤ IOU. شوف [`SCOPE.ar.md`](SCOPE.ar.md).
+> موش مدّعى: السعر، إخفاء الهوية، تكافؤ IOU، تغطية الاحتياطي، تدقيق مستقل.
+> شوف [`SCOPE.ar.md`](SCOPE.ar.md) · [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md).

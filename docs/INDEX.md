@@ -18,6 +18,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`README.md`](../README.md) · [`README.ar.md`](../README.ar.md) | **Start here.** TL;DR, official sources, 3-layer proof, FAQ table, scope, runnable code |
 | [`PROOF.md`](../PROOF.md) · [`PROOF.ar.md`](../PROOF.ar.md) | Step-by-step proof that an app owner cannot tell where π came from |
 | [`SCOPE.md`](SCOPE.md) · [`SCOPE.ar.md`](SCOPE.ar.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
+| [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) · [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) | **Audit status:** not independently audited — what that means, and how to do one |
 | [`SECURITY.md`](../SECURITY.md) · [`SECURITY.ar.md`](../SECURITY.ar.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
 | [`DISCLAIMER.md`](../DISCLAIMER.md) · [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) | Independent & unofficial; no financial advice; no custody; no warranty |
 | [`SOURCES.md`](SOURCES.md) · [`SOURCES.ar.md`](SOURCES.ar.md) | All official sources, with verbatim quotes (§1–§16) |
@@ -68,6 +69,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | Same coin but different price? | [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md) |
 | Is this repo a scam / phishing? | [`FAQ-UNOFFICIAL-REPO-SCAM.md`](FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](../SECURITY.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) |
 | What exactly is proven — and not? | [`SCOPE.md`](SCOPE.md) |
+| Has this been independently audited? | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) |
 | Any other objection (lockups, KYC, governance…)? | [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) |
 | Which official sources back all this? | [`SOURCES.md`](SOURCES.md) |
 
@@ -76,8 +78,10 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 ## Part 3 — Run the proofs
 
 ```bash
+node examples/self-test.mjs          # 3 assertions (correct/wrong/no-address)
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
+node examples/verify-deposit.mjs <TXID> [TO_ADDRESS]
 node examples/mixing-check.mjs
 node examples/mixing-check.mjs <SENDER_ACCOUNT>
 ```
@@ -86,4 +90,5 @@ Node 18+ · **zero dependencies** · **read-only** (see [`SECURITY.md`](../SECUR
 ---
 
 > **π = π.** Proven: a payment carries **no observable per-coin origin**.
-> Not claimed: price, identity-hiding, IOU equivalence. See [`SCOPE.md`](SCOPE.md).
+> Not claimed: price, identity-hiding, IOU equivalence, reserve backing, independent audit.
+> See [`SCOPE.md`](SCOPE.md) · [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md).

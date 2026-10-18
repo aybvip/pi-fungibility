@@ -56,7 +56,7 @@ See [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) for the f
 | 3.1 | **No price / no future-value claim.** | Fungibility is about *asset identity*, not *market price*. (See [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md).) |
 | 3.2 | **Not** “you can hide that you *ever* used an exchange **at the account level**.” | If an exchange address is **publicly labeled**, transaction-graph analysis may link **accounts** — never **coins**. |
 | 3.3 | **Not** a guarantee against **law enforcement / identity (KYC)**. | KYC links an **identity to a human** (off-chain), not an **origin to a unit**. |
-| 3.4 | **No claim of independent audit.** | Instead: **fully reproducible** — official sources + runnable code. |
+| 3.4 | **No claim of independent audit.** | Instead: **fully reproducible** — official sources + runnable code. See [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md). |
 | 3.5 | **Not** a claim about any **specific exchange’s IOU** being native. | An **IOU/wrapped token** *is* a different asset (see §5, Group C). Always check `asset_type` + `issuer`. |
 
 ---

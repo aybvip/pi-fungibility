@@ -15,8 +15,10 @@
 [![Platform API](https://img.shields.io/badge/Source-platform__API-0969da)](https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
 [![self-test](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml/badge.svg)](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml)
+[![Audit: not independently audited](https://img.shields.io/badge/audit-not%20independently%20audited-red)](docs/AUDIT-REQUEST.ar.md)
 
 📄 **النطاق الكامل — شنوّة مثبت وشنوّة موش مدّعى:** [`docs/SCOPE.ar.md`](docs/SCOPE.ar.md) · 🌍 [English](docs/SCOPE.md)
+🧾 **حالة التدقيق المستقل — موش مدقّق من طرف ثالث (قابل للتكرار):** [`docs/AUDIT-REQUEST.ar.md`](docs/AUDIT-REQUEST.ar.md) · 🌍 [English](docs/AUDIT-REQUEST.md)
 
 > 🏷️ **مستقل وغير رسمي — موش تابع لـPi Network.** هذا تحليل مستقل، موش منتج رسمي.
 > شوف [`DISCLAIMER.ar.md`](DISCLAIMER.ar.md).
@@ -118,6 +120,7 @@ Pi.createPayment(
 | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) | **هل الفريق يفرض سعر مختلف/يمنع البيع؟** لا — على مستوى البروتوكول مستحيل |
 | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.ar.md) | **«خلطت معدَّنة + مشرية وبعثت — ينجّم يشوف الفرق؟»** برهان حتمي |
 | [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) | **«التكافؤ شيء، لكن رصيد المنصّة مدعوم؟»** 3 ادّعاءات: A مثبت، B يُتحقّق، C موش مدّعى |
+| [`docs/AUDIT-REQUEST.md`](docs/AUDIT-REQUEST.ar.md) | **«البرهان خضع لتدقيق مستقل؟»** **لا** — موثّق ذاتيًا وقابل للتكرار، وهذا موش تدقيق طرف ثالث |
 | [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md) | **«مستودع GitHub عشوائي = نصب؟»** افحص ما تثقش + تصحيح «Pi موش مدرجة» |
 | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) | **كل الحجج الممكنة المتبقية** + الردّ على كل واحدة |
 | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) | ورقة MiCA الرسمية: «native, fungible» + «Functionally Fungible Group» |

@@ -12,6 +12,7 @@
 [![MiCA Whitepaper](https://img.shields.io/badge/Source-MiCA%20Whitepaper-ff69b4)](https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
 [![self-test](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml/badge.svg)](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml)
+[![Audit: not independently audited](https://img.shields.io/badge/audit-not%20independently%20audited-red)](docs/AUDIT-REQUEST.md)
 
 🌍 **English** · [العربية](README.ar.md)
 
@@ -121,6 +122,7 @@ data** — never **coin provenance**.
 | **“I bought π on an exchange, put it in the same wallet as my mined π, then sent some to a friend — can they tell?”** | **No — and it is deterministic, not a loophole.** The ledger has no per-unit identity, so per-coin origin is **not an observable**. Includes the honest account-level-vs-unit-level distinction. | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.md) |
 | **“Can the Core Team set a different price for mined vs exchange Pi, or stop you selling?”** | **No — not on-chain.** No origin to target, no price field, no issuer controls. Their power is off-chain/app-level only. | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
 | **“Fungibility is one thing — but is an exchange’s balance really backed?”** | **Three separate claims:** A fungibility (**proven**), B a specific deposit is on-chain (**verifiable**), C reserve backing (**not claimed**). | [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |
+| **“Has this proof been independently audited?”** | **No** — it is **self-verified and reproducible**, which is *not* the same as a third-party audit. Status, scope, and how to do one. | [`docs/AUDIT-REQUEST.md`](docs/AUDIT-REQUEST.md) |
 | **“It’s just an unofficial GitHub repo — must be a scam/phishing.”** | **Audit, don’t trust.** This repo is read-only: no wallet, no passphrase, no keys, no signing, no deps. And “Pi not listed / network closed” is outdated (Open Network 2025-02-20). | [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](SECURITY.md) |
 | **All other objections** (labeling, chain analysis, lockups, KYC, core-team data, governance…) | Catalogued with a refutation each. | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) |
 
@@ -177,7 +179,7 @@ node examples/provenance-check.mjs <TXID>
 - It does **not** claim you can hide that you *ever* used an exchange **at the account level**: if an exchange
   address is publicly labeled, transaction-graph analysis may link **accounts** — never **coins**.
 - No independent audit is claimed; instead, **everything is verifiable** by running the code and reading the
-  official sources.
+  official sources. Status, scope, and how to audit: [`docs/AUDIT-REQUEST.md`](docs/AUDIT-REQUEST.md).
 
 > Precise claim: **“A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger.”**
 > No more, no less. Distinguishing **A** (fungibility, proven) from **B** (a specific deposit — verifiable)
