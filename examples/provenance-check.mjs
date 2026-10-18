@@ -11,24 +11,35 @@
  * Usage:
  *   node examples/provenance-check.mjs
  *   node examples/provenance-check.mjs <TRANSACTION_HASH>
+ *   node examples/provenance-check.mjs --help
  * ---------------------------------------------------------------------------
  */
 
-const BASE = "https://api.mainnet.minepi.com";
+import { api, rule, isTxHash, usageAndExit } from "./lib.mjs";
 
 // A real Pi Mainnet transaction (a 0.8 Pi payment) as the default sample.
 const DEFAULT_TX =
   "e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c";
 
-const txid = process.argv[2] || DEFAULT_TX;
+const HELP = [
+  "provenance-check.mjs — show what a Pi payment reveals (and what it never can)",
+  "",
+  "Usage:",
+  "  node examples/provenance-check.mjs                     # built-in sample tx",
+  "  node examples/provenance-check.mjs <TRANSACTION_HASH>  # a 64-char hex hash",
+  "  node examples/provenance-check.mjs --help",
+  "",
+  "Read-only. No wallet, no keys. Node 18+.",
+];
 
-async function api(path) {
-  const res = await fetch(BASE + path, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText} -> ${path}`);
-  return res.json();
+const argv = process.argv.slice(2);
+if (argv.includes("--help") || argv.includes("-h")) usageAndExit(HELP, 0);
+
+const arg = argv[0];
+if (arg && !isTxHash(arg)) {
+  usageAndExit([`✗ invalid transaction hash: ${arg}`, "", ...HELP]);
 }
-
-const rule = () => console.log("-".repeat(74));
+const txid = arg || DEFAULT_TX;
 
 async function main() {
   console.log("\n🔎  Pi Mainnet — Coin Provenance Check");
@@ -45,7 +56,7 @@ async function main() {
   rule();
 
   const ops = await api(`/transactions/${txid}/operations`);
-  const records = ops._embedded.records;
+  const records = ops?._embedded?.records ?? [];
   console.log(`⚙️   Operations (${records.length})`);
   for (const op of records) {
     console.log("    type        :", op.type);
@@ -58,7 +69,7 @@ async function main() {
         : `${op.asset_code}/${op.asset_issuer}  (custom token)`;
       console.log("      asset     :", kind);
       // Muxed fields (CAP-27): identify the *counterparty* only, never the coin's origin.
-      // (Stellar: muxed accounts don't exist on the ledger.)
+      // An `M...` value is a `G...` account + a 64-bit id; it adds no provenance.
       if (op.from_muxed) console.log("      from(M)   :", op.from_muxed, "#", op.from_muxed_id);
       if (op.to_muxed) console.log("      to(M)     :", op.to_muxed, "#", op.to_muxed_id);
     }
@@ -81,7 +92,7 @@ async function main() {
   console.log("      <- simply because no such field exists on-chain or in the SDK.");
   rule();
   console.log("ℹ️  Note on M addresses (Muxed Accounts, CAP-27):");
-  console.log("      • M = a G address + a number; it does not exist on the ledger (only G is real).");
+  console.log("      • M = a G address + a 64-bit id; the G account is what exists on the ledger.");
   console.log("      • The network treats it exactly as if no muxing were used (same native pi).");
   console.log("      • If from_muxed/to_muxed appear, they identify the counterparty only,");
   console.log("        not the coin's origin. Differentiation remains impossible.");

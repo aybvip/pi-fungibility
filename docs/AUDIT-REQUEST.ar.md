@@ -62,7 +62,7 @@
 git clone https://github.com/aybvip/pi-fungibility
 cd pi-fungibility
 
-node examples/self-test.mjs          # 8 اختبارات وحدة (evaluate) + 3 فحوصات أونلاين طرف-لطرف
+node examples/self-test.mjs          # 18 اختبار وحدة (مدقّقات + evaluate) + 3 فحوصات أونلاين طرف-لطرف
 node examples/model-check.mjs        # نموذج سجلّ + فحص خصائص بلا شبكة (2000 بذرة، حتمي)
 node examples/exhaustive-check.mjs   # فحص استنفادي محدود بلا شبكة (كل 1452 تاريخ)
 node examples/coin-id-check.mjs      # ما فماش معرّف لكل micro-π على السجلّ

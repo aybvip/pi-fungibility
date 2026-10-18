@@ -2,7 +2,9 @@
 /**
  * self-test.mjs
  * ---------------------------------------------------------------------------
- * Automated checks for verify-deposit.mjs. Two layers:
+ * Automated checks for verify-deposit.mjs. Three layers:
+ *
+ *   LAYER 0 — OFFLINE (pure): input validation helpers in lib.mjs.
  *
  *   LAYER 1 — OFFLINE (pure, no network): unit-test the exported `evaluate()`
  *     decision function with synthetic transactions. This pins the two
@@ -24,6 +26,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { evaluate } from "./verify-deposit.mjs";
+import { isTxHash, isGAddress, isMAddress, isAddress } from "./lib.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TOOL = join(HERE, "verify-deposit.mjs");
@@ -55,11 +58,29 @@ const nativePay = (from, to, amount = "1.0000000", extra = {}) => ({
   ...extra,
 });
 
+console.log("\n🧪  self-test: verify-deposit.mjs\n");
+
+// ---------------------------------------------------------------------------
+// LAYER 0 — offline tests of the shared helpers (lib.mjs)
+// ---------------------------------------------------------------------------
+console.log("Layer 0 — offline helpers (input validation)\n");
+
+{
+  const TX = "e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c";
+  const M = "M" + "A".repeat(68);
+  check("isTxHash accepts a 64-hex hash", isTxHash(TX) === true);
+  check("isTxHash rejects a short string", isTxHash("deadbeef") === false);
+  check("isGAddress accepts the sample G...", isGAddress(GOOD) === true);
+  check("isGAddress rejects an M... value", isGAddress(M) === false);
+  check("isMAddress accepts a 69-char M...", isMAddress(M) === true);
+  check("isAddress accepts both G... and M...", isAddress(GOOD) === true && isAddress(M) === true);
+  check("isAddress rejects garbage", isAddress("hello") === false);
+}
+
 // ---------------------------------------------------------------------------
 // LAYER 1 — offline unit tests of evaluate()
 // ---------------------------------------------------------------------------
-console.log("\n🧪  self-test: verify-deposit.mjs\n");
-console.log("Layer 1 — offline unit tests (evaluate)\n");
+console.log("\nLayer 1 — offline unit tests (evaluate)\n");
 
 // 1) succeeded + native payment to expected address
 {
@@ -136,6 +157,24 @@ console.log("Layer 1 — offline unit tests (evaluate)\n");
   const M = "MAAAAAAAAAAAAAAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMM";
   const r = evaluate(tx, [nativePay(OTHER, OTHER, "1.0000000", { to_muxed: M })], M);
   check("muxed M... recipient accepted -> VERIFIED", r.verdict === "VERIFIED", r.verdict);
+}
+
+// 9) robustness: undefined tx -> TX_FAILED (never VERIFIED)
+{
+  const r = evaluate(undefined, [nativePay(OTHER, GOOD)], GOOD);
+  check("undefined tx -> NOT_VERIFIED_TX_FAILED", r.verdict === "NOT_VERIFIED_TX_FAILED", r.verdict);
+}
+
+// 10) robustness: missing operations do not crash
+{
+  const r = evaluate({ successful: true }, undefined, null);
+  check("undefined records + no address -> NO_NATIVE_PAYMENT", r.verdict === "NO_NATIVE_PAYMENT", r.verdict);
+}
+
+// 11) robustness: a null entry inside operations is tolerated
+{
+  const r = evaluate({ successful: true }, [null, nativePay(OTHER, GOOD)], GOOD);
+  check("null op entry tolerated -> VERIFIED", r.verdict === "VERIFIED", r.verdict);
 }
 
 // ---------------------------------------------------------------------------

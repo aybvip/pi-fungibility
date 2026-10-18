@@ -20,55 +20,92 @@
  * Usage:
  *   node examples/mixing-check.mjs
  *   node examples/mixing-check.mjs <SENDER_ACCOUNT>
+ *   node examples/mixing-check.mjs --help
  * ---------------------------------------------------------------------------
  */
 
-const BASE = "https://api.mainnet.minepi.com";
+import { api, rule, isGAddress, isMAddress, usageAndExit } from "./lib.mjs";
 
 // A real account that received Pi from several sources and then sent Pi out.
 const DEFAULT_ACCOUNT =
   "GC55LFCTGSDPDMNDIOHZVVA4CYCUF4IKI2SUGHWCJA2PCLPKH4HMDMIU";
 
-const ACCOUNT = process.argv[2] || DEFAULT_ACCOUNT;
+const HELP = [
+  "mixing-check.mjs — can a recipient tell mined Pi from bought Pi? (No.)",
+  "",
+  "Usage:",
+  "  node examples/mixing-check.mjs                 # built-in sample account",
+  "  node examples/mixing-check.mjs <G_ACCOUNT>     # a public G... account id",
+  "  node examples/mixing-check.mjs --help",
+  "",
+  "Note: an M... muxed address cannot be queried directly — use its G account.",
+  "Read-only. No wallet, no keys. Node 18+.",
+];
 
-async function api(path) {
-  const res = await fetch(BASE + path, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText} -> ${path}`);
-  return res.json();
+const argv = process.argv.slice(2);
+if (argv.includes("--help") || argv.includes("-h")) usageAndExit(HELP, 0);
+
+const arg = argv[0];
+if (arg && isMAddress(arg)) {
+  usageAndExit([
+    `✗ ${arg} is a muxed (M...) address; the ledger only stores the underlying G... account.`,
+    "  Re-run with that G... account (or omit the argument for the sample).",
+  ]);
 }
+if (arg && !isGAddress(arg)) {
+  usageAndExit([`✗ invalid account: ${arg}`, "", ...HELP]);
+}
+const ACCOUNT = arg || DEFAULT_ACCOUNT;
 
-const rule = (c = "-") => console.log(c.repeat(78));
+// An operation's source/destination may be given as G (`op.to`) or as a muxed
+// M (`op.to_muxed`). Match on whichever field carries the value we were given.
+const paymentSideMatches = (op, side, addr) =>
+  op[side] === addr || op[`${side}_muxed`] === addr;
 
 async function main() {
   console.log("\n🧪  Pi Mainnet — 'Can the recipient tell mined Pi from bought Pi?'");
   console.log("    sender account:", ACCOUNT);
-  rule("=");
+  rule("=", 78);
 
   // ---- 1) Commingling: many inflows, from many sources --------------------
   const ops = await api(`/accounts/${ACCOUNT}/operations?order=desc&limit=30`);
-  const payments = ops._embedded.records.filter((o) => o.type === "payment");
+  const records = ops?._embedded?.records ?? [];
+  const payments = records.filter((o) => o.type === "payment");
 
-  const inflows = payments.filter((o) => o.to === ACCOUNT);
-  const outflows = payments.filter((o) => o.from === ACCOUNT);
+  const inflows = payments.filter((o) => paymentSideMatches(o, "to", ACCOUNT));
+  const outflows = payments.filter((o) => paymentSideMatches(o, "from", ACCOUNT));
 
   console.log(`📥  Inflows (last ${inflows.length}):`);
+  if (inflows.length === 0) console.log("      (no incoming payments in the last 30 operations)");
   for (const op of inflows.slice(0, 8)) {
-    console.log(`      + ${op.amount}  from ${op.from.slice(0, 12)}…`);
+    console.log(`      + ${op.amount}  from ${String(op.from).slice(0, 12)}…`);
   }
   console.log("      ↑ these came from DIFFERENT counterparties (some mined, some not).");
-  rule();
+  rule("-", 78);
 
   // ---- 2) The balance is ONE scalar number --------------------------------
   const acc = await api(`/accounts/${ACCOUNT}`);
-  const native = acc.balances.find((b) => b.asset_type === "native");
+  const balances = Array.isArray(acc.balances) ? acc.balances : [];
+  const native = balances.find((b) => b.asset_type === "native");
   console.log("📦  Resulting balance (the whole account):");
-  console.log(`      native Pi = "${native.balance}"   <- ONE number`);
-  console.log("      ↑ after commingling, there is no '5 mined + 10 bought'.");
-  console.log("        There is only a total. The pieces are gone.");
-  rule("=");
+  if (!native) {
+    console.log("      native Pi = (none — this account holds no native Pi)");
+  } else {
+    console.log(`      native Pi = "${native.balance}"   <- ONE number`);
+    console.log("      ↑ after commingling, there is no '5 mined + 10 bought'.");
+    console.log("        There is only a total. The pieces are gone.");
+  }
+  rule("=", 78);
 
   // ---- 3) The outgoing payment has NO origin field -------------------------
   const out = outflows[0];
+  if (!out) {
+    console.log("📤  No outgoing payment found for this account in the last 30 operations.");
+    console.log("    (pick an account that has SENT native Pi, or omit the argument)");
+    rule("=", 78);
+    console.log("");
+    return;
+  }
   console.log("📤  An outgoing payment from this account — the FULL record:");
   console.log(JSON.stringify(
     {
@@ -83,7 +120,7 @@ async function main() {
     },
     null, 2
   ));
-  rule();
+  rule("-", 78);
 
   const fields = Object.keys(out);
   const originFields = ["origin", "source", "mining", "exchange", "provenance", "taint", "coin_id"];
@@ -92,7 +129,7 @@ async function main() {
   console.log("      present origin-ish fields:", present.length ? present.join(", ") : "NONE");
   console.log("      -> the recipient sees: amount + from + to + memo + txid.");
   console.log("      -> they DO NOT see where the coins came from.");
-  rule("=");
+  rule("=", 78);
 
   // ---- 4) Even the sender cannot say which units were sent ----------------
   console.log("🧠  The formal reason (why this is deterministic, not a loophole):");
@@ -105,13 +142,13 @@ async function main() {
   console.log("        H1: mine 5 -> S ;  buy 10 -> S        => bal(S) = 15");
   console.log("        H2: buy 15 -> S                       => bal(S) = 15");
   console.log("      History -> state is NOT injective, and 'origin' is not in the image.");
-  rule("=");
+  rule("=", 78);
   console.log("✅  Conclusion: the recipient CANNOT see the difference. Mined Pi and");
   console.log("    exchange-bought Pi are the same native asset, indistinguishable.");
   console.log("⚠️  Scope: this is not a claim about price. And note the ONE thing that");
   console.log("    graph analysis CAN see is an ACCOUNT interacting with a KNOWN exchange");
   console.log("    address (that is account-level history, not per-coin origin).");
-  rule("=");
+  rule("=", 78);
   console.log("");
 }
 

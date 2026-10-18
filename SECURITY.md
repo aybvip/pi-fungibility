@@ -16,12 +16,16 @@ endorsed by, or connected to **Pi Network / Pi Core Team / SocialChain / PiBit**
 - ❌ **No** third-party dependencies (nothing to `npm install`).
 
 ## 3. What the scripts actually do ✅
-Every script in `examples/` performs **only read-only HTTP `GET`** requests to the **public** Pi Mainnet
+Every **proof/check** script in `examples/` performs **only read-only HTTP `GET`** requests to the **public** Pi Mainnet
 Horizon API and prints the JSON/messages to your terminal:
 
 ```js
 const res = await fetch("https://api.mainnet.minepi.com" + path, { headers: { Accept: "application/json" } });
 ```
+
+> The only exception is `examples/regenerate-snapshots.mjs`, a **maintenance tool** that runs the other scripts and
+> rewrites the local `examples/*-output.txt` snapshots as UTF-8. It makes **no** network writes, touches **no**
+> wallet, and writes **nothing** outside those snapshot files.
 
 Audit it yourself (the code is small, plain Node.js — no libraries):
 ```powershell

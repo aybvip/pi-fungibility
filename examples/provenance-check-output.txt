@@ -1,0 +1,39 @@
+
+🔎  Pi Mainnet — Coin Provenance Check
+    txid: e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c
+--------------------------------------------------------------------------
+📄  Transaction
+    hash       : e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c
+    ledger     : 27024280
+    source     : GBWKGBVDEJO3JKRV7IUBHXMBE7A2JYHOGMUMKEO2XM5RFIRBRVSYHTZA
+    memo       : text "VV352v94UwCxraXcrr75XYHSHUrT"
+    successful : true
+--------------------------------------------------------------------------
+⚙️   Operations (1)
+    type        : payment
+      from      : GBWKGBVDEJO3JKRV7IUBHXMBE7A2JYHOGMUMKEO2XM5RFIRBRVSYHTZA
+      to        : GC55LFCTGSDPDMNDIOHZVVA4CYCUF4IKI2SUGHWCJA2PCLPKH4HMDMIU
+      amount    : 0.8000000
+      asset     : native  (Pi - no issuer, cannot be traced to an origin)
+--------------------------------------------------------------------------
+✅  What any app/exchange CAN see:
+      • amount
+      • sender address (from_address)
+      • recipient address (to_address)
+      • memo
+      • transaction id (txid)
+      • asset type = "native"
+--------------------------------------------------------------------------
+🚫  What it CANNOT know (impossible):
+      • whether the coin was mined or withdrawn from OKX/Bitget
+      • any "origin", "tag" or "taint" of the coin
+      • a mining date per unit
+      <- simply because no such field exists on-chain or in the SDK.
+--------------------------------------------------------------------------
+ℹ️  Note on M addresses (Muxed Accounts, CAP-27):
+      • M = a G address + a 64-bit id; the G account is what exists on the ledger.
+      • The network treats it exactly as if no muxing were used (same native pi).
+      • If from_muxed/to_muxed appear, they identify the counterparty only,
+        not the coin's origin. Differentiation remains impossible.
+--------------------------------------------------------------------------
+

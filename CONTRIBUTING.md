@@ -27,15 +27,17 @@ quote is mis-attributed, or a script misleads, that is a **welcome** finding.
 2. **Zero dependencies.** Only **Node 18+ built-ins** (`fetch`, `node:child_process`, …). No `npm install`.
 3. **Read-only.** Scripts may only issue **GET** requests against the public API
    (`https://api.mainnet.minepi.com`). **No** wallet, **no** keys, **no** passphrase, **no** signing,
-   **no** writes. See [`SECURITY.md`](SECURITY.md).
+   **no** writes. See [`SECURITY.md`](SECURITY.md). (The single exception is the clearly-labelled
+   maintenance tool `examples/regenerate-snapshots.mjs`, which only rewrites the local `*-output.txt` snapshots.)
 4. **Precise claims only.** State exactly what is proven and what is **not** (price, identity-hiding,
    reserve backing are **out of scope**). Prefer the canonical wording:
    *“A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger.”*
 5. **No tool/AI names.** Do not name any assistant, chatbot, or external tool anywhere in the repo.
 6. **Official sources.** Back protocol claims with a link (docs.minepi.com, the MiCA whitepaper, the
    Platform API docs). Add them to [`docs/SOURCES.md`](docs/SOURCES.md).
-7. **Keep outputs honest.** If you change a script’s output, **regenerate** its committed
-   `examples/*-output.txt` snapshot.
+7. **Keep outputs honest.** If you change a script’s output, **regenerate** the committed
+   `examples/*-output.txt` snapshots with `node examples/regenerate-snapshots.mjs` (writes clean
+   UTF-8/LF — avoid a shell `>`, which produces UTF-16 on Windows).
 
 ---
 
@@ -57,7 +59,7 @@ Requires **Node 18+** and network access (only the live examples need the networ
 
 ```bash
 node examples/run-all.mjs            # everything at once (+ summary); add --offline for no network
-node examples/self-test.mjs          # offline unit tests + online end-to-end (11 checks)
+node examples/self-test.mjs          # offline unit tests + online end-to-end (21 checks)
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
 node examples/exhaustive-check.mjs   # offline EXHAUSTIVE bounded check (all 1452 histories)
 node examples/provenance-check.mjs   # live: no origin field on chain

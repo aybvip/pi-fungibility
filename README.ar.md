@@ -113,6 +113,7 @@ Pi.createPayment(
 | [`examples/model-check.mjs`](examples/model-check.mjs) | **نموذج تنفيذي** + فحص خصائص (2000 بذرة، بلا شبكة): الحالة رقم واحد، `تاريخ → حالة` مش تعاكسية، رؤية المستلم مستقلة عن المصدر |
 | [`examples/exhaustive-check.mjs`](examples/exhaustive-check.mjs) | **فحص استنفادي محدود** (بلا شبكة، بلا عشوائية): يعدّد **كل 1452** تاريخ في مجال منتهي؛ إخفاء المصدر يصحّ لكل واحد |
 | [`examples/run-all.mjs`](examples/run-all.mjs) | **أمر واحد** يشغّل كل الفحوصات ويطبع ملخّص (`--offline` لتخطّي الشبكة) |
+| [`examples/lib.mjs`](examples/lib.mjs) | مساعدات مشتركة: عميل API متين (يعرض حالة HTTP + الجسم عند الخطأ) وتحقيق مدخلات strkey |
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | سكربت **بلا اعتماديات** يشغّل على البلوكشين ويثبت شنو **ينفع/ما ينفعش** تعرفه عن عملة معيّنة |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | يثبت إنّ الرصيد رقم واحد — **مافيه معرّف لكل micro-π** |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | واجهة `Pi.createPayment` الرسمية (U2A) |
@@ -157,7 +158,7 @@ node examples/provenance-check.mjs <TXID>
 
 ## 🛡️ اعتراض شائع: «المنصّات عندها عنوان M مو G!»
 
-**الرد باختصار:** عناوين **M** هي **Muxed Accounts** (CAP-27) = عنوان **G** + رقم. ما توجدش على السلسلة أصلاً، والشبكة تتعامل معاها **بالضبط** كأنك ما استعملت muxing أبداً. الـ M توصف **الطرف الآخر** (غالباً حساب منصّة مجمّع)، **مو مصدر العملة**.
+**الرد باختصار:** عناوين **M** هي **Muxed Accounts** (CAP-27) = عنوان **G** + رقم 64-bit. الـ **G** هو اللي موجود فعليًا على السجلّ، والشبكة تتعامل معاملة الـ M **بالضبط** كأنك ما استعملتش muxing. الـ M توصف **الطرف الآخر** (غالباً حساب منصّة مجمّع)، **مو مصدر العملة**.
 
 - ✅ صحيح: Bitget (وأخرى) تعطي عنوان إيداع Pi يبدأ بـ M.
 - ❌ غلط: إنّ هذا يخليك تفرّق بين π معدّنة و π مشتراة.
@@ -206,7 +207,7 @@ On **Pi Mainnet** (built on the **Stellar** protocol), Pi is the **native asset*
 
 An app (or exchange) therefore **cannot tell** whether an incoming Pi was mined, withdrawn from OKX/Bitget, or sent by another app. The only real distinctions are **state** (locked `claimable_balance` vs liquid `native`) and **asset type** (native vs token/IOU) — never mining history.
 
-**Muxed accounts (M addresses):** a common counterargument is that exchanges use `M...` deposit addresses. True — but `M` is just a **muxed account** (`G...` + 64-bit ID, CAP-27). It identifies the **counterparty** (a pooled exchange account), not the **origin of the coins**. Muxed accounts don't exist on the ledger, and the network processes them *exactly as if muxing was not used*. So `M` vs `G` is **address labeling**, never **coin provenance**. See [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md).
+**Muxed accounts (M addresses):** a common counterargument is that exchanges use `M...` deposit addresses. True — but `M` is just a **muxed account** (`G...` + 64-bit ID, CAP-27). It identifies the **counterparty** (a pooled exchange account), not the **origin of the coins**. The `M` is a `G` account plus a 64-bit id — the `G` account is what exists on the ledger — and the network processes the payment *exactly as if muxing was not used*. So `M` vs `G` is **address labeling**, never **coin provenance**. See [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md).
 
 ---
 

@@ -50,6 +50,8 @@
 | [`model-check.mjs`](../examples/model-check.mjs) | نموذج سجلّ تنفيذي + فحص خصائص (2000 بذرة، بلا شبكة): حالة رقم واحد، «تاريخ→حالة» مش تعاكسية |
 | [`exhaustive-check.mjs`](../examples/exhaustive-check.mjs) | فحص استنفادي محدود (بلا شبكة): يعدّد كل 1452 تاريخ؛ إخفاء المصدر لكل واحد |
 | [`run-all.mjs`](../examples/run-all.mjs) | يشغّل كل الفحوصات ويطبع ملخّص (`--offline` لتخطّي الشبكة) |
+| [`lib.mjs`](../examples/lib.mjs) | مساعدات مشتركة: عميل API متين (يعرض الحالة + الجسم عند الخطأ) وتحقيق صيغ strkey |
+| [`regenerate-snapshots.mjs`](../examples/regenerate-snapshots.mjs) | أداة صيانة: تعيد كتابة لقطات `*-output.txt` كـUTF-8/LF نظيف |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | عرض حيّ: خلط → رصيد رقم واحد → دفعة **بلا مصدر** |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | مسار `Pi.createPayment` الرسمي (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | سيرفر يعالج `PaymentDTO`؛ يطبع مفاتيحه |
@@ -86,7 +88,7 @@
 ```bash
 node examples/run-all.mjs            # كل شي مرّة وحدة (+ ملخّص)؛ زيد --offline لتخطّي الشبكة
 
-node examples/self-test.mjs          # اختبارات وحدة بلا شبكة + أونلاين (11 فحص)
+node examples/self-test.mjs          # اختبارات وحدة بلا شبكة + أونلاين (21 فحص)
 node examples/model-check.mjs        # نموذج سجلّ + فحص خصائص بلا شبكة (2000 بذرة)
 node examples/exhaustive-check.mjs   # فحص استنفادي محدود بلا شبكة (كل 1452 تاريخ)
 node examples/provenance-check.mjs

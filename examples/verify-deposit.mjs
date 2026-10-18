@@ -31,6 +31,7 @@
  *   node examples/verify-deposit.mjs                       # uses a default sample tx
  *   node examples/verify-deposit.mjs <TXID>
  *   node examples/verify-deposit.mjs <TXID> <TO_ADDRESS>   # require the same op to reach TO_ADDRESS
+ *   node examples/verify-deposit.mjs --help
  *
  * The pure decision function `evaluate()` is exported so it can be unit-tested
  * offline (see examples/self-test.mjs).
@@ -38,14 +39,28 @@
  */
 
 import { pathToFileURL } from "node:url";
+import { api, rule as ruleLine, isTxHash, isAddress, usageAndExit } from "./lib.mjs";
 
-const BASE = "https://api.mainnet.minepi.com";
+const rule = (c = "-") => ruleLine(c, 78);
 
 // A real Pi Mainnet transaction (native payment) used as the default sample.
 const DEFAULT_TX =
   "e0916b2f64bef9da8ac6c2e784a98e48102637a77654a1a73055cb2b6927914c";
 
-const rule = (c = "-") => console.log(c.repeat(78));
+const HELP = [
+  "verify-deposit.mjs — is a transaction a real native Pi payment on Mainnet?",
+  "",
+  "Usage:",
+  "  node examples/verify-deposit.mjs                       # built-in sample tx",
+  "  node examples/verify-deposit.mjs <TXID>                # a 64-char hex hash",
+  "  node examples/verify-deposit.mjs <TXID> <TO_ADDRESS>   # require the SAME op to reach TO_ADDRESS",
+  "  node examples/verify-deposit.mjs --help",
+  "",
+  "  <TO_ADDRESS>  a G... account or an M... muxed address (CAP-27)",
+  "",
+  "Proves Claim B (the tx is native on-chain). Cannot prove Claim C (reserve",
+  "backing / an internal credit) — that is off-chain. Read-only. Node 18+.",
+];
 
 // Does THIS operation deliver to the expected address? Accept both the plain
 // `G...` account and the muxed `M...` form (CAP-27).
@@ -67,15 +82,16 @@ function goesTo(op, addr) {
  * }}
  */
 export function evaluate(tx, records, toAddress) {
-  const txOk = tx && tx.successful === true;
+  const list = Array.isArray(records) ? records : [];
+  const txOk = Boolean(tx) && tx.successful === true;
 
   let nativePayments = 0;
   let sameOpVerified = false;
   const ops = [];
 
-  for (const op of records) {
-    if (op.type !== "payment") {
-      ops.push({ type: op.type });
+  for (const op of list) {
+    if (!op || op.type !== "payment") {
+      ops.push({ type: op ? op.type : "(unknown)" });
       continue;
     }
     const isNative = op.asset_type === "native";
@@ -113,15 +129,19 @@ export function evaluate(tx, records, toAddress) {
   return { txOk, nativePayments, sameOpVerified, ops, verdict };
 }
 
-async function api(path) {
-  const res = await fetch(BASE + path, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText} -> ${path}`);
-  return res.json();
-}
-
 async function main() {
-  const txid = process.argv[2] || DEFAULT_TX;
-  const toAddress = process.argv[3] || null; // optional: expected recipient
+  const argv = process.argv.slice(2);
+  if (argv.includes("--help") || argv.includes("-h")) usageAndExit(HELP, 0);
+
+  const txid = argv[0] || DEFAULT_TX;
+  const toAddress = argv[1] || null; // optional: expected recipient
+
+  if (!isTxHash(txid)) {
+    usageAndExit([`✗ invalid transaction hash: ${txid}`, "", ...HELP]);
+  }
+  if (toAddress && !isAddress(toAddress)) {
+    usageAndExit([`✗ invalid address (expected G... or M...): ${toAddress}`, "", ...HELP]);
+  }
 
   console.log("\n🔗  Pi Mainnet — verify one native Pi payment (e.g. a deposit)");
   console.log("    txid:", txid);
@@ -138,7 +158,7 @@ async function main() {
   rule();
 
   const ops = await api(`/transactions/${txid}/operations`);
-  const records = ops._embedded.records;
+  const records = ops?._embedded?.records ?? [];
 
   const r = evaluate(tx, records, toAddress);
 

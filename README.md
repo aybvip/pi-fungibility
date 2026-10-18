@@ -114,7 +114,7 @@ data** — never **coin provenance**.
 
 | Objection | Answer | Details |
 |---|---|---|
-| “Exchanges use **M** addresses, not **G**” | `M` = a **muxed account** (`G` + ID, CAP-27); identifies the **counterparty**, not the coin. Muxed accounts don’t exist on the ledger, and the network processes them *exactly as if muxing weren’t used*. | [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) |
+| “Exchanges use **M** addresses, not **G**” | `M` = a **muxed account** (`G` + ID, CAP-27); identifies the **counterparty**, not the coin. The `M` is a `G` account plus a 64-bit id — the `G` account is what exists on the ledger — and the network processes the payment *exactly as if muxing weren’t used*. | [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) |
 | “Every **micro-π** has its own ID” | Pi uses an **Account/Balance** model (one number), **not UTXO**. `1 π = 10,000,000 micro-π` is just decimal precision, not an ID. | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) |
 | “The **MiCA whitepaper** says Pi comes only from mining” | The same paper says Pi is **native, fungible**, in a **Functionally Fungible Group**, **immutable even by the issuer**, with **no transfer restrictions**, and that exchanges are the **secondary market**. | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) |
 | “Pi once said **‘don’t buy Pi’**” | That was **Enclosed Mainnet** policy (until **Feb 20, 2025**). Open Network **removed the firewall** and enabled **CEX integration** — Pi’s own blog says so. | [`docs/FAQ-DONT-BUY-PI.md`](docs/FAQ-DONT-BUY-PI.md) |
@@ -140,6 +140,7 @@ data** — never **coin provenance**.
 | [`examples/model-check.mjs`](examples/model-check.mjs) | **Executable model** + property check (2000 seeds, offline): state is one scalar, `history → state` non-injective, recipient view independent of origin |
 | [`examples/exhaustive-check.mjs`](examples/exhaustive-check.mjs) | **Exhaustive bounded check** (offline, no randomness): enumerates **all 1452** histories in a finite domain; origin-invisibility holds for every one |
 | [`examples/run-all.mjs`](examples/run-all.mjs) | **One command** runs every check and prints a summary (`--offline` to skip network) |
+| [`examples/lib.mjs`](examples/lib.mjs) | Shared helpers: robust API client (shows HTTP status + body on error) and strkey input validation |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | Backend handling `PaymentDTO` + printing its keys |
 | [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |

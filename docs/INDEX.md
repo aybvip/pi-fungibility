@@ -51,6 +51,8 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`model-check.mjs`](../examples/model-check.mjs) | Executable ledger model + property check (2000 seeds, offline): scalar state, non-injective history→state |
 | [`exhaustive-check.mjs`](../examples/exhaustive-check.mjs) | Exhaustive bounded check (offline): enumerates all 1452 histories; origin-invisibility for every one |
 | [`run-all.mjs`](../examples/run-all.mjs) | Runs every check and prints a summary (`--offline` to skip network) |
+| [`lib.mjs`](../examples/lib.mjs) | Shared helpers: robust API client (status + body on error) and strkey validation |
+| [`regenerate-snapshots.mjs`](../examples/regenerate-snapshots.mjs) | Maintenance tool: rewrites the `*-output.txt` snapshots as clean UTF-8/LF |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | Backend handling `PaymentDTO`; prints its keys |
 | [`payment-dto-sample.json`](../examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -86,7 +88,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 ```bash
 node examples/run-all.mjs            # everything at once (+ summary); add --offline to skip network
 
-node examples/self-test.mjs          # offline unit tests + online end-to-end (11 checks)
+node examples/self-test.mjs          # offline unit tests + online end-to-end (21 checks)
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
 node examples/exhaustive-check.mjs   # offline exhaustive bounded check (all 1452 histories)
 node examples/provenance-check.mjs

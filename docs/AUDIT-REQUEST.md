@@ -63,7 +63,7 @@ Requires only **Node 18+** (no npm, no dependencies) and network access.
 git clone https://github.com/aybvip/pi-fungibility
 cd pi-fungibility
 
-node examples/self-test.mjs          # 8 offline unit tests (evaluate) + 3 online end-to-end checks
+node examples/self-test.mjs          # 18 offline unit tests (validators + evaluate) + 3 online end-to-end checks
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds, deterministic)
 node examples/exhaustive-check.mjs   # offline EXHAUSTIVE bounded check (all 1452 histories)
 node examples/coin-id-check.mjs      # no per-micro-π identifier on the ledger
