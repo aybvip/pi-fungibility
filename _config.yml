@@ -1,0 +1,20 @@
+# Jekyll config for the π = π proof site (GitHub Pages, source = repository root).
+title: "π = π — Pi fungibility proof"
+description: "A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger."
+url: "https://aybvip.github.io"
+baseurl: "/pi-fungibility"
+
+theme: jekyll-theme-minimal
+
+# All whitelisted on GitHub Pages.
+plugins:
+  - jekyll-optional-front-matter   # render .md files that have no front matter
+  - jekyll-relative-links          # rewrite [x](foo.md) -> foo.html
+  - jekyll-titles-from-headings    # use the first H1 as the page title
+  - jekyll-sitemap                 # generate /sitemap.xml for every page
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

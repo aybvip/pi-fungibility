@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>π = π — Pi fungibility: a native Pi payment carries no observable per-unit mining origin</title>
+<meta name="description" content="Source-verified, dependency-free, read-only proof that Pi Network's native asset (π) is fungible: a native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger. Mined π = exchange π.">
+<meta name="keywords" content="Pi Network, Pi, fungibility, provenance, native asset, Stellar, Soroban, blockchain, Account/Balance, mainnet, mined Pi, exchange Pi">
+<meta name="msvalidate.01" content="8A86F67C7B2FD924205AD0CF77D0DEFE">
+<link rel="canonical" href="https://aybvip.github.io/pi-fungibility/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="π = π — Pi fungibility proof">
+<meta property="og:description" content="A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger.">
+<meta property="og:url" content="https://aybvip.github.io/pi-fungibility/">
+<meta name="twitter:card" content="summary">
+<style>
+  :root { --fg:#1f2328; --muted:#57606a; --line:#d0d7de; --bg:#ffffff; --code:#f6f8fa; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width: 820px; margin: 0 auto; padding: 40px 20px 80px; }
+  h1 { font-size: 1.9rem; line-height:1.25; }
+  h2 { margin-top: 2.2rem; border-bottom:1px solid var(--line); padding-bottom:.3rem; }
+  code, pre { font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size: .9em; }
+  pre { background:var(--code); padding:14px; border-radius:6px; overflow:auto; }
+  code { background:var(--code); padding:.15em .35em; border-radius:4px; }
+  pre code { background:none; padding:0; }
+  table { border-collapse:collapse; width:100%; margin:1rem 0; }
+  th,td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  blockquote { margin:1rem 0; padding:.4rem 1rem; border-left:4px solid var(--line); color:var(--muted); }
+  a { color:#0969da; }
+  .ok { color:#1a7f37; font-weight:600; }
+  .no { color:#cf222e; font-weight:600; }
+  footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; color:var(--muted); font-size:.9rem; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "π = π — Pi fungibility proof",
+  "headline": "A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger",
+  "description": "Source-verified, dependency-free, read-only proof that Pi Network's native asset (π) is fungible. Mined π and π withdrawn from an exchange (OKX / Bitget) are the same native asset.",
+  "url": "https://aybvip.github.io/pi-fungibility/",
+  "codeRepository": "https://github.com/aybvip/pi-fungibility",
+  "license": "https://opensource.org/licenses/MIT",
+  "programmingLanguage": "JavaScript",
+  "keywords": ["Pi Network","fungibility","provenance","native asset","Stellar","Soroban","blockchain","Account/Balance","mainnet"],
+  "author": { "@type": "Organization", "name": "pi-fungibility (aybvip)", "url": "https://github.com/aybvip" },
+  "isAccessibleForFree": true
+}
+</script>
+</head>
+<body>
+<main>
+
+<h1>π = π — Is Pi on exchanges the same as mined Pi?</h1>
+
+<p><strong>Answer: yes — and it is deterministic, not a loophole.</strong></p>
+
+<blockquote>
+<strong>Canonical claim:</strong> <em>A native Pi payment carries no observable per-unit mining origin on the
+Pi Mainnet ledger.</em>
+</blockquote>
+
+<p>π mined in the Pi app, π withdrawn from an exchange (OKX / Bitget), and π sent from inside a Pi Browser app
+are the <strong>same native asset</strong>. On-chain, <strong>every π is identical</strong>: the native asset has
+<strong>no issuer</strong> and <strong>no contract</strong>, and the ledger records <strong>balances — not
+“coins” tagged with an origin</strong>.</p>
+
+<pre><code>mined π = π from OKX/Bitget = π from inside a Pi Browser app</code></pre>
+
+<h2>The proof, layer by layer</h2>
+<table>
+<thead><tr><th>Layer</th><th>What it shows</th><th>Origin field?</th></tr></thead>
+<tbody>
+<tr><td><strong>1 — Blockchain (Horizon)</strong></td><td>Pi is a <strong>Stellar-protocol</strong> chain; the <strong>native asset</strong> has no <code>asset_issuer</code>; a balance is <strong>one scalar</strong></td><td class="no">No</td></tr>
+<tr><td><strong>2 — Pi Wallet SDK</strong> (<code>window.Pi</code>)</td><td><code>createPayment</code> accepts only <code>amount</code> / <code>memo</code> / <code>metadata</code>; transactions are plain native <code>payment</code>s</td><td class="no">No</td></tr>
+<tr><td><strong>3 — Platform API</strong> (<code>PaymentDTO</code>)</td><td><code>identifier, user_uid, amount, memo, metadata, from_address, to_address, direction, created_at, network, status, transaction.txid</code></td><td class="no">No</td></tr>
+<tr><td><strong>4 — Soroban smart contracts</strong></td><td>The contract-facing token interface exposes only scalars: <code>balance</code>, <code>allowance</code>, <code>transfer</code>, <code>transfer_from</code>, <code>approve</code></td><td class="no">No</td></tr>
+</tbody>
+</table>
+
+<p>Because Pi uses an <strong>Account/Balance</strong> model (not UTXO), the history → state map is
+<strong>non-injective</strong>: after the first merge into a wallet the per-unit trail is gone. Account-level
+transaction-graph analysis is possible (you can label <strong>addresses</strong>), but <strong>unit-level
+provenance is undefined</strong>.</p>
+
+<h2>Scope (kept honest)</h2>
+<table>
+<thead><tr><th>Claim</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><strong>A — Fungibility</strong> (mined π ≡ exchange π)</td><td class="ok">Proven (deterministic, reproducible)</td></tr>
+<tr><td><strong>B — A specific deposit is native on-chain</strong></td><td class="ok">Verifiable per case</td></tr>
+<tr><td><strong>C — Reserve backing of an exchange’s internal balances</strong></td><td class="no">Not claimed</td></tr>
+</tbody>
+</table>
+
+<p>Also <strong>not</strong> claimed: price, identity-hiding, IOU equivalence, or an independent audit.</p>
+
+<h2>Reproduce it (Node 18+, zero dependencies, read-only)</h2>
+<pre><code>node examples/run-all.mjs            # everything at once (+ summary); add --offline to skip network checks
+node examples/provenance-check.mjs   # live on-chain: there is no origin field
+node examples/coin-id-check.mjs      # the balance is one scalar — no per-unit ID
+node examples/mixing-check.mjs       # commingling → scalar balance → origin-less payment
+node examples/verify-deposit.mjs &lt;TXID&gt; [TO_ADDRESS]</code></pre>
+
+<h2>Read the sources</h2>
+<ul>
+<li><a href="/pi-fungibility/README.html">README</a> — overview, four-layer proof, FAQ</li>
+<li><a href="/pi-fungibility/PROOF.html">PROOF</a> — step-by-step proof</li>
+<li><a href="/pi-fungibility/docs/SCOPE.html">SCOPE</a> — what is proven vs <strong>not</strong> claimed</li>
+<li><a href="/pi-fungibility/docs/SOURCES.html">SOURCES</a> — verbatim quotes from official sources</li>
+<li><a href="/pi-fungibility/docs/INDEX.html">INDEX</a> — every file, by file and by question</li>
+<li><a href="/pi-fungibility/docs/THREAT-MODEL.html">THREAT-MODEL</a> — actors, capabilities, attacks, residual risk</li>
+<li>Source code: <a href="https://github.com/aybvip/pi-fungibility">github.com/aybvip/pi-fungibility</a></li>
+<li>Machine-readable index for AI tools: <a href="/pi-fungibility/llms.txt">llms.txt</a></li>
+</ul>
+
+<h2>Answers to specific objections</h2>
+<ul>
+<li><a href="/pi-fungibility/docs/FAQ-ALL-OBJECTIONS.html">All objections, catalogued</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-MICRO-PI-ID.html">Does every micro-π have its own ID?</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-MUXED-M-VS-G.html">Do exchanges use <code>M</code> addresses, not <code>G</code>?</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-SDK-PLATFORM-API-FIELDS.html">Doesn’t the SDK / Platform API expose the origin?</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-SMART-CONTRACTS-AND-TOKENS.html">Do Soroban contracts / ecosystem tokens change this?</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-RECIPIENT-CANNOT-TELL.html">Mixed mined + bought π — can the recipient tell?</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.html">Is an exchange’s balance really backed?</a></li>
+<li><a href="/pi-fungibility/docs/MICA-WHITEPAPER.html">What does the MiCA whitepaper say?</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-CAN-CORE-TEAM-SET-PRICE.html">Can the Core Team set a different price by origin?</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-FUNGIBILITY-VS-PRICE.html">Same coin ≠ same price</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-DONT-BUY-PI.html">“Pi once said don’t buy Pi”</a></li>
+<li><a href="/pi-fungibility/docs/FAQ-UNOFFICIAL-REPO-SCAM.html">“It’s an unofficial repo — must be a scam”</a></li>
+</ul>
+
+<h2>Cite this work</h2>
+<p>See <a href="https://github.com/aybvip/pi-fungibility/blob/main/CITATION.cff">CITATION.cff</a>. If you
+reference this analysis, please link the repository.</p>
+
+<footer>
+<p>Independent &amp; unofficial — not affiliated with Pi Network. <strong>Not independently audited</strong>
+(self-verified and reproducible). License: MIT.</p>
+</footer>
+
+</main>
+</body>
+</html>
