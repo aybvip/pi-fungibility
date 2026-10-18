@@ -43,6 +43,7 @@ Every document is written in **English** (`*.md`).
 | [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) | “Pi once said *don’t buy Pi*” (Enclosed Mainnet; ended 2025-02-20) |
 | [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md) | “Same coin ≠ same price” |
 | [`FAQ-UNOFFICIAL-REPO-SCAM.md`](FAQ-UNOFFICIAL-REPO-SCAM.md) | “It’s an unofficial GitHub repo — must be a scam/phishing” |
+| [`FAQ-TAINT-CONTAGION.md`](FAQ-TAINT-CONTAGION.md) | **“If *tainted* π touches my wallet, doesn’t the taint spread through my whole balance?”** → no taint field; the allocation problem; the transitive reductio; the honest account-level boundary |
 | [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) | Full catalog of every remaining objection (groups A–E) |
 
 ### Examples — runnable proofs (zero dependencies)
@@ -87,6 +88,7 @@ Every document is written in **English** (`*.md`).
 | Has this been independently audited? | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) |
 | Has anyone actually **run** this, when, and where? | [`VERIFICATION.md`](VERIFICATION.md) |
 | Who could attack this, and what do we assume? | [`THREAT-MODEL.md`](THREAT-MODEL.md) |
+| Does “taint” spread to the rest of my balance? | [`FAQ-TAINT-CONTAGION.md`](FAQ-TAINT-CONTAGION.md) |
 | Any other objection (lockups, KYC, governance…)? | [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) |
 | Which official sources back all this? | [`SOURCES.md`](SOURCES.md) |
 

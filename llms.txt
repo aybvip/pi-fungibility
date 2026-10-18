@@ -35,6 +35,7 @@
 - [Does the SDK / Platform API expose the origin?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-SDK-PLATFORM-API-FIELDS.md) — no; full field enumeration
 - [Do Soroban smart contracts / ecosystem tokens change fungibility?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md) — no; scalars only, tokens are a different asset
 - [Mined + bought then sent — can the recipient tell?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-RECIPIENT-CANNOT-TELL.md) — no
+- [If tainted π touches my wallet, doesn’t the taint spread through everything?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-TAINT-CONTAGION.md) — no taint field; non-transitive taint cannot be allocated, transitive taint is vacuous
 - [All other objections](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-ALL-OBJECTIONS.md) — catalogued with a refutation each
 
 ## Reproduce (Node 18+, zero dependencies, read-only)

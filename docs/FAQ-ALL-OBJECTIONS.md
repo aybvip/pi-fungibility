@@ -80,6 +80,17 @@ faq_answer: "They are catalogued and each one is answered. The unifying rule: an
 
 ---
 
+
+## Group F — “Taint / contamination / dilution” arguments
+
+| # | Objection | Refutation |
+|---|---|---|
+| F1 | “Tainted π spreads through my whole balance” | Contagion needs a **marked object** *and* a **propagation rule**. The ledger state is a scalar balance — neither exists. There is nothing to spread. |
+| F2 | “Even mixed, the exchange π still taints a fraction of what I send” | Cannot be allocated. With 100 mined + 10 bought, sending 10 admits **no** FIFO / LIFO / lot rule the ledger endorses. The question is **undefined**, not unknown. |
+| F3 | “Taint follows the coins through every hop” | Then it reaches **all π** — a property everything possesses distinguishes nothing. Dichotomy: non-transitive ⇒ unallocatable; transitive ⇒ vacuous. |
+| F4 | “Chain-analysis tools prove taint” | They infer links between **accounts**, never properties of **units**. An account-level inference, not a ledger fact about a coin. |
+| F5 | “Older coins are cleaner” | Age attaches to an **account or transaction**, not to a unit. Same error as E4. |
+
 ## The master table
 
 | Every argument above gives you only one of these | Identifies |
