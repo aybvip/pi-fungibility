@@ -138,6 +138,7 @@ data** — never **coin provenance**.
 | [`examples/verify-deposit.mjs`](examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real **native Pi payment on Mainnet** (Claim B); states what the ledger cannot prove (Claim C) |
 | [`examples/self-test.mjs`](examples/self-test.mjs) | Automated checks: **offline** unit tests (same-op rule, failed-tx gate) + **online** end-to-end (correct → VERIFIED, wrong → NOT VERIFIED) |
 | [`examples/model-check.mjs`](examples/model-check.mjs) | **Executable model** + property check (2000 seeds, offline): state is one scalar, `history → state` non-injective, recipient view independent of origin |
+| [`examples/exhaustive-check.mjs`](examples/exhaustive-check.mjs) | **Exhaustive bounded check** (offline, no randomness): enumerates **all 1452** histories in a finite domain; origin-invisibility holds for every one |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | Backend handling `PaymentDTO` + printing its keys |
 | [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -200,6 +201,11 @@ node examples/provenance-check.mjs <TXID>
    scheme that doesn’t appear on-chain as a `claimable_balance` is a scam.
 
 ---
+
+## Contributing
+
+Found a flaw? That is the most valuable contribution. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and the
+audit status [`docs/AUDIT-REQUEST.md`](docs/AUDIT-REQUEST.md) (this repo is **not** independently audited yet).
 
 ## License
 MIT

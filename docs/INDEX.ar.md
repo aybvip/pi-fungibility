@@ -19,6 +19,7 @@
 | [`PROOF.ar.md`](../PROOF.ar.md) · [`PROOF.md`](../PROOF.md) | البرهان خطوة بخطوة إنّ صاحب التطبيق ما يعرفش منين جاءت الـπ |
 | [`docs/SCOPE.ar.md`](SCOPE.ar.md) · [`SCOPE.md`](SCOPE.md) | **النطاق الدقيق:** شنوّة مثبت مقابل **شنوّة موش مدّعى** (+ تحقّق مستقل) |
 | [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) · [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) | **حالة التدقيق:** موش مدقّق من طرف ثالث — شنوّة يعني هذا، وكيفاش تدير واحد |
+| [`CONTRIBUTING.ar.md`](../CONTRIBUTING.ar.md) · [`CONTRIBUTING.md`](../CONTRIBUTING.md) | كيفاش تساهم: بلّغ على الأخطاء، قواعد ثنائي اللغة/بلا مكتبات، زيد سؤال |
 | [`SECURITY.ar.md`](../SECURITY.ar.md) · [`SECURITY.md`](../SECURITY.md) | للقراءة فقط: بلا محفظة/عبارة/مفاتيح/توقيع/مكتبات؛ كيفاش تفحص |
 | [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) | مستقل وغير رسمي؛ بلا نصيحة مالية؛ بلا وصاية؛ بلا ضمان |
 | [`SOURCES.ar.md`](SOURCES.ar.md) · [`SOURCES.md`](SOURCES.md) | كل المصادر الرسمية بالاقتباسات الحرفية (§1–§16) |
@@ -46,6 +47,7 @@
 | [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | يتحقّق إنّ تحويلًا **معيّنًا** دفعة Pi أصلية على Mainnet (الادّعاء B) |
 | [`self-test.mjs`](../examples/self-test.mjs) | اختبارات آلية: بلا شبكة (قاعدة نفس العملية، بوّابة المعاملة الفاشلة) + أونلاين |
 | [`model-check.mjs`](../examples/model-check.mjs) | نموذج سجلّ تنفيذي + فحص خصائص (2000 بذرة، بلا شبكة): حالة رقم واحد، «تاريخ→حالة» مش تعاكسية |
+| [`exhaustive-check.mjs`](../examples/exhaustive-check.mjs) | فحص استنفادي محدود (بلا شبكة): يعدّد كل 1452 تاريخ؛ إخفاء المصدر لكل واحد |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | عرض حيّ: خلط → رصيد رقم واحد → دفعة **بلا مصدر** |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | مسار `Pi.createPayment` الرسمي (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | سيرفر يعالج `PaymentDTO`؛ يطبع مفاتيحه |
@@ -81,6 +83,7 @@
 ```bash
 node examples/self-test.mjs          # اختبارات وحدة بلا شبكة + أونلاين (11 فحص)
 node examples/model-check.mjs        # نموذج سجلّ + فحص خصائص بلا شبكة (2000 بذرة)
+node examples/exhaustive-check.mjs   # فحص استنفادي محدود بلا شبكة (كل 1452 تاريخ)
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
 node examples/verify-deposit.mjs <TXID> [عنوان_المستلم]

@@ -110,6 +110,7 @@ Pi.createPayment(
 | [`examples/verify-deposit.mjs`](examples/verify-deposit.mjs) | يتحقّق إنّ تحويلًا **معيّنًا** هو دفعة **Pi أصلية على Mainnet** (الادّعاء B)؛ ويوضّح شنوّة ما يثبتوش السجلّ (C) |
 | [`examples/self-test.mjs`](examples/self-test.mjs) | اختبارات آلية: **بلا شبكة** (قاعدة نفس العملية، بوّابة المعاملة الفاشلة) + **أونلاين** (صحيح → VERIFIED، غالط → NOT VERIFIED) |
 | [`examples/model-check.mjs`](examples/model-check.mjs) | **نموذج تنفيذي** + فحص خصائص (2000 بذرة، بلا شبكة): الحالة رقم واحد، `تاريخ → حالة` مش تعاكسية، رؤية المستلم مستقلة عن المصدر |
+| [`examples/exhaustive-check.mjs`](examples/exhaustive-check.mjs) | **فحص استنفادي محدود** (بلا شبكة، بلا عشوائية): يعدّد **كل 1452** تاريخ في مجال منتهي؛ إخفاء المصدر يصحّ لكل واحد |
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | سكربت **بلا اعتماديات** يشغّل على البلوكشين ويثبت شنو **ينفع/ما ينفعش** تعرفه عن عملة معيّنة |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | يثبت إنّ الرصيد رقم واحد — **مافيه معرّف لكل micro-π** |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | واجهة `Pi.createPayment` الرسمية (U2A) |
@@ -206,6 +207,11 @@ An app (or exchange) therefore **cannot tell** whether an incoming Pi was mined,
 **Muxed accounts (M addresses):** a common counterargument is that exchanges use `M...` deposit addresses. True — but `M` is just a **muxed account** (`G...` + 64-bit ID, CAP-27). It identifies the **counterparty** (a pooled exchange account), not the **origin of the coins**. Muxed accounts don't exist on the ledger, and the network processes them *exactly as if muxing was not used*. So `M` vs `G` is **address labeling**, never **coin provenance**. See [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md).
 
 ---
+
+## المساهمة
+
+لقيت خطأ؟ هذا أثمن تبرّع. شوف [`CONTRIBUTING.ar.md`](CONTRIBUTING.ar.md) وحالة التدقيق
+[`docs/AUDIT-REQUEST.ar.md`](docs/AUDIT-REQUEST.ar.md) (هذا المستودع **موش** مدقّق من طرف ثالث توّا).
 
 ## License
 MIT

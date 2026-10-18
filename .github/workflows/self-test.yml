@@ -1,8 +1,8 @@
 name: self-test
 
-# Runs the reproducible proof self-test on every push / PR.
-# The self-test is read-only and talks to the public Pi Mainnet API
-# (https://api.mainnet.minepi.com) to make its assertions.
+# Runs the reproducible proof checks on every push / PR.
+# All checks are read-only; the self-test talks to the public Pi Mainnet API
+# (https://api.mainnet.minepi.com). The model and exhaustive checks are offline.
 
 on:
   push:
@@ -14,8 +14,8 @@ permissions:
   contents: read
 
 jobs:
-  verify-deposit:
-    name: verify-deposit self-test (Node ${{ matrix.node-version }})
+  proof-checks:
+    name: proof checks (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -35,6 +35,9 @@ jobs:
 
       - name: Run ledger model check (offline, deterministic)
         run: node examples/model-check.mjs
+
+      - name: Run exhaustive bounded check (offline, deterministic)
+        run: node examples/exhaustive-check.mjs
 
       - name: Show the committed sample output
         if: always()

@@ -19,6 +19,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`PROOF.md`](../PROOF.md) · [`PROOF.ar.md`](../PROOF.ar.md) | Step-by-step proof that an app owner cannot tell where π came from |
 | [`SCOPE.md`](SCOPE.md) · [`SCOPE.ar.md`](SCOPE.ar.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
 | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) · [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) | **Audit status:** not independently audited — what that means, and how to do one |
+| [`CONTRIBUTING.md`](../CONTRIBUTING.md) · [`CONTRIBUTING.ar.md`](../CONTRIBUTING.ar.md) | How to contribute: report findings, bilingual/zero-dep rules, add a FAQ |
 | [`SECURITY.md`](../SECURITY.md) · [`SECURITY.ar.md`](../SECURITY.ar.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
 | [`DISCLAIMER.md`](../DISCLAIMER.md) · [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) | Independent & unofficial; no financial advice; no custody; no warranty |
 | [`SOURCES.md`](SOURCES.md) · [`SOURCES.ar.md`](SOURCES.ar.md) | All official sources, with verbatim quotes (§1–§16) |
@@ -47,6 +48,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real native Pi payment on Mainnet (Claim B) |
 | [`self-test.mjs`](../examples/self-test.mjs) | Automated checks: offline unit tests (same-op rule, failed-tx gate) + online end-to-end |
 | [`model-check.mjs`](../examples/model-check.mjs) | Executable ledger model + property check (2000 seeds, offline): scalar state, non-injective history→state |
+| [`exhaustive-check.mjs`](../examples/exhaustive-check.mjs) | Exhaustive bounded check (offline): enumerates all 1452 histories; origin-invisibility for every one |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | Backend handling `PaymentDTO`; prints its keys |
 | [`payment-dto-sample.json`](../examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -81,6 +83,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 ```bash
 node examples/self-test.mjs          # offline unit tests + online end-to-end (11 checks)
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
+node examples/exhaustive-check.mjs   # offline exhaustive bounded check (all 1452 histories)
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
 node examples/verify-deposit.mjs <TXID> [TO_ADDRESS]

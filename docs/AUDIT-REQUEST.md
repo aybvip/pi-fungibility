@@ -15,6 +15,7 @@
 | Reproducible by anyone (sources + code)? | ✅ **Yes** |
 | Automated tests of the *tool logic*? | ✅ **Yes** — [`examples/self-test.mjs`](../examples/self-test.mjs) + [CI](../.github/workflows/self-test.yml) |
 | Executable model + property check? | ✅ **Yes** — [`examples/model-check.mjs`](../examples/model-check.mjs) (offline, 2000 seeds) |
+| Exhaustive (bounded) verification? | ✅ **Yes** — [`examples/exhaustive-check.mjs`](../examples/exhaustive-check.mjs) (all 1452 histories in a finite domain) |
 | Does passing tests prove the whole mathematical claim? | ❌ **No** — tests check the **tool**, not the **proof** |
 
 > ⚠️ **Do not read “tests pass” as “audited.”** Automated checks verify the behaviour of one script
@@ -64,6 +65,7 @@ cd pi-fungibility
 
 node examples/self-test.mjs          # 8 offline unit tests (evaluate) + 3 online end-to-end checks
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds, deterministic)
+node examples/exhaustive-check.mjs   # offline EXHAUSTIVE bounded check (all 1452 histories)
 node examples/coin-id-check.mjs      # no per-micro-π identifier on the ledger
 node examples/provenance-check.mjs   # a live account with many inbound payments, one scalar balance
 node examples/mixing-check.mjs       # mined + bought -> one balance -> origin-less payment
@@ -81,8 +83,9 @@ the protocol is either a **quoted official source** or a **plain node script** y
 
 - **Formal proof is not machine-checked in a proof assistant.** §7 is a written argument, not a Lean/Coq
   artifact. We provide an **executable model + property check**
-  ([`examples/model-check.mjs`](../examples/model-check.mjs), 2000 seeds, offline) as a concrete,
-  regression-tested illustration — but that is **not** the same as a verified formalisation.
+  ([`examples/model-check.mjs`](../examples/model-check.mjs), 2000 seeds) and an **exhaustive bounded check**
+  ([`examples/exhaustive-check.mjs`](../examples/exhaustive-check.mjs), all 1452 histories in a finite domain)
+  — both offline. Strong, but **bounded**; still **not** the same as a verified formalisation.
 - **Sources are as of their publication date.** If Pi Network changes the protocol or its docs change,
   re-verify (see [`SOURCES.md`](SOURCES.md) for dates/links).
 - **The live examples depend on the network.** They query `https://api.mainnet.minepi.com`; a specific
