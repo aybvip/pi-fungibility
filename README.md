@@ -4,6 +4,8 @@
 > why an **app owner** — even with the **Pi Wallet SDK** and **Platform API** — **cannot distinguish**
 > between mined π, π withdrawn from an exchange (OKX / Bitget), and π sent from inside a Pi Browser app.
 
+[![Independent](https://img.shields.io/badge/Independent-unofficial-orange)](DISCLAIMER.md)
+[![Not affiliated with Pi Network](https://img.shields.io/badge/not%20affiliated-Pi%20Network-critical)](DISCLAIMER.md)
 [![Pi Docs](https://img.shields.io/badge/Source-docs.minepi.com-6f42c1)](https://docs.minepi.com/)
 [![Pi Developer Guide](https://img.shields.io/badge/Source-pi--apps.github.io-2ea44f)](https://pi-apps.github.io/community-developer-guide/)
 [![Platform API](https://img.shields.io/badge/Source-platform__API-0969da)](https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md)
@@ -12,9 +14,12 @@
 
 🌍 **English** · [العربية](README.ar.md)
 
-> 🔐 **Independent & safe by design.** Unofficial analysis with **read-only** tools. **No** wallet
-> connection, **no** passphrase, **no** keys, **no** signing, **no** dependencies. Audit it — see
-> [`SECURITY.md`](SECURITY.md). Details: [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.md).
+> 🏷️ **Independent & unofficial — not affiliated with Pi Network.** This is an independent technical
+> analysis, not an official product. See [`DISCLAIMER.md`](DISCLAIMER.md).
+>
+> 🔐 **Safe by design (read-only).** **No** wallet connection, **no** passphrase, **no** keys, **no** signing,
+> **no** dependencies. Audit it — see [`SECURITY.md`](SECURITY.md). Details:
+> [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.md).
 
 ---
 

@@ -8,6 +8,8 @@
 > -π مسحوبة من منصّة مثل **OKX / Bitget**،
 > -π واصلة داخل تطبيق في **Pi Browser**.
 
+[![Independent](https://img.shields.io/badge/Independent-unofficial-orange)](DISCLAIMER.ar.md)
+[![Not affiliated with Pi Network](https://img.shields.io/badge/not%20affiliated-Pi%20Network-critical)](DISCLAIMER.ar.md)
 [![Pi Docs](https://img.shields.io/badge/Source-docs.minepi.com-6f42c1)](https://docs.minepi.com/)
 [![Pi Developer Guide](https://img.shields.io/badge/Source-pi--apps.github.io-2ea44f)](https://pi-apps.github.io/community-developer-guide/)
 [![Platform API](https://img.shields.io/badge/Source-platform__API-0969da)](https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md)
@@ -15,8 +17,11 @@
 
 📄 **النطاق الكامل — شنوّة مثبت وشنوّة موش مدّعى:** [`docs/SCOPE.ar.md`](docs/SCOPE.ar.md) · 🌍 [English](docs/SCOPE.md)
 
-> 🔐 **مستقل وآمن بالتصميم.** تحليل غير رسمي بأدوات **للقراءة فقط**. **بلا** ربط محفظة، **بلا** عبارة سرية،
-> **بلا** مفاتيح، **بلا** توقيع، **بلا** مكتبات. افحصو — شوف [`SECURITY.ar.md`](SECURITY.ar.md).
+> 🏷️ **مستقل وغير رسمي — موش تابع لـPi Network.** هذا تحليل مستقل، موش منتج رسمي.
+> شوف [`DISCLAIMER.ar.md`](DISCLAIMER.ar.md).
+>
+> 🔐 **آمن بالتصميم (للقراءة فقط).** **بلا** ربط محفظة، **بلا** عبارة سرية، **بلا** مفاتيح، **بلا** توقيع،
+> **بلا** مكتبات. افحصو — شوف [`SECURITY.ar.md`](SECURITY.ar.md).
 > التفاصيل: [`docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md).
 
 ---

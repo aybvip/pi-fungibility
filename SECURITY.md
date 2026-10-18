@@ -5,7 +5,7 @@ This project is an **independent technical analysis** with **read-only** tools. 
 endorsed by, or connected to **Pi Network / Pi Core Team / SocialChain / PiBit** in any way.
 
 > Being “unofficial” is normal for a code repository — and it is exactly why you should **audit it instead of
-> trusting it**. This file tells you how.
+> trusting it**. This file tells you how. See also [`DISCLAIMER.md`](DISCLAIMER.md).
 
 ## 2. What this repository does **NOT** do ❌
 - ❌ **No** wallet connection.
