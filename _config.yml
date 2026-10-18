@@ -18,3 +18,10 @@ defaults:
       path: ""
     values:
       layout: default
+
+# jekyll-optional-front-matter skips "common meta files" (denylist). Listing them
+# here makes them render as HTML pages too (README.html, CONTRIBUTING.html, ...).
+include:
+  - README.md
+  - CONTRIBUTING.md
+  - LICENSE
