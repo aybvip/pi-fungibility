@@ -5,8 +5,8 @@
 > contracts** — **cannot distinguish**
 > between mined π, π withdrawn from an exchange (OKX / Bitget), and π sent from inside a Pi Browser app.
 
-[![Independent](https://img.shields.io/badge/Independent-unofficial-orange)](DISCLAIMER.md)
-[![Not affiliated with Pi Network](https://img.shields.io/badge/not%20affiliated-Pi%20Network-critical)](DISCLAIMER.md)
+[![Independent](https://img.shields.io/badge/Independent-unofficial-orange)](https://github.com/aybvip/pi-fungibility/blob/main/DISCLAIMER.md)
+[![Not affiliated with Pi Network](https://img.shields.io/badge/not%20affiliated-Pi%20Network-critical)](https://github.com/aybvip/pi-fungibility/blob/main/DISCLAIMER.md)
 [![Pi Docs](https://img.shields.io/badge/Source-docs.minepi.com-6f42c1)](https://docs.minepi.com/)
 [![Pi Developer Guide](https://img.shields.io/badge/Source-pi--apps.github.io-2ea44f)](https://pi-apps.github.io/community-developer-guide/)
 [![Platform API](https://img.shields.io/badge/Source-platform__API-0969da)](https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md)
@@ -15,7 +15,7 @@
 [![Smart Contracts (official)](https://img.shields.io/badge/Source-SmartContracts-2ea44f)](https://github.com/PiNetwork/SmartContracts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
 [![self-test](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml/badge.svg)](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml)
-[![Audit: not independently audited](https://img.shields.io/badge/audit-not%20independently%20audited-red)](docs/AUDIT-REQUEST.md)
+[![Audit: not independently audited](https://img.shields.io/badge/audit-not%20independently%20audited-red)](https://github.com/aybvip/pi-fungibility/blob/main/docs/AUDIT-REQUEST.md)
 
 > 🏷️ **Independent & unofficial — not affiliated with Pi Network.** This is an independent technical
 > analysis, not an official product. See [`DISCLAIMER.md`](DISCLAIMER.md).

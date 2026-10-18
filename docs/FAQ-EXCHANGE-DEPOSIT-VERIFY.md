@@ -67,7 +67,7 @@ It confirms (from the **public** API, the source of truth):
 > Run the automated check: `node examples/self-test.mjs` — it has **offline unit tests** (pure `evaluate()`,
 > no network: correct vs wrong recipient, the **failed-tx gate**, and the **multi-op same-op rule**) plus
 > **online** end-to-end checks (see [`examples/self-test-output.txt`](../examples/self-test-output.txt)).
-> It also runs in **CI** on every push/PR ([`.github/workflows/self-test.yml`](../.github/workflows/self-test.yml)).
+> It also runs in **CI** on every push/PR ([`.github/workflows/self-test.yml`](https://github.com/aybvip/pi-fungibility/blob/main/.github/workflows/self-test.yml)).
 
 > ⚠️ Practical notes:
 > - Exchange **deposit** addresses are often **`M…`** muxed accounts (CAP-27) — see

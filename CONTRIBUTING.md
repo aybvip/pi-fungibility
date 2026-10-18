@@ -11,7 +11,7 @@ quote is mis-attributed, or a script misleads, that is a **welcome** finding.
 ## 1. How to report a problem
 
 - **Open an issue** using the **“Audit finding / correctness issue”** template
-  ([`.github/ISSUE_TEMPLATE/audit-finding.md`](.github/ISSUE_TEMPLATE/audit-finding.md)).
+  ([`.github/ISSUE_TEMPLATE/audit-finding.md`](https://github.com/aybvip/pi-fungibility/blob/main/.github/ISSUE_TEMPLATE/audit-finding.md)).
 - Say **which claim** you are challenging (**A / B / C** — see
   [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md)).
 - For **code** findings, paste the exact command line and the **full output**.
@@ -67,7 +67,7 @@ node examples/mixing-check.mjs
 ```
 
 CI runs the **offline** checks on **Node 20 & 22** for every push/PR
-([`.github/workflows/self-test.yml`](.github/workflows/self-test.yml)). Keep them **green**.
+([`.github/workflows/self-test.yml`](https://github.com/aybvip/pi-fungibility/blob/main/.github/workflows/self-test.yml)). Keep them **green**.
 
 ---
 

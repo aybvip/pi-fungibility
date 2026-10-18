@@ -13,7 +13,7 @@
 | Independently audited by a third party? | ❌ **No** |
 | Peer-reviewed formally (academic/industry)? | ❌ **No** |
 | Reproducible by anyone (sources + code)? | ✅ **Yes** |
-| Automated tests of the *tool logic*? | ✅ **Yes** — [`examples/self-test.mjs`](../examples/self-test.mjs) + [CI](../.github/workflows/self-test.yml) |
+| Automated tests of the *tool logic*? | ✅ **Yes** — [`examples/self-test.mjs`](../examples/self-test.mjs) + [CI](https://github.com/aybvip/pi-fungibility/blob/main/.github/workflows/self-test.yml) |
 | Executable model + property check? | ✅ **Yes** — [`examples/model-check.mjs`](../examples/model-check.mjs) (offline, 2000 seeds) |
 | Exhaustive (bounded) verification? | ✅ **Yes** — [`examples/exhaustive-check.mjs`](../examples/exhaustive-check.mjs) (all 1452 histories in a finite domain) |
 | Does passing tests prove the whole mathematical claim? | ❌ **No** — tests check the **tool**, not the **proof** |

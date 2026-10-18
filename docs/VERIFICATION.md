@@ -33,7 +33,7 @@
 | **Scope** | The repository state of **2026-10-18** |
 
 Every push to `main` re-runs the full suite (offline **and** live Mainnet layers) on both Node versions:
-[`.github/workflows/self-test.yml`](../.github/workflows/self-test.yml) · status badge on the
+[`.github/workflows/self-test.yml`](https://github.com/aybvip/pi-fungibility/blob/main/.github/workflows/self-test.yml) · status badge on the
 [README](../README.md).
 
 > **Where did the live Mainnet reads happen?** In **CI** (GitHub-hosted runner) and **locally**. The CI job runs
