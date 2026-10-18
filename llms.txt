@@ -26,6 +26,7 @@
 - [VERIFICATION](https://github.com/aybvip/pi-fungibility/blob/main/docs/VERIFICATION.md) — last verified date, what ran where (local vs CI), what it does not prove
 - [SOURCES](https://github.com/aybvip/pi-fungibility/blob/main/docs/SOURCES.md) — verbatim quotes from official sources, with pinned revisions (§0)
 - [FALSIFICATION](https://github.com/aybvip/pi-fungibility/blob/main/docs/FALSIFICATION.md) — the four things that would kill the claim, and how to try each
+- [PRIOR-ART](https://github.com/aybvip/pi-fungibility/blob/main/docs/PRIOR-ART.md) — what already existed, what was searched, what appears new, and what is not claimed about it
 - [INDEX](https://github.com/aybvip/pi-fungibility/blob/main/docs/INDEX.md) — every file, by file and by question
 
 ## Question-specific answers

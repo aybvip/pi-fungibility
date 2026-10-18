@@ -17,6 +17,7 @@ Every document is written in **English** (`*.md`).
 | [`PROOF.md`](../PROOF.md) | Step-by-step proof that an app owner cannot tell where π came from |
 | [`SCOPE.md`](SCOPE.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
 | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) | **Audit status:** not independently audited — what that means, and how to do one |
+| [`PRIOR-ART.md`](PRIOR-ART.md) | **Prior art:** what already existed, what was searched, what appears new — and what is explicitly **not** claimed |
 | [`FALSIFICATION.md`](FALSIFICATION.md) | **Falsification criterion:** the four things that would kill the claim, how to try each, and what does *not* count |
 | [`VERIFICATION.md`](VERIFICATION.md) | **Verification status:** last verified date, what ran where (local vs CI), live Mainnet vs offline layers, how to read a red build, and what is **not** verified |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) | How to contribute: report findings, zero-dep rules, add a FAQ |
@@ -97,6 +98,7 @@ Every document is written in **English** (`*.md`).
 | Is this repo a scam / phishing? | [`FAQ-UNOFFICIAL-REPO-SCAM.md`](FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](../SECURITY.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) |
 | What exactly is proven — and not? | [`SCOPE.md`](SCOPE.md) |
 | Has this been independently audited? | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) |
+| Has anyone else already proven this — are you first? | [`PRIOR-ART.md`](PRIOR-ART.md) |
 | How would someone **disprove** this? | [`FALSIFICATION.md`](FALSIFICATION.md) |
 | Has anyone actually **run** this, when, and where? | [`VERIFICATION.md`](VERIFICATION.md) |
 | Who could attack this, and what do we assume? | [`THREAT-MODEL.md`](THREAT-MODEL.md) |
