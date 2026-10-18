@@ -10,6 +10,10 @@ vendor/
 
 node_modules/
 
+# local scratch — never committed (editor / agent helper files)
+_msg.txt
+_*.mjs
+
 # OS
 Thumbs.db
 .DS_Store

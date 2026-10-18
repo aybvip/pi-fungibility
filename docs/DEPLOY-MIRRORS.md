@@ -58,16 +58,22 @@ set GitHub Pages does** and stays byte-compatible with the canonical output.
 
 ## Verified properties of the mirror build
 
-Checked in CI / locally before adding a host (`29 HTML pages`):
+Checked in CI / locally before adding a host (`31 HTML pages`):
 
-- ✅ **27/27** Jekyll-rendered pages emit `rel="canonical"` → GitHub Pages **with**
+- ✅ **29/29** Jekyll-rendered pages emit `rel="canonical"` → GitHub Pages **with**
   the `/pi-fungibility` subpath
 - ✅ **0** internal or asset links carry the `/pi-fungibility/` prefix
-- ✅ all **28** `sitemap.xml` URLs target the canonical host — never the mirror
+- ✅ all **30** `sitemap.xml` URLs target the canonical host — never the mirror
 - ✅ `assets/css/style.css` reachable at `/assets/…`
 - ✅ `404.html` built, and **excluded** from the sitemap
 - ✅ `index.html` uses **relative** links, so it resolves on any host
-- ✅ `llms.txt`, `robots.txt`, IndexNow key, Bing/Google verification files all served
+- ✅ `llms.txt`, `robots.txt`, the IndexNow key and the Bing/Google verification files are all served
+
+> **IndexNow: pass `keyLocation`.** The key file lives *in this repository*, so it is served under the
+> subpath — `https://aybvip.github.io/pi-fungibility/<key>.txt` — **not** at the host root
+> (`https://aybvip.github.io/<key>.txt`, which 404s). Submissions must therefore send the `keyLocation`
+> parameter; without it the API replies `202 Accepted`, then rejects the site asynchronously with
+> `403 UserForbiddedToAccessSite`.
 
 The two pages with no canonical are deliberate:
 `examples/app-payment-flow/frontend.html` (a code sample) and
