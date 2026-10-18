@@ -28,6 +28,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 |---|---|
 | [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) · [.ar](FAQ-RECIPIENT-CANNOT-TELL.ar.md) | **“I mixed mined + bought π, then sent some — can the recipient tell?”** (deterministic proof) |
 | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) · [.ar](FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) | **“Can the Core Team set a different price by origin, or block sales?”** (no — on-chain) |
+| [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) · [.ar](FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) | **“Is an exchange’s balance really backed?”** → three claims: A fungibility (proven), B a specific deposit (verifiable), C reserve backing (not claimed) |
 | [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) · [.ar](FAQ-MICRO-PI-ID.ar.md) | “Every micro-π has its own ID” |
 | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) · [.ar](FAQ-MUXED-M-VS-G.ar.md) | “Exchanges use `M` addresses, not `G`” |
 | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) · [.ar](MICA-WHITEPAPER.ar.md) | “The MiCA whitepaper says Pi comes only from mining” |
@@ -42,6 +43,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`provenance-check.mjs`](../examples/provenance-check.mjs) | Reads a real tx on-chain; shows there is **no origin field** |
 | [`coin-id-check.mjs`](../examples/coin-id-check.mjs) | Shows the balance is **one scalar** — no per-unit ID |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | Live demo: commingling → scalar balance → **origin-less** payment |
+| [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real native Pi payment on Mainnet (Claim B) |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | Backend handling `PaymentDTO`; prints its keys |
 | [`payment-dto-sample.json`](../examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -59,6 +61,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | Every micro-π has an ID? | [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) |
 | Exchanges use `M`, not `G`? | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) |
 | Can the Core Team set a different price / block sales? | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
+| Is an exchange’s on-chain balance really backed? | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |
 | The MiCA whitepaper says “only through mining”? | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) |
 | “Pi said don’t buy Pi”? | [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) |
 | Same coin but different price? | [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md) |

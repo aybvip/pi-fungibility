@@ -28,6 +28,7 @@
 |---|---|
 | [`FAQ-RECIPIENT-CANNOT-TELL.ar.md`](FAQ-RECIPIENT-CANNOT-TELL.ar.md) · [EN](FAQ-RECIPIENT-CANNOT-TELL.md) | **«خلطت معدَّنة + مشرية وبعثت — المُرْسَل إليه ينجّم يشوف الفرق؟»** (برهان حتمي) |
 | [`FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) · [EN](FAQ-CAN-CORE-TEAM-SET-PRICE.md) | **«الفريق ينجّم يفرض سعر مختلف/يمنع البيع؟»** (لا — على السلسلة) |
+| [`FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) · [EN](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) | **«رصيد المنصّة مدعوم؟»** → 3 ادّعاءات: A مثبت، B يُتحقّق، C موش مدّعى |
 | [`FAQ-MICRO-PI-ID.ar.md`](FAQ-MICRO-PI-ID.ar.md) · [EN](FAQ-MICRO-PI-ID.md) | «كل micro-π عندها ID» |
 | [`FAQ-MUXED-M-VS-G.ar.md`](FAQ-MUXED-M-VS-G.ar.md) · [EN](FAQ-MUXED-M-VS-G.md) | «المنصّات تستعمل عناوين `M` موش `G`» |
 | [`MICA-WHITEPAPER.ar.md`](MICA-WHITEPAPER.ar.md) · [EN](MICA-WHITEPAPER.md) | «ورقة MiCA تقول Pi من التعدين برك» |
@@ -41,6 +42,7 @@
 |---|---|
 | [`provenance-check.mjs`](../examples/provenance-check.mjs) | يقرا معاملة حقيقية على السلسلة؛ يوريك **ما فماش خانة مصدر** |
 | [`coin-id-check.mjs`](../examples/coin-id-check.mjs) | يوريك الرصيد **رقم واحد** — بلا ID لكل وحدة |
+| [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | يتحقّق إنّ تحويلًا **معيّنًا** دفعة Pi أصلية على Mainnet (الادّعاء B) |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | عرض حيّ: خلط → رصيد رقم واحد → دفعة **بلا مصدر** |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | مسار `Pi.createPayment` الرسمي (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | سيرفر يعالج `PaymentDTO`؛ يطبع مفاتيحه |
@@ -59,6 +61,7 @@
 | كل micro-π عندها ID؟ | [`FAQ-MICRO-PI-ID.ar.md`](FAQ-MICRO-PI-ID.ar.md) |
 | المنصّات تستعمل `M` موش `G`؟ | [`FAQ-MUXED-M-VS-G.ar.md`](FAQ-MUXED-M-VS-G.ar.md) |
 | الفريق ينجّم يفرض سعر مختلف/يمنع البيع؟ | [`FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) |
+| رصيد المنصّة مدعوم فعلاً؟ | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) |
 | ورقة MiCA تقول «من التعدين برك»؟ | [`MICA-WHITEPAPER.ar.md`](MICA-WHITEPAPER.ar.md) |
 | «Pi قالوا ما تشريش Pi»؟ | [`FAQ-DONT-BUY-PI.ar.md`](FAQ-DONT-BUY-PI.ar.md) |
 | نفس العملة بسعر مختلف؟ | [`FAQ-FUNGIBILITY-VS-PRICE.ar.md`](FAQ-FUNGIBILITY-VS-PRICE.ar.md) |

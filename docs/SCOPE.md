@@ -19,11 +19,20 @@ yourself with zero dependencies.
 
 ## 1. The precise claim (one sentence)
 
-> **A payment carries no observable per-coin origin.**
+> **“A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger.”**
 > Mined π and exchange-bought π are the **same native asset**, and **no data** available to a recipient,
 > an app, or an exchange distinguishes them.
 
-That is the whole claim. No more, no less.
+That is the whole claim. No more, no less. (The Arabic rendering is in [`SCOPE.ar.md`](SCOPE.ar.md).)
+
+### 1.1 Three different claims — do not blend them
+| # | Claim | Status |
+|---|---|---|
+| **A** | **Protocol fungibility** — no observable per-unit mining origin | ✅ **Proven** (this file) |
+| **B** | **A specific transfer is real** — a given deposit is a native Pi payment on Mainnet | ✅ **Verifiable per case** — [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |
+| **C** | **Reserve backing** — the venue’s whole internal balance is fully backed on-chain | ❌ **Not claimed** (off-chain) |
+
+See [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) for the full separation.
 
 ---
 

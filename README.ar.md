@@ -103,6 +103,8 @@ Pi.createPayment(
 
 | الملف | الوصف |
 |---|---|
+| [`examples/mixing-check.mjs`](examples/mixing-check.mjs) | برهان حيّ لسيناريو **«معدَّنة + مشرية ثم بعث»**: خلط → رصيد رقم واحد → دفعة بلا مصدر |
+| [`examples/verify-deposit.mjs`](examples/verify-deposit.mjs) | يتحقّق إنّ تحويلًا **معيّنًا** هو دفعة **Pi أصلية على Mainnet** (الادّعاء B)؛ ويوضّح شنوّة ما يثبتوش السجلّ (C) |
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | سكربت **بلا اعتماديات** يشغّل على البلوكشين ويثبت شنو **ينفع/ما ينفعش** تعرفه عن عملة معيّنة |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | يثبت إنّ الرصيد رقم واحد — **مافيه معرّف لكل micro-π** |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | واجهة `Pi.createPayment` الرسمية (U2A) |
@@ -113,6 +115,7 @@ Pi.createPayment(
 | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) | الرد على اعتراض «كل micro-π عندها معرّف ID» |
 | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) | **هل الفريق يفرض سعر مختلف/يمنع البيع؟** لا — على مستوى البروتوكول مستحيل |
 | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.ar.md) | **«خلطت معدَّنة + مشرية وبعثت — ينجّم يشوف الفرق؟»** برهان حتمي |
+| [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) | **«التكافؤ شيء، لكن رصيد المنصّة مدعوم؟»** 3 ادّعاءات: A مثبت، B يُتحقّق، C موش مدّعى |
 | [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md) | **«مستودع GitHub عشوائي = نصب؟»** افحص ما تثقش + تصحيح «Pi موش مدرجة» |
 | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) | **كل الحجج الممكنة المتبقية** + الردّ على كل واحدة |
 | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) | ورقة MiCA الرسمية: «native, fungible» + «Functionally Fungible Group» |

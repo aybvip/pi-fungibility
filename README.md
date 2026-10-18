@@ -119,6 +119,7 @@ data** — never **coin provenance**.
 | “Same coin, but **not the same price**” | **Fungibility ≠ price.** The same asset trades at different prices across venues (Bitcoin’s “Kimchi premium”, even the US dollar). Only an **IOU vs native** difference is real. | [`docs/FAQ-FUNGIBILITY-VS-PRICE.md`](docs/FAQ-FUNGIBILITY-VS-PRICE.md) |
 | **“I bought π on an exchange, put it in the same wallet as my mined π, then sent some to a friend — can they tell?”** | **No — and it is deterministic, not a loophole.** The ledger has no per-unit identity, so per-coin origin is **not an observable**. Includes the honest account-level-vs-unit-level distinction. | [`docs/FAQ-RECIPIENT-CANNOT-TELL.md`](docs/FAQ-RECIPIENT-CANNOT-TELL.md) |
 | **“Can the Core Team set a different price for mined vs exchange Pi, or stop you selling?”** | **No — not on-chain.** No origin to target, no price field, no issuer controls. Their power is off-chain/app-level only. | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
+| **“Fungibility is one thing — but is an exchange’s balance really backed?”** | **Three separate claims:** A fungibility (**proven**), B a specific deposit is on-chain (**verifiable**), C reserve backing (**not claimed**). | [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |
 | **“It’s just an unofficial GitHub repo — must be a scam/phishing.”** | **Audit, don’t trust.** This repo is read-only: no wallet, no passphrase, no keys, no signing, no deps. And “Pi not listed / network closed” is outdated (Open Network 2025-02-20). | [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](SECURITY.md) |
 | **All other objections** (labeling, chain analysis, lockups, KYC, core-team data, governance…) | Catalogued with a refutation each. | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) |
 
@@ -131,6 +132,7 @@ data** — never **coin provenance**.
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | **Zero-dependency** script that queries the live chain and shows what an app **can / cannot** know about a coin |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | Proves the balance is a **single number** — there is **no per-micro-π ID** |
 | [`examples/mixing-check.mjs`](examples/mixing-check.mjs) | Live proof for the exact **“mined + bought, then send”** scenario: commingling → scalar balance → origin-less payment |
+| [`examples/verify-deposit.mjs`](examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real **native Pi payment on Mainnet** (Claim B); states what the ledger cannot prove (Claim C) |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | Backend handling `PaymentDTO` + printing its keys |
 | [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -175,8 +177,10 @@ node examples/provenance-check.mjs <TXID>
 - No independent audit is claimed; instead, **everything is verifiable** by running the code and reading the
   official sources.
 
-> Precise claim: **“A payment carries no observable per-coin origin.”** No more, no less.
-> Full standalone statement: [`docs/SCOPE.md`](docs/SCOPE.md).
+> Precise claim: **“A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger.”**
+> No more, no less. Distinguishing **A** (fungibility, proven) from **B** (a specific deposit — verifiable)
+> and **C** (reserve backing — *not* claimed): [`docs/SCOPE.md`](docs/SCOPE.md) ·
+> [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md).
 
 ---
 
