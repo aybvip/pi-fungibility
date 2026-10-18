@@ -154,6 +154,7 @@ See [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md).
 | Blockchain (Horizon) | ❌ No |
 | Pi Wallet SDK (`window.Pi`) | ❌ No |
 | Platform API (`PaymentDTO`) | ❌ No |
+| Soroban smart contracts / token interface (SEP-41) | ❌ No — `balance`/`allowance`/`transfer` are **scalar `i128`** |
 | Official MiCA whitepaper | ❌ No — instead: **“native, fungible”** |
 
 > Field-by-field enumeration of the whole SDK + Platform API surface:

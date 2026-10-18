@@ -1,7 +1,8 @@
 # π = π — Is Pi on exchanges the same as mined Pi?
 
 > A **source-verified** technical analysis of **fungibility** in the **Pi Network** blockchain:
-> why an **app owner** — even with the **Pi Wallet SDK** and **Platform API** — **cannot distinguish**
+> why an **app owner** — even with the **Pi Wallet SDK**, the **Platform API**, and **Soroban smart
+> contracts** — **cannot distinguish**
 > between mined π, π withdrawn from an exchange (OKX / Bitget), and π sent from inside a Pi Browser app.
 
 [![Independent](https://img.shields.io/badge/Independent-unofficial-orange)](DISCLAIMER.md)
@@ -10,6 +11,8 @@
 [![Pi Developer Guide](https://img.shields.io/badge/Source-pi--apps.github.io-2ea44f)](https://pi-apps.github.io/community-developer-guide/)
 [![Platform API](https://img.shields.io/badge/Source-platform__API-0969da)](https://github.com/pi-apps/pi-platform-docs/blob/master/platform_API.md)
 [![MiCA Whitepaper](https://img.shields.io/badge/Source-MiCA%20Whitepaper-ff69b4)](https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf)
+[![PiRC (official)](https://img.shields.io/badge/Source-PiRC%20RFcs-blueviolet)](https://github.com/PiNetwork/PiRC)
+[![Smart Contracts (official)](https://img.shields.io/badge/Source-SmartContracts-2ea44f)](https://github.com/PiNetwork/SmartContracts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
 [![self-test](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml/badge.svg)](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml)
 [![Audit: not independently audited](https://img.shields.io/badge/audit-not%20independently%20audited-red)](docs/AUDIT-REQUEST.md)
@@ -34,8 +37,9 @@ On-chain, **every π is identical**. The native asset has **no issuer and no con
 mined π = π from OKX/Bitget = π from inside a Pi Browser app
 ```
 
-There is **no field** called “origin”, “mining”, or “exchange” — not on-chain, not in the SDK, and not in the
-Platform API. All an app sees is: **amount + sender address + recipient address + memo + txid**.
+There is **no field** called “origin”, “mining”, or “exchange” — not on-chain, not in the SDK, not in the
+Platform API, and not in the Soroban smart-contract layer. All an app sees is: **amount + sender address +
+recipient address + memo + txid**.
 
 The official MiCA whitepaper says it plainly: Pi is the **“native, fungible digital asset”** and belongs to a
 **“Functionally Fungible Group”**.
@@ -59,12 +63,15 @@ Everything in this repo is grounded in Pi Network’s official documentation:
 | MiCA Whitepaper (PDF) | https://minepi.com/wp-content/uploads/2025/11/MiCA-Whitepaper-Pi-1.pdf | “native, fungible”, “Functionally Fungible Group” |
 | Stellar — Accounts | https://developers.stellar.org/docs/learn/fundamentals/stellar-data-structures/accounts | Account/Balance model |
 | Stellar — Muxed accounts | https://developers.stellar.org/docs/build/guides/transactions/pooled-accounts-muxed-accounts-memos | CAP-27 `M...` addresses |
+| PiRC — Pi Requests for Comment | https://github.com/PiNetwork/PiRC | Ecosystem-token design (PiRC1) + subscription contract (PiRC2) |
+| Smart Contracts (reference impl) | https://github.com/PiNetwork/SmartContracts | Soroban token interface = scalar amounts |
+| Pi blog — Subscription contract | https://minepi.com/blog/subscriptions-smart-contract | First smart contract, on Testnet (2026-04-17) |
 
 Full quotes and citations: [`docs/SOURCES.md`](docs/SOURCES.md).
 
 ---
 
-## 🧩 The three-layer proof
+## 🧩 The proof (four layers)
 
 ### Layer 1 — The blockchain: a native asset with no identity (no issuer, no provenance)
 - Pi uses the **Stellar protocol** (same `Horizon` API, same `@stellar/stellar-sdk`, same `networkPassphrase`).
@@ -103,6 +110,20 @@ The full official response of `GET /v2/payments/{payment_id}`:
 👉 **Not a single field** describes where the π came from. Even `from_address` tells you **who** sent it — not
 **where the coin came from**.
 
+### Layer 4 — Smart contracts (Soroban): still scalars, never origin
+Pi’s new **Soroban** smart-contract capability (PiRC1/PiRC2, on **Testnet**) gives a contract only the
+**Stellar token interface**:
+```rust
+token.approve(subscriber, spender, &amount, &expiration_ledger);
+token.transfer(&from, &to, &amount);
+token.transfer_from(&spender, &from, &to, &amount);
+let balance   = token.balance(&account);       // one i128 number
+let allowance = token.allowance(&from, &spender); // one i128 number
+```
+Every value is a **scalar `i128`** — no array of units, no per-coin `txid`, no origin. A contract may define
+rules for **its own token** (a **different asset**), but it cannot read or write **native π’s** per-unit
+origin. → [`docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md`](docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md)
+
 ---
 
 ## 🛡️ Counterarguments (fully answered)
@@ -115,6 +136,7 @@ data** — never **coin provenance**.
 | “Exchanges use **M** addresses, not **G**” | `M` = a **muxed account** (`G` + ID, CAP-27); identifies the **counterparty**, not the coin. The `M` is a `G` account plus a 64-bit id — the `G` account is what exists on the ledger — and the network processes the payment *exactly as if muxing weren’t used*. | [`docs/FAQ-MUXED-M-VS-G.md`](docs/FAQ-MUXED-M-VS-G.md) |
 | “Every **micro-π** has its own ID” | Pi uses an **Account/Balance** model (one number), **not UTXO**. `1 π = 10,000,000 micro-π` is just decimal precision, not an ID. | [`docs/FAQ-MICRO-PI-ID.md`](docs/FAQ-MICRO-PI-ID.md) |
 | **“Doesn’t the SDK / Platform API expose where the π came from?”** | **No.** Pi’s own docs enumerate the **entire** SDK/API surface — `amount`, `memo`, `metadata`, `from_address`, `to_address`, `status`, `txid`… Not one field carries per-unit origin. | [`docs/FAQ-SDK-PLATFORM-API-FIELDS.md`](docs/FAQ-SDK-PLATFORM-API-FIELDS.md) |
+| **“Pi now has Soroban smart contracts and ecosystem tokens — can’t you tag a coin’s origin now?”** | **No.** The contract-facing token interface exposes only **scalars** (`balance`, `allowance`, `transfer`, `transfer_from`, `approve`). A contract can hold state and define rules for **its own token** — a **different asset** — but it cannot read/write **native π’s** per-unit origin, because none exists. | [`docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md`](docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md) |
 | “The **MiCA whitepaper** says Pi comes only from mining” | The same paper says Pi is **native, fungible**, in a **Functionally Fungible Group**, **immutable even by the issuer**, with **no transfer restrictions**, and that exchanges are the **secondary market**. | [`docs/MICA-WHITEPAPER.md`](docs/MICA-WHITEPAPER.md) |
 | “Pi once said **‘don’t buy Pi’**” | That was **Enclosed Mainnet** policy (until **Feb 20, 2025**). Open Network **removed the firewall** and enabled **CEX integration** — Pi’s own blog says so. | [`docs/FAQ-DONT-BUY-PI.md`](docs/FAQ-DONT-BUY-PI.md) |
 | “Same coin, but **not the same price**” | **Fungibility ≠ price.** The same asset trades at different prices across venues (Bitcoin’s “Kimchi premium”, even the US dollar). Only an **IOU vs native** difference is real. | [`docs/FAQ-FUNGIBILITY-VS-PRICE.md`](docs/FAQ-FUNGIBILITY-VS-PRICE.md) |

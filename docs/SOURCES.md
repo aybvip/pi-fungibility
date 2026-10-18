@@ -191,3 +191,58 @@ interface PaymentData {
   pi-apps/pi-platform-docs”) are **unofficial**, and their field names (camelCase `paymentId`/`toAddress`) may
   not match the real API. Cite the official repos above.
 - See also: `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` (the full SDK/API field enumeration).
+
+## 19. PiRC — Pi Requests for Comment (official GitHub org `PiNetwork`)
+- https://github.com/PiNetwork/PiRC
+  > “**Pi Requests for Comment**” — official design RFCs, reviewed publicly via GitHub Issues / Discussions /
+  > Pull Requests, published by the `PiNetwork` organization (Public).
+  Contents: **`PiRC1`** — Pi Ecosystem Token Design · **`PiRC2`** — Subscription Contract API.
+- ⚠️ **RFC status:** these are **Requests for Comment** (design + reference implementation), **not** final
+  Mainnet specifications. Treat them as proposals open to change.
+
+## 20. PiRC1 — Pi Ecosystem Token Design (Pi Launchpad)
+- https://github.com/PiNetwork/PiRC/blob/main/PiRC1/ReadMe.md
+  Verbatim quotes:
+  > “**Pi Launchpad** introduces a fair, transparent, community-first and enagement-oriented token launch
+  > framework built natively on the Pi ecosystem.”
+  > “Unlike traditional launchpads, Pi Launchpad never transfers the proceeds of a token launch sale to the
+  > project team — instead, **all Pi sold becomes liquidity**, supporting long-term market depth and trust.”
+  > “**On-chain transparency** of the launch process ensured by **immutable smart contracts**.”
+  Token flow (§2.2): “…the pool remains fully accessible to users for **Pi ↔ token swaps** or new liquidity
+  deposits.”
+  Participation (§3): users **stake Pi** to receive *PiPower*; the baseline rule references an account with
+  “an active Pi lockup of ≥90% of their **mined** tokens for at least 3 years”.
+  → Here Pi is the **staked / liquidity asset** and the launched units are **separate tokens** (new assets).
+  **No per-unit origin field appears anywhere.**
+
+## 21. PiRC2 — Subscription Contract API + reference implementation
+- https://github.com/PiNetwork/PiRC/blob/main/PiRC2/ReadMe.md
+  > “This document specifies the Subscription Contract API — a **Soroban smart contract** that manages
+  > recurring payment subscriptions on the Pi Network.”
+  > “…enabled by **Soroban’s token allowance mechanism**: a subscriber can `approve` a contract as a spender
+  > for a given amount (optionally with an `expiration_ledger`), and the contract can later draw down that
+  > allowance over time (e.g. via `transfer_from`) without transferring or locking the full budget upfront.”
+- Reference implementation (official): https://github.com/PiNetwork/SmartContracts
+  > “A **Soroban smart contract** for recurring paid subscriptions on the Pi Network… subscribers pay using
+  > **standard Stellar asset tokens** via allowance-based recurring charges.”
+  Verified in the source code:
+  - `soroban-sdk = "22.0.0"` → **Stellar protocol 22 (Soroban)** semantics.
+  - Uses `soroban_sdk::token::TokenClient`: `approve`, `transfer`, `transfer_from`, `allowance`, `balance`
+    — all on **scalar `i128` amounts** per (account, token). **No** per-unit origin in the token interface.
+  - Data model (`Service`, `Subscription`): ids, addresses, an `i128` price, timestamps — **no** origin field.
+  - Event `charge` = `(subscriber, service_id, price)` — a scalar amount.
+- Official blog: https://minepi.com/blog/subscriptions-smart-contract (published 2026-04-17)
+  > “Pi Network is launching its **first smart contract capability on Pi Testnet: subscription support**!”
+  > “It also gives the ecosystem a way to **evaluate the contract before rollout to the Mainnet**.”
+  > “The smart contract itself is also being reviewed by external auditing services.”
+  → This is the **first** capability, on **Testnet**; Mainnet rollout was still pending at publication.
+
+## 22. Pi smart-contract platform (Soroban) — what it changes and what it does not
+- Pi Docs — “Use Pi native features” lists **tokens** among native features:
+  https://docs.minepi.com/use-native-features/Wallet (see also §2).
+- The interface a contract is given for an asset is the **Stellar token interface** (SEP-41 style): scalars
+  `balance()`, `allowance()`, `transfer()`, `transfer_from()`, `approve()` — **no per-unit origin**.
+- Consequence: Soroban smart contracts do **not** add per-unit provenance to the **native** asset. A contract
+  can implement arbitrary rules for **its own token / state** — that is a **different asset** (see §12 and
+  `docs/FAQ-ALL-OBJECTIONS.md` Group C).
+- → `docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md` (the full treatment).

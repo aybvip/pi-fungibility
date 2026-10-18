@@ -46,6 +46,8 @@
 | C5 | “Tokens (Soroban/others) are traceable” | Tokens have an `issuer` + trustline → a **different asset**. The native asset has no issuer at all. |
 | C6 | “Stellar has a Stellar Asset Contract for the native asset, so it has a tag” | The SAC wraps the same native asset **without changing its fungibility**; it adds no “origin”. |
 | C7 | “Amounts are stored as integers, so they have structure” | **Numeric** structure (scaled integer), not **piece** structure. |
+| C8 | “Pi added **Soroban smart contracts**, so a contract can track a coin’s origin” | The contract-facing token interface exposes only **scalars** (`balance`/`allowance`/`transfer`/`transfer_from`/`approve`). A contract can hold state and define rules for **its own token** — a **different asset** — never native π’s per-unit origin. → `docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md` |
+| C9 | “**Ecosystem tokens / Pi Launchpad** (PiRC1) mean Pi units are now differentiated” | Launched units are **separate tokens** (own issuer/contract). Pi is used as the **staked/liquidity asset** by scalar amounts. “Mined” appears only as an **account lockup state**, not a per-unit tag. → `docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md` |
 
 ---
 
@@ -81,6 +83,7 @@
 | an asset type (`native` / token / wrapped / testnet) | **asset type** |
 | a state (`claimable_balance` / stake) | **balance state** |
 | off-chain data (KYC / Core Team / exchange) | **external identity/record** |
+| a contract’s own state (Soroban service/subscription) | **app/contract data** |
 | **unit origin (mined / bought)** | ❌ **does not exist at all** |
 
 ---
@@ -96,5 +99,5 @@ concept that does not exist** on the Pi blockchain (no issuer, no UTXO, no origi
 
 ## Sources
 - `docs/SOURCES.md` (all official sources)
-- `docs/FAQ-MICRO-PI-ID.md` · `docs/FAQ-MUXED-M-VS-G.md` · `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` · `PROOF.md`
+- `docs/FAQ-MICRO-PI-ID.md` · `docs/FAQ-MUXED-M-VS-G.md` · `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` · `docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md` · `PROOF.md`
 - Live tests: `examples/coin-id-check.mjs` · `examples/provenance-check.mjs`

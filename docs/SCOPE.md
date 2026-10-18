@@ -90,6 +90,7 @@ This is the distinction that resolves the most common objection
 | **F** | The concrete scenario | “I mixed mined + bought, then sent — can they tell?” | → [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) |
 | **G** | Policy | “Pi once said *don’t buy Pi*” | → [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) (Enclosed Mainnet; ended 2025-02-20) |
 | **H** | Economics | “same coin ≠ same price” | → [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md) |
+| **I** | Smart contracts / ecosystem tokens (Soroban, PiRC) | “Pi has smart contracts now — can’t they tag a coin’s origin?” | → [`FAQ-SMART-CONTRACTS-AND-TOKENS.md`](FAQ-SMART-CONTRACTS-AND-TOKENS.md) |
 
 Full catalog: [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md).
 

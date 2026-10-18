@@ -13,7 +13,7 @@ Every document is written in **English** (`*.md`).
 ### Root
 | File | What it is |
 |---|---|
-| [`README.md`](../README.md) | **Start here.** TL;DR, official sources, 3-layer proof, FAQ table, scope, runnable code |
+| [`README.md`](../README.md) | **Start here.** TL;DR, official sources, 4-layer proof, FAQ table, scope, runnable code |
 | [`PROOF.md`](../PROOF.md) | Step-by-step proof that an app owner cannot tell where π came from |
 | [`SCOPE.md`](SCOPE.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
 | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) | **Audit status:** not independently audited — what that means, and how to do one |
@@ -21,7 +21,7 @@ Every document is written in **English** (`*.md`).
 | [`THREAT-MODEL.md`](THREAT-MODEL.md) | **Threat model:** assets, actors, capabilities, trust assumptions, attacks, out-of-scope |
 | [`SECURITY.md`](../SECURITY.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
 | [`DISCLAIMER.md`](../DISCLAIMER.md) | Independent & unofficial; no financial advice; no custody; no warranty |
-| [`SOURCES.md`](SOURCES.md) | All official sources, with verbatim quotes (§1–§18) |
+| [`SOURCES.md`](SOURCES.md) | All official sources, with verbatim quotes (§1–§22) |
 | [`LICENSE`](../LICENSE) | MIT |
 
 ### Docs — FAQ (one per objection)
@@ -32,6 +32,7 @@ Every document is written in **English** (`*.md`).
 | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) | **“Is an exchange’s balance really backed?”** → three claims: A fungibility (proven), B a specific deposit (verifiable), C reserve backing (not claimed) |
 | [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) | “Every micro-π has its own ID” |
 | [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) | **“Doesn’t the SDK / Platform API expose where the π came from?”** (no — full field enumeration) |
+| [`FAQ-SMART-CONTRACTS-AND-TOKENS.md`](FAQ-SMART-CONTRACTS-AND-TOKENS.md) | **“Pi now has Soroban smart contracts and ecosystem tokens — so you can tag a coin’s origin now?”** (no — scalars only; tokens are a different asset) |
 | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) | “Exchanges use `M` addresses, not `G`” |
 | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) | “The MiCA whitepaper says Pi comes only from mining” |
 | [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) | “Pi once said *don’t buy Pi*” (Enclosed Mainnet; ended 2025-02-20) |
@@ -68,6 +69,7 @@ Every document is written in **English** (`*.md`).
 | Doesn’t the transaction graph reveal the origin? | [`SCOPE.md`](SCOPE.md) §4 · [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) §3 |
 | Every micro-π has an ID? | [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) |
 | Doesn’t the SDK / Platform API expose the origin? | [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) |
+| Do Soroban smart contracts / ecosystem tokens change fungibility? | [`FAQ-SMART-CONTRACTS-AND-TOKENS.md`](FAQ-SMART-CONTRACTS-AND-TOKENS.md) |
 | Exchanges use `M`, not `G`? | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) |
 | Can the Core Team set a different price / block sales? | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
 | Is an exchange’s on-chain balance really backed? | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |

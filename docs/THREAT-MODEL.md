@@ -29,6 +29,7 @@ This file does **not** add a new claim. It makes explicit the **assumptions** be
 | **On-chain analyst** | Anyone reading the public ledger / Horizon | Can perform transaction-graph analysis |
 | **Issuer / Core Team** | Pi Network (as a centralized organization) | Controls app/Wallet policy, off-chain |
 | **Network / infrastructure** | The Pi Mainnet + the public API endpoint | Assumed honest-by-design (§4) |
+| **Smart-contract author (Soroban)** | A developer deploying a contract on Pi (protocol 22+) | Can define state/rules for **its own token/contract**; cannot read native π’s per-unit origin |
 
 ---
 
@@ -41,6 +42,7 @@ This file does **not** add a new claim. It makes explicit the **assumptions** be
 | On-chain analyst | Link **accounts** over time (if an address is publicly labeled); cluster heuristics | Attribute a **specific unit** to a past source — the state has no units |
 | Issuer / Core Team | Set **app-layer / Wallet policy**; run KYC; operate infrastructure | Freeze or re-label **native** balances **on-chain** (no issuer controls — MiCA G.3 / G.11); set a **price by origin** |
 | Network / API | Serve canonical ledger data | (assumed correct — see §4) |
+| Smart-contract author (Soroban) | Hold **contract state**; define **rules for its own token**; use the token interface’s scalars (`balance`/`allowance`/`transfer_from`) | Read or write a **per-unit origin** for **native** π (the token interface exposes only scalars); make the ledger store one |
 
 ---
 
@@ -74,6 +76,8 @@ If any of these is false, the claim must be revisited:
 | 5.6 | “Issuer **freezes / re-labels** native π” | ❌ **Not on-chain** — native has no issuer; no freeze authority (MiCA G.3, G.11) |
 | 5.7 | “Set a **different price** for mined vs exchange π” | ❌ **Not on-chain** — no origin and no price field (see [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md)) |
 | 5.8 | “**Re-identify** an origin by internal exchange logs” | ⚠️ **Private/off-chain** — a venue’s own ledger is not the protocol (Claim C, out of scope) |
+| 5.9 | “Deploy a **Soroban contract** to build a **taint / origin overlay**” | ❌ for native π / ⚠️ as an overlay — a contract sees only **its own** deposits (an **account-level** graph) and must **trust its own rules**; it cannot observe native π’s per-unit origin (none exists) |
+| 5.10 | “**Ecosystem tokens / Pi Launchpad** (PiRC1) differentiate Pi units” | ⚠️ **Different asset** — launched units are **separate tokens**; Pi is used as the **staked/liquidity asset** by scalars. Check issuer/contract id (Group C, out of scope) |
 
 Legend: ❌ blocked by the claim · ⚠️ real but **explicitly out of scope**.
 
@@ -93,6 +97,10 @@ See [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md).
 
 - **Protocol change:** if Pi (or its Stellar base) ever added per-unit provenance, the claim would break.
   Re-check [`SOURCES.md`](SOURCES.md) dates and re-run the tests.
+- **Protocol additions are not provenance:** Pi’s **Soroban smart-contract** layer (protocol 22; PiRC1/PiRC2,
+  official blog 2026-04-17) adds a contract platform and **ecosystem tokens** — **separate assets** — but the
+  contract-facing token interface exposes only **scalars** (`balance`/`allowance`/`transfer`). Re-check on
+  future protocol upgrades ([`FAQ-SMART-CONTRACTS-AND-TOKENS.md`](FAQ-SMART-CONTRACTS-AND-TOKENS.md)).
 - **Undocumented behavior:** a hidden per-unit feature would invalidate assumption §4.4.
 - **Data-integrity failure:** if the public API diverged from the ledger, the tests would mislead — this is
   why every claim is also tied to **documented semantics**, not only to live reads.
