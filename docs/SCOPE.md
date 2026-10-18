@@ -23,7 +23,7 @@ yourself with zero dependencies.
 > Mined π and exchange-bought π are the **same native asset**, and **no data** available to a recipient,
 > an app, or an exchange distinguishes them.
 
-That is the whole claim. No more, no less. (The Arabic rendering is in [`SCOPE.ar.md`](SCOPE.ar.md).)
+That is the whole claim. No more, no less.
 
 ### 1.1 Three different claims — do not blend them
 | # | Claim | Status |

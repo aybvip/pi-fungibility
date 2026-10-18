@@ -21,9 +21,7 @@ quote is mis-attributed, or a script misleads, that is a **welcome** finding.
 
 ## 2. Project rules (please keep these)
 
-1. **Bilingual, English first.** Every document exists as **English** (`*.md`) and **Arabic** (`*.ar.md`).
-   English files stay **English** (the only Arabic allowed is the language-switcher link, which links to the
-   Arabic page).
+1. **English only.** Every document is written in **English** (`*.md`). Do not add translated copies.
 2. **Zero dependencies.** Only **Node 18+ built-ins** (`fetch`, `node:child_process`, …). No `npm install`.
 3. **Read-only.** Scripts may only issue **GET** requests against the public API
    (`https://api.mainnet.minepi.com`). **No** wallet, **no** keys, **no** passphrase, **no** signing,
@@ -43,12 +41,12 @@ quote is mis-attributed, or a script misleads, that is a **welcome** finding.
 
 ## 3. Adding a new FAQ (answering a new objection)
 
-1. Create `docs/FAQ-<TOPIC>.md` **and** `docs/FAQ-<TOPIC>.ar.md`.
+1. Create `docs/FAQ-<TOPIC>.md`.
 2. Structure: **the objection** (stated fairly) → **the short answer** → **the evidence** (source + code)
    → **what is *not* claimed**.
 3. Link both files from:
-   - [`README.md`](README.md) FAQ table **and** [`README.ar.md`](README.ar.md)
-   - [`docs/INDEX.md`](docs/INDEX.md) Part 1 **and** Part 2, **and** their `.ar.md` equivalents.
+   - [`README.md`](README.md) FAQ table
+   - [`docs/INDEX.md`](docs/INDEX.md) Part 1 **and** Part 2.
 4. If the objection is common, also add it to [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md).
 
 ---

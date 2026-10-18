@@ -1,12 +1,10 @@
 # Index — every file, and what question it answers
 
-🌍 **English** · [العربية](INDEX.ar.md)
-
 A map of the repository. Two layers:
 - **Part 1 — By file** (what each file is).
 - **Part 2 — By question** (find the answer to a specific objection).
 
-Every document exists in **English** and **Arabic** (`*.ar.md`).
+Every document is written in **English** (`*.md`).
 
 ---
 
@@ -15,31 +13,31 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 ### Root
 | File | What it is |
 |---|---|
-| [`README.md`](../README.md) · [`README.ar.md`](../README.ar.md) | **Start here.** TL;DR, official sources, 3-layer proof, FAQ table, scope, runnable code |
-| [`PROOF.md`](../PROOF.md) · [`PROOF.ar.md`](../PROOF.ar.md) | Step-by-step proof that an app owner cannot tell where π came from |
-| [`SCOPE.md`](SCOPE.md) · [`SCOPE.ar.md`](SCOPE.ar.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
-| [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) · [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) | **Audit status:** not independently audited — what that means, and how to do one |
-| [`CONTRIBUTING.md`](../CONTRIBUTING.md) · [`CONTRIBUTING.ar.md`](../CONTRIBUTING.ar.md) | How to contribute: report findings, bilingual/zero-dep rules, add a FAQ |
-| [`THREAT-MODEL.md`](THREAT-MODEL.md) · [`THREAT-MODEL.ar.md`](THREAT-MODEL.ar.md) | **Threat model:** assets, actors, capabilities, trust assumptions, attacks, out-of-scope |
-| [`SECURITY.md`](../SECURITY.md) · [`SECURITY.ar.md`](../SECURITY.ar.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
-| [`DISCLAIMER.md`](../DISCLAIMER.md) · [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) | Independent & unofficial; no financial advice; no custody; no warranty |
-| [`SOURCES.md`](SOURCES.md) · [`SOURCES.ar.md`](SOURCES.ar.md) | All official sources, with verbatim quotes (§1–§18) |
+| [`README.md`](../README.md) | **Start here.** TL;DR, official sources, 3-layer proof, FAQ table, scope, runnable code |
+| [`PROOF.md`](../PROOF.md) | Step-by-step proof that an app owner cannot tell where π came from |
+| [`SCOPE.md`](SCOPE.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
+| [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) | **Audit status:** not independently audited — what that means, and how to do one |
+| [`CONTRIBUTING.md`](../CONTRIBUTING.md) | How to contribute: report findings, zero-dep rules, add a FAQ |
+| [`THREAT-MODEL.md`](THREAT-MODEL.md) | **Threat model:** assets, actors, capabilities, trust assumptions, attacks, out-of-scope |
+| [`SECURITY.md`](../SECURITY.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
+| [`DISCLAIMER.md`](../DISCLAIMER.md) | Independent & unofficial; no financial advice; no custody; no warranty |
+| [`SOURCES.md`](SOURCES.md) | All official sources, with verbatim quotes (§1–§18) |
 | [`LICENSE`](../LICENSE) | MIT |
 
 ### Docs — FAQ (one per objection)
 | File | Question it answers |
 |---|---|
-| [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) · [.ar](FAQ-RECIPIENT-CANNOT-TELL.ar.md) | **“I mixed mined + bought π, then sent some — can the recipient tell?”** (deterministic proof) |
-| [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) · [.ar](FAQ-CAN-CORE-TEAM-SET-PRICE.ar.md) | **“Can the Core Team set a different price by origin, or block sales?”** (no — on-chain) |
-| [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) · [.ar](FAQ-EXCHANGE-DEPOSIT-VERIFY.ar.md) | **“Is an exchange’s balance really backed?”** → three claims: A fungibility (proven), B a specific deposit (verifiable), C reserve backing (not claimed) |
-| [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) · [.ar](FAQ-MICRO-PI-ID.ar.md) | “Every micro-π has its own ID” |
-| [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) · [.ar](FAQ-SDK-PLATFORM-API-FIELDS.ar.md) | **“Doesn’t the SDK / Platform API expose where the π came from?”** (no — full field enumeration) |
-| [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) · [.ar](FAQ-MUXED-M-VS-G.ar.md) | “Exchanges use `M` addresses, not `G`” |
-| [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) · [.ar](MICA-WHITEPAPER.ar.md) | “The MiCA whitepaper says Pi comes only from mining” |
-| [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) · [.ar](FAQ-DONT-BUY-PI.ar.md) | “Pi once said *don’t buy Pi*” (Enclosed Mainnet; ended 2025-02-20) |
-| [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md) · [.ar](FAQ-FUNGIBILITY-VS-PRICE.ar.md) | “Same coin ≠ same price” |
-| [`FAQ-UNOFFICIAL-REPO-SCAM.md`](FAQ-UNOFFICIAL-REPO-SCAM.md) · [.ar](FAQ-UNOFFICIAL-REPO-SCAM.ar.md) | “It’s an unofficial GitHub repo — must be a scam/phishing” |
-| [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) · [.ar](FAQ-ALL-OBJECTIONS.ar.md) | Full catalog of every remaining objection (groups A–E) |
+| [`FAQ-RECIPIENT-CANNOT-TELL.md`](FAQ-RECIPIENT-CANNOT-TELL.md) | **“I mixed mined + bought π, then sent some — can the recipient tell?”** (deterministic proof) |
+| [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) | **“Can the Core Team set a different price by origin, or block sales?”** (no — on-chain) |
+| [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) | **“Is an exchange’s balance really backed?”** → three claims: A fungibility (proven), B a specific deposit (verifiable), C reserve backing (not claimed) |
+| [`FAQ-MICRO-PI-ID.md`](FAQ-MICRO-PI-ID.md) | “Every micro-π has its own ID” |
+| [`FAQ-SDK-PLATFORM-API-FIELDS.md`](FAQ-SDK-PLATFORM-API-FIELDS.md) | **“Doesn’t the SDK / Platform API expose where the π came from?”** (no — full field enumeration) |
+| [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) | “Exchanges use `M` addresses, not `G`” |
+| [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) | “The MiCA whitepaper says Pi comes only from mining” |
+| [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) | “Pi once said *don’t buy Pi*” (Enclosed Mainnet; ended 2025-02-20) |
+| [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md) | “Same coin ≠ same price” |
+| [`FAQ-UNOFFICIAL-REPO-SCAM.md`](FAQ-UNOFFICIAL-REPO-SCAM.md) | “It’s an unofficial GitHub repo — must be a scam/phishing” |
+| [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) | Full catalog of every remaining objection (groups A–E) |
 
 ### Examples — runnable proofs (zero dependencies)
 | File | What it does |

@@ -14,8 +14,6 @@
 [![self-test](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml/badge.svg)](https://github.com/aybvip/pi-fungibility/actions/workflows/self-test.yml)
 [![Audit: not independently audited](https://img.shields.io/badge/audit-not%20independently%20audited-red)](docs/AUDIT-REQUEST.md)
 
-🌍 **English** · [العربية](README.ar.md)
-
 > 🏷️ **Independent & unofficial — not affiliated with Pi Network.** This is an independent technical
 > analysis, not an official product. See [`DISCLAIMER.md`](DISCLAIMER.md).
 >
