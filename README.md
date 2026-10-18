@@ -21,6 +21,8 @@
 > **no** dependencies. Audit it — see [`SECURITY.md`](SECURITY.md). Details:
 > [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.md).
 
+🗂️ **Full index of every file (by file and by question):** [`docs/INDEX.md`](docs/INDEX.md)
+
 ---
 
 ## 🎯 TL;DR

@@ -24,6 +24,8 @@
 > **بلا** مكتبات. افحصو — شوف [`SECURITY.ar.md`](SECURITY.ar.md).
 > التفاصيل: [`docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.ar.md).
 
+🗂️ **الفهرس الكامل لكل الملفات (حسب الملف وحسب السؤال):** [`docs/INDEX.ar.md`](docs/INDEX.ar.md)
+
 ---
 
 ## 🎯 الخلاصة (TL;DR)
