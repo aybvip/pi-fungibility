@@ -4,7 +4,9 @@
  * ---------------------------------------------------------------------------
  * Automated checks for verify-deposit.mjs. Four layers:
  *
- *   LAYER 0 — OFFLINE (pure): input validation helpers in lib.mjs.
+ *   LAYER 0 — OFFLINE (pure): input validation helpers in lib.mjs, plus the
+ *     strkey codec and the CAP-27 muxed-address builder in exchange-wallets.mjs
+ *     (checksum, ed25519 key extraction, and known-vector rebuilds).
  *
  *   LAYER 1 — OFFLINE (pure, no network): unit-test the exported `evaluate()`
  *     decision function with synthetic transactions. This pins the two
@@ -32,6 +34,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { evaluate } from "./verify-deposit.mjs";
 import { api, DEFAULT_TIMEOUT_MS, isTxHash, isGAddress, isMAddress, isAddress } from "./lib.mjs";
+import { BITGET, OKX, decodeStrKey, muxedFromG, base32Decode, base32Encode } from "./exchange-wallets.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TOOL = join(HERE, "verify-deposit.mjs");
@@ -80,6 +83,65 @@ console.log("Layer 0 — offline helpers (input validation)\n");
   check("isMAddress accepts a 69-char M...", isMAddress(M) === true);
   check("isAddress accepts both G... and M...", isAddress(GOOD) === true && isAddress(M) === true);
   check("isAddress rejects garbage", isAddress("hello") === false);
+}
+
+// ---------------------------------------------------------------------------
+// LAYER 0b — offline tests of the strkey codec + muxed builder (exchange-wallets)
+// ---------------------------------------------------------------------------
+console.log("\nLayer 0b — offline codec (strkey checksum + CAP-27 muxed)\n");
+
+{
+  // The two pinned exchange addresses, decoded from scratch.
+  const b = decodeStrKey(BITGET);
+  const o = decodeStrKey(OKX);
+  check(
+    "Bitget address decodes as a valid G account (v0x30)",
+    b.valid === true && b.crcOk === true && b.version === 0x30,
+    JSON.stringify(b)
+  );
+  check(
+    "Bitget ed25519 key matches the expected bytes",
+    b.keyHex === "cadb1fd92a6a748d61635d49efb7e108a8552076f235f1abfd60958b8f4ba05b",
+    b.keyHex
+  );
+  check(
+    "OKX ed25519 key matches the expected bytes",
+    o.keyHex === "1784953d9547ce94366e8d3e22defc899da02e2c8327d0a2b579afb42d59b6fb",
+    o.keyHex
+  );
+
+  // A one-character corruption must flip the checksum — we never trust a shape.
+  const corrupted = BITGET.slice(0, -1) + (BITGET.endsWith("5") ? "6" : "5");
+  check(
+    "a corrupted address fails the checksum",
+    decodeStrKey(corrupted).crcOk === false && decodeStrKey(corrupted).valid === false
+  );
+
+  // Known vectors: M = G + uint64 id (CAP-27). Pinned so a drift is caught.
+  const m1 = muxedFromG(BITGET, 7142514608);
+  const m2 = muxedFromG(OKX, 2486605);
+  check(
+    "muxedFromG(Bitget, 7142514608) == pinned M address",
+    m1 === "MDFNWH6ZFJVHJDLBMNOUT35X4EEKQVJAO3ZDL4NL7VQJLC4PJOQFWAAAAAA2TOQ7WBSJA",
+    m1
+  );
+  check(
+    "muxedFromG(OKX, 2486605) == pinned M address",
+    m2 === "MALYJFJ5SVD45FBWN2GT4IW67SEZ3IBOFSBSPUFCWV427NBNLG3PWAAAAAAAAJPRJXINQ",
+    m2
+  );
+
+  // Round-trip: the rebuilt M must be a valid M and carry the same key + id.
+  const d = decodeStrKey(m1);
+  check(
+    "rebuilt M round-trips (valid, same key, same id)",
+    d.valid === true && d.muxedId === "7142514608" && d.keyHex === b.keyHex,
+    JSON.stringify(d)
+  );
+
+  // base32 is exact and lossless.
+  const bytes = Buffer.from("00ff1020deadbeef", "hex");
+  check("base32 encode/decode round-trips exactly", base32Decode(base32Encode(bytes)).equals(bytes));
 }
 
 // ---------------------------------------------------------------------------

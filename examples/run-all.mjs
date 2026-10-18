@@ -29,7 +29,8 @@ const CHECKS = [
   { script: "coin-id-check.mjs", offline: false, what: "balance is one scalar (no per-unit ID)" },
   { script: "mixing-check.mjs", offline: false, what: "mined+bought mixed -> origin-less payment" },
   { script: "verify-deposit.mjs", offline: false, what: "a specific transfer is native on Mainnet (Claim B)" },
-  { script: "self-test.mjs", offline: false, what: "unit tests + transport failures + end-to-end (29 checks)" },
+  { script: "exchange-wallets.mjs", offline: false, what: "observed exchange wallets: muxed id (who), not origin (where); pinned Bitget->OKX txs" },
+  { script: "self-test.mjs", offline: false, what: "unit tests + transport failures + end-to-end (37 checks)" },
 ];
 
 const selected = CHECKS.filter((c) => (OFFLINE ? c.offline : true));

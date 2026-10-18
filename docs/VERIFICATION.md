@@ -59,7 +59,7 @@ Every push to `main` re-runs the full suite (offline **and** live Mainnet layers
 | 9 | `exhaustive-check.mjs` — bounded exhaustive check | automated | no | local + CI | ✅ all 1 452 histories |
 | 10 | `falsify-try.mjs` — enumerate the whole observable surface for an origin field (F1/F3) | live read | **yes** | local + CI | ✅ no origin-like key |
 
-**Totals for the self-test file (rows 0–3): 29 checks, 29 passed, 0 failed** — 26 offline + 3 online.
+**Totals for the self-test file (rows 0–3): 37 checks, 37 passed, 0 failed** — 34 offline + 3 online.
 The committed transcript is [`examples/self-test-output.txt`](../examples/self-test-output.txt).
 
 ---

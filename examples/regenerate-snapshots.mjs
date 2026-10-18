@@ -31,6 +31,7 @@ const MAP = [
   ["model-check.mjs", "model-check-output.txt"],
   ["exhaustive-check.mjs", "exhaustive-check-output.txt"],
   ["self-test.mjs", "self-test-output.txt"],
+  ["exchange-wallets.mjs", "exchange-wallets-output.txt"],
   ["run-all.mjs", "run-all-output.txt"],
 ];
 

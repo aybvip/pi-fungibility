@@ -54,6 +54,26 @@ The official MiCA whitepaper says it plainly: Pi is the **“native, fungible di
 
 ---
 
+## 🔍 Concrete, verifiable example (Bitget → OKX)
+
+On-chain observation (read-only): two real addresses labeled by the venues (external attribution). 
+
+- **Bitget** `GDFNWH6Z…75` — 165.43M π native, all inbound deposits carry `to_muxed_id` (muxed recipient id). The `M...` address rebuilds byte-for-byte from `(G + id)` and matches the API.
+- **OKX** `GALYJFJ5…EQU` — 37.54M π native, same muxed pattern.
+
+Pinned, reproducible: **5 historical transactions** show Bitget sending native π directly to OKX (`memo_type: "none"`, successful). Each payment is plain `asset_type: "native"` with `to_muxed_id` naming the recipient inside the pooled account — **never** a coin-origin field.
+
+> `to_muxed_id` identifies **who** (the exchange user), not **where the coin came from**. The balance is one scalar, merged on arrival. Attribution is external (the ledger does not say "Bitget"/"OKX").
+
+Reproduce:
+```bash
+node examples/exchange-wallets.mjs
+```
+
+Full explanation + pinned hashes: [`docs/FAQ-EXCHANGE-ADDRESSES-OBSERVED.md`](docs/FAQ-EXCHANGE-ADDRESSES-OBSERVED.md).
+
+---
+
 ## 🔎 Transaction vs. coin — the distinction that decides the argument
 
 You **can** trace **transactions**. You **cannot** trace **coins**.
