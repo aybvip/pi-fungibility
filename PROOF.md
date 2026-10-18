@@ -53,7 +53,7 @@ const NETWORK_PASSPHRASE = "Pi Testnet";
 There is **no origin field** and no “mining history” on-chain.
 
 ### 1.3 The ledger records balances, not coins
-The only fields about the counterparty are the **sender address** (`from`) and the **memo** (`memo`).
+The only fields about the counterparty are the **sender address** (`from`) and an **optional memo** (`memo`).
 A real example (run `examples/provenance-check.mjs`):
 ```
 type        : payment
@@ -129,7 +129,7 @@ cat examples/payment-dto-sample.json
 cat examples/app-payment-flow/frontend.html
 ```
 
-**Result:** at every layer, all you see is **amount + address + memo**, and **no** “origin/mining/exchange”.
+**Result:** at every layer, all you see is **amount + address + an optional memo**, and **no** “origin/mining/exchange”.
 
 ---
 

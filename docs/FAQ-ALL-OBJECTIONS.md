@@ -20,7 +20,7 @@ faq_answer: "They are catalogued and each one is answered. The unifying rule: an
 | A1 | “Every micro-π has an ID” | Pi uses an **Account/Balance** model, not UTXO; the balance is **one number**. `1π = 10,000,000 micro-π` is a decimal place, not an ID. → `docs/FAQ-MICRO-PI-ID.md` |
 | A2 | “Exchanges use M, not G” | `M` = a **Muxed Account** (`G` + ID, CAP-27); it identifies the **counterparty**, not the coin. → `docs/FAQ-MUXED-M-VS-G.md` |
 | A3 | “We know OKX/Bitget’s hot wallet, so we can trace it” | That’s **address labeling** = you know **who**, not **where the coin came from**. After the first merge into a wallet, the trail is gone. |
-| A4 | “The Memo field reveals the source” | `memo` is **data written by the sender** (optional), with no validation or standard meaning. |
+| A4 | “The Memo field reveals the source” | `memo` is **optional, sender-written text** with no validation or standard meaning. Sampled live: the **majority of real Mainnet transactions carry none at all** (`memo_type: "none"`). → `examples/memo-check.mjs` |
 | A5 | “`source_account` reveals the origin” | It identifies **who sent** (an account), not the **origin of the units**. |
 | A6 | “The Operation ID settles it” | `op.id` identifies the **operation**, not a coin. |
 | A7 | “The wallet address itself is proof” | An address = **account identity**. Any account (person/exchange) can send and receive the same native π. |
@@ -116,4 +116,4 @@ concept that does not exist** on the Pi blockchain (no issuer, no UTXO, no origi
 ## Sources
 - `docs/SOURCES.md` (all official sources)
 - `docs/FAQ-MICRO-PI-ID.md` · `docs/FAQ-MUXED-M-VS-G.md` · `docs/FAQ-SDK-PLATFORM-API-FIELDS.md` · `docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md` · `PROOF.md`
-- Live tests: `examples/coin-id-check.mjs` · `examples/provenance-check.mjs`
+- Live tests: `examples/coin-id-check.mjs` · `examples/provenance-check.mjs` · `examples/memo-check.mjs`

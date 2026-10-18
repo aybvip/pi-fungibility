@@ -13,6 +13,16 @@ You receive 10 π from an exchange. Later you receive 100 π that you mined your
 Someone claims the exchange π has "tainted" the wallet — that the taint has *spread* to the mined π, so that
 anything you now send is partly tainted.
 
+> **A note on direction — this is deliberately the *inbound* case.**
+>
+> The questionable π **arrives into your wallet from** the exchange's address (a withdrawal). That is the
+> harder direction, and it is the one used here. Sending *to* an exchange would only add a second
+> account-level fact — your address appears on the exchange's inbound side — and would not change a single
+> line of the argument below.
+>
+> Direction is a property of the **transaction**. No unit has a direction, because there is no unit for a
+> direction to attach to.
+
 This is the most intuitive-sounding of all the objections, because "contagion" is a real pattern in the
 physical world: dye spreads in water, rust spreads through metal, a disease spreads on contact.
 
@@ -86,6 +96,27 @@ have to maintain per-lot accounting — which is a UTXO model or an explicit lot
 > ransom payment is not observably different from any other dollar, and no rule exists to say which dollar
 > you spent. Fungibility is what makes that question ill-formed — and it is the same reason it is ill-formed
 > here.
+
+### The inbound version: "receiving from an exchange *dilutes* my balance"
+
+This is the most plausible-sounding form of the objection, and it fails for a precise reason:
+
+> **Dilution presupposes prior segregation.** To dilute something, there must first have been separable
+> parts that later got mixed.
+
+An Account/Balance ledger never had those parts. Your balance was never a stack of labelled lots that
+exchange-π then invaded — it was a **single integer** from the first π you received, and it remains a single
+integer. Nothing was commingled, because nothing was ever separate.
+
+So "dilution" quietly imports a UTXO or lot-register model that this ledger does not have. Granting the
+word would grant exactly the per-unit structure whose absence is the entire point.
+
+And notice the symmetry with the table above: *"which 10 of the exchange's balance came to you?"* is just as
+undefined as *"which 10 of your balance did you send?"* — the exchange's balance is a scalar too, and it has
+no lots either. **Direction changes nothing.**
+
+What *is* true is narrower, and Part D already concedes it: you received π from an address that can be
+labelled as an exchange. That is an **account-level** fact. It attaches no property to units.
 
 ---
 

@@ -46,7 +46,8 @@ mined π = π from OKX/Bitget = π from inside a Pi Browser app
 
 There is **no field** called “origin”, “mining”, or “exchange” — not on-chain, not in the SDK, not in the
 Platform API, and not in the Soroban smart-contract layer. All an app sees is: **amount + sender address +
-recipient address + memo + txid**.
+recipient address + memo + txid** — and the memo is **optional** (on recent Pi Mainnet traffic the large
+majority of transactions carry none at all).
 
 The official MiCA whitepaper says it plainly: Pi is the **“native, fungible digital asset”** and belongs to a
 **“Functionally Fungible Group”**.
@@ -210,6 +211,7 @@ data** — never **coin provenance**.
 | File | Description |
 |---|---|
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | **Zero-dependency** script that queries the live chain and shows what an app **can / cannot** know about a coin |
+| [`examples/memo-check.mjs`](examples/memo-check.mjs) | Samples **200 real Mainnet transactions** and shows the large majority carry **no memo at all** (`memo_type: "none"`) — so `memo` is optional, sender-written text, not a provenance channel |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | Proves the balance is a **single number** — there is **no per-micro-π ID** |
 | [`examples/mixing-check.mjs`](examples/mixing-check.mjs) | Live proof for the exact **“mined + bought, then send”** scenario: commingling → scalar balance → origin-less payment |
 | [`examples/verify-deposit.mjs`](examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real **native Pi payment on Mainnet** (Claim B); states what the ledger cannot prove (Claim C) |
@@ -227,6 +229,7 @@ data** — never **coin provenance**.
 ```bash
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
+node examples/memo-check.mjs
 # or against a specific transaction:
 node examples/provenance-check.mjs <TXID>
 ```

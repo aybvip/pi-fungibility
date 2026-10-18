@@ -51,6 +51,7 @@ Every document is written in **English** (`*.md`).
 | File | What it does |
 |---|---|
 | [`provenance-check.mjs`](../examples/provenance-check.mjs) | Reads a real tx on-chain; shows there is **no origin field** |
+| [`memo-check.mjs`](../examples/memo-check.mjs) | Samples 200 real Mainnet txs; shows most carry **no memo** (`memo_type: "none"`) — `memo` is optional sender text, not provenance |
 | [`coin-id-check.mjs`](../examples/coin-id-check.mjs) | Shows the balance is **one scalar** — no per-unit ID |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | Live demo: commingling → scalar balance → **origin-less** payment |
 | [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real native Pi payment on Mainnet (Claim B) |

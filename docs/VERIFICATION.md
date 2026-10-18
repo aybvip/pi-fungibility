@@ -52,10 +52,11 @@ Every push to `main` re-runs the full suite (offline **and** live Mainnet layers
 | 2 | **Transport failure handling** (HTTP 500/429, invalid JSON, connection failure, timeout) | automated | no (injected transport) | local + CI | ✅ 8/8 |
 | 3 | End-to-end `verify-deposit.mjs` on a stable Mainnet tx | automated + **live read** | **yes** | local + CI | ✅ 3/3 |
 | 4 | `provenance-check.mjs` — no origin field on a real payment | live read | **yes** | local + CI | ✅ |
-| 5 | `coin-id-check.mjs` — balance is a single scalar | live read | **yes** | local + CI | ✅ |
-| 6 | `mixing-check.mjs` — commingling → origin-less payment | live read | **yes** | local + CI | ✅ |
-| 7 | `model-check.mjs` — ledger model + property check | automated | no | local + CI | ✅ 2 000 seeds |
-| 8 | `exhaustive-check.mjs` — bounded exhaustive check | automated | no | local + CI | ✅ all 1 452 histories |
+| 5 | `memo-check.mjs` — `memo` is optional (200-tx sample, `memo_type: "none"`) | live read | **yes** | local + CI | ✅ |
+| 6 | `coin-id-check.mjs` — balance is a single scalar | live read | **yes** | local + CI | ✅ |
+| 7 | `mixing-check.mjs` — commingling → origin-less payment | live read | **yes** | local + CI | ✅ |
+| 8 | `model-check.mjs` — ledger model + property check | automated | no | local + CI | ✅ 2 000 seeds |
+| 9 | `exhaustive-check.mjs` — bounded exhaustive check | automated | no | local + CI | ✅ all 1 452 histories |
 
 **Totals for the self-test file (rows 0–3): 29 checks, 29 passed, 0 failed** — 26 offline + 3 online.
 The committed transcript is [`examples/self-test-output.txt`](../examples/self-test-output.txt).
