@@ -30,14 +30,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Run proof self-test (read-only, network)
-        run: node examples/self-test.mjs
-
-      - name: Run ledger model check (offline, deterministic)
-        run: node examples/model-check.mjs
-
-      - name: Run exhaustive bounded check (offline, deterministic)
-        run: node examples/exhaustive-check.mjs
+      - name: Run full check suite (read-only)
+        run: node examples/run-all.mjs
 
       - name: Show the committed sample output
         if: always()

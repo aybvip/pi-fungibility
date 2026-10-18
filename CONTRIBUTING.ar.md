@@ -54,6 +54,7 @@
 يحتاج **Node 18+** واتصال بالشبكة (الأمثلة الحيّة برك تحتاج الشبكة).
 
 ```bash
+node examples/run-all.mjs            # كل شي مرّة وحدة (+ ملخّص)؛ زيد --offline بلا شبكة
 node examples/self-test.mjs          # اختبارات وحدة + أونلاين (11 فحص)
 node examples/model-check.mjs        # نموذج سجلّ + فحص خصائص (2000 بذرة)
 node examples/exhaustive-check.mjs   # فحص استنفادي محدود (كل 1452 تاريخ)

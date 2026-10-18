@@ -19,6 +19,7 @@
 
 📄 **النطاق الكامل — شنوّة مثبت وشنوّة موش مدّعى:** [`docs/SCOPE.ar.md`](docs/SCOPE.ar.md) · 🌍 [English](docs/SCOPE.md)
 🧾 **حالة التدقيق المستقل — موش مدقّق من طرف ثالث (قابل للتكرار):** [`docs/AUDIT-REQUEST.ar.md`](docs/AUDIT-REQUEST.ar.md) · 🌍 [English](docs/AUDIT-REQUEST.md)
+🛡️ **نموذج التهديد — الفرضيات وقدرات الخصم:** [`docs/THREAT-MODEL.ar.md`](docs/THREAT-MODEL.ar.md) · 🌍 [English](docs/THREAT-MODEL.md)
 
 > 🏷️ **مستقل وغير رسمي — موش تابع لـPi Network.** هذا تحليل مستقل، موش منتج رسمي.
 > شوف [`DISCLAIMER.ar.md`](DISCLAIMER.ar.md).
@@ -111,6 +112,7 @@ Pi.createPayment(
 | [`examples/self-test.mjs`](examples/self-test.mjs) | اختبارات آلية: **بلا شبكة** (قاعدة نفس العملية، بوّابة المعاملة الفاشلة) + **أونلاين** (صحيح → VERIFIED، غالط → NOT VERIFIED) |
 | [`examples/model-check.mjs`](examples/model-check.mjs) | **نموذج تنفيذي** + فحص خصائص (2000 بذرة، بلا شبكة): الحالة رقم واحد، `تاريخ → حالة` مش تعاكسية، رؤية المستلم مستقلة عن المصدر |
 | [`examples/exhaustive-check.mjs`](examples/exhaustive-check.mjs) | **فحص استنفادي محدود** (بلا شبكة، بلا عشوائية): يعدّد **كل 1452** تاريخ في مجال منتهي؛ إخفاء المصدر يصحّ لكل واحد |
+| [`examples/run-all.mjs`](examples/run-all.mjs) | **أمر واحد** يشغّل كل الفحوصات ويطبع ملخّص (`--offline` لتخطّي الشبكة) |
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | سكربت **بلا اعتماديات** يشغّل على البلوكشين ويثبت شنو **ينفع/ما ينفعش** تعرفه عن عملة معيّنة |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | يثبت إنّ الرصيد رقم واحد — **مافيه معرّف لكل micro-π** |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | واجهة `Pi.createPayment` الرسمية (U2A) |

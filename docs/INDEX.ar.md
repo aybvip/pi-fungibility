@@ -20,6 +20,7 @@
 | [`docs/SCOPE.ar.md`](SCOPE.ar.md) · [`SCOPE.md`](SCOPE.md) | **النطاق الدقيق:** شنوّة مثبت مقابل **شنوّة موش مدّعى** (+ تحقّق مستقل) |
 | [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) · [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) | **حالة التدقيق:** موش مدقّق من طرف ثالث — شنوّة يعني هذا، وكيفاش تدير واحد |
 | [`CONTRIBUTING.ar.md`](../CONTRIBUTING.ar.md) · [`CONTRIBUTING.md`](../CONTRIBUTING.md) | كيفاش تساهم: بلّغ على الأخطاء، قواعد ثنائي اللغة/بلا مكتبات، زيد سؤال |
+| [`THREAT-MODEL.ar.md`](THREAT-MODEL.ar.md) · [`THREAT-MODEL.md`](THREAT-MODEL.md) | **نموذج التهديد:** الأصول، الفاعلون، القدرات، فرضيات الثقة، الهجمات، برّا النطاق |
 | [`SECURITY.ar.md`](../SECURITY.ar.md) · [`SECURITY.md`](../SECURITY.md) | للقراءة فقط: بلا محفظة/عبارة/مفاتيح/توقيع/مكتبات؛ كيفاش تفحص |
 | [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) | مستقل وغير رسمي؛ بلا نصيحة مالية؛ بلا وصاية؛ بلا ضمان |
 | [`SOURCES.ar.md`](SOURCES.ar.md) · [`SOURCES.md`](SOURCES.md) | كل المصادر الرسمية بالاقتباسات الحرفية (§1–§16) |
@@ -48,6 +49,7 @@
 | [`self-test.mjs`](../examples/self-test.mjs) | اختبارات آلية: بلا شبكة (قاعدة نفس العملية، بوّابة المعاملة الفاشلة) + أونلاين |
 | [`model-check.mjs`](../examples/model-check.mjs) | نموذج سجلّ تنفيذي + فحص خصائص (2000 بذرة، بلا شبكة): حالة رقم واحد، «تاريخ→حالة» مش تعاكسية |
 | [`exhaustive-check.mjs`](../examples/exhaustive-check.mjs) | فحص استنفادي محدود (بلا شبكة): يعدّد كل 1452 تاريخ؛ إخفاء المصدر لكل واحد |
+| [`run-all.mjs`](../examples/run-all.mjs) | يشغّل كل الفحوصات ويطبع ملخّص (`--offline` لتخطّي الشبكة) |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | عرض حيّ: خلط → رصيد رقم واحد → دفعة **بلا مصدر** |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | مسار `Pi.createPayment` الرسمي (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | سيرفر يعالج `PaymentDTO`؛ يطبع مفاتيحه |
@@ -73,6 +75,7 @@
 | هذا المستودع نصب/تصيّد؟ | [`FAQ-UNOFFICIAL-REPO-SCAM.ar.md`](FAQ-UNOFFICIAL-REPO-SCAM.ar.md) · [`SECURITY.ar.md`](../SECURITY.ar.md) · [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) |
 | شنوّة مثبت بالضبط — وشنوّة لا؟ | [`SCOPE.ar.md`](SCOPE.ar.md) |
 | هل تمّ تدقيقه من طرف ثالث؟ | [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) |
+| شكون ينجّم يهاجم، وشنوّة نفترضوا؟ | [`THREAT-MODEL.ar.md`](THREAT-MODEL.ar.md) |
 | أي اعتراض آخر (قفل، KYC، حوكمة…)؟ | [`FAQ-ALL-OBJECTIONS.ar.md`](FAQ-ALL-OBJECTIONS.ar.md) |
 | أي مصادر رسمية تسند كل هذا؟ | [`SOURCES.ar.md`](SOURCES.ar.md) |
 
@@ -81,6 +84,8 @@
 ## الجزء 3 — شغّل البراهين
 
 ```bash
+node examples/run-all.mjs            # كل شي مرّة وحدة (+ ملخّص)؛ زيد --offline لتخطّي الشبكة
+
 node examples/self-test.mjs          # اختبارات وحدة بلا شبكة + أونلاين (11 فحص)
 node examples/model-check.mjs        # نموذج سجلّ + فحص خصائص بلا شبكة (2000 بذرة)
 node examples/exhaustive-check.mjs   # فحص استنفادي محدود بلا شبكة (كل 1452 تاريخ)

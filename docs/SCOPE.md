@@ -102,6 +102,9 @@ Full catalog: [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md).
 
 **B. Run the live on-chain tests** (Node 18+, **zero dependencies**):
 ```bash
+node examples/run-all.mjs                       # everything at once (+ summary); --offline to skip network
+node examples/model-check.mjs                   # offline: 2000 seeds (scalar state, non-injective history)
+node examples/exhaustive-check.mjs              # offline: ALL 1452 bounded histories, exhaustive
 node examples/provenance-check.mjs              # no origin field on a real payment
 node examples/coin-id-check.mjs                 # balance is one scalar (no per-unit ID)
 node examples/mixing-check.mjs                  # mined+bought mixed -> scalar -> origin-less output

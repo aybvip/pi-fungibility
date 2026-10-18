@@ -139,6 +139,7 @@ data** — never **coin provenance**.
 | [`examples/self-test.mjs`](examples/self-test.mjs) | Automated checks: **offline** unit tests (same-op rule, failed-tx gate) + **online** end-to-end (correct → VERIFIED, wrong → NOT VERIFIED) |
 | [`examples/model-check.mjs`](examples/model-check.mjs) | **Executable model** + property check (2000 seeds, offline): state is one scalar, `history → state` non-injective, recipient view independent of origin |
 | [`examples/exhaustive-check.mjs`](examples/exhaustive-check.mjs) | **Exhaustive bounded check** (offline, no randomness): enumerates **all 1452** histories in a finite domain; origin-invisibility holds for every one |
+| [`examples/run-all.mjs`](examples/run-all.mjs) | **One command** runs every check and prints a summary (`--offline` to skip network) |
 | [`examples/app-payment-flow/frontend.html`](examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`examples/app-payment-flow/server.js`](examples/app-payment-flow/server.js) | Backend handling `PaymentDTO` + printing its keys |
 | [`examples/payment-dto-sample.json`](examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -185,7 +186,8 @@ node examples/provenance-check.mjs <TXID>
 
 > Precise claim: **“A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger.”**
 > No more, no less. Distinguishing **A** (fungibility, proven) from **B** (a specific deposit — verifiable)
-> and **C** (reserve backing — *not* claimed): [`docs/SCOPE.md`](docs/SCOPE.md) ·
+> Precision package: assumptions & adversary capabilities in [`docs/THREAT-MODEL.md`](docs/THREAT-MODEL.md);
+> the three claims in [`docs/SCOPE.md`](docs/SCOPE.md) ·
 > [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md).
 
 ---

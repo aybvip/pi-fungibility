@@ -20,6 +20,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`SCOPE.md`](SCOPE.md) · [`SCOPE.ar.md`](SCOPE.ar.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
 | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) · [`AUDIT-REQUEST.ar.md`](AUDIT-REQUEST.ar.md) | **Audit status:** not independently audited — what that means, and how to do one |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) · [`CONTRIBUTING.ar.md`](../CONTRIBUTING.ar.md) | How to contribute: report findings, bilingual/zero-dep rules, add a FAQ |
+| [`THREAT-MODEL.md`](THREAT-MODEL.md) · [`THREAT-MODEL.ar.md`](THREAT-MODEL.ar.md) | **Threat model:** assets, actors, capabilities, trust assumptions, attacks, out-of-scope |
 | [`SECURITY.md`](../SECURITY.md) · [`SECURITY.ar.md`](../SECURITY.ar.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
 | [`DISCLAIMER.md`](../DISCLAIMER.md) · [`DISCLAIMER.ar.md`](../DISCLAIMER.ar.md) | Independent & unofficial; no financial advice; no custody; no warranty |
 | [`SOURCES.md`](SOURCES.md) · [`SOURCES.ar.md`](SOURCES.ar.md) | All official sources, with verbatim quotes (§1–§16) |
@@ -49,6 +50,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`self-test.mjs`](../examples/self-test.mjs) | Automated checks: offline unit tests (same-op rule, failed-tx gate) + online end-to-end |
 | [`model-check.mjs`](../examples/model-check.mjs) | Executable ledger model + property check (2000 seeds, offline): scalar state, non-injective history→state |
 | [`exhaustive-check.mjs`](../examples/exhaustive-check.mjs) | Exhaustive bounded check (offline): enumerates all 1452 histories; origin-invisibility for every one |
+| [`run-all.mjs`](../examples/run-all.mjs) | Runs every check and prints a summary (`--offline` to skip network) |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | Backend handling `PaymentDTO`; prints its keys |
 | [`payment-dto-sample.json`](../examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |
@@ -73,6 +75,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | Is this repo a scam / phishing? | [`FAQ-UNOFFICIAL-REPO-SCAM.md`](FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](../SECURITY.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) |
 | What exactly is proven — and not? | [`SCOPE.md`](SCOPE.md) |
 | Has this been independently audited? | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) |
+| Who could attack this, and what do we assume? | [`THREAT-MODEL.md`](THREAT-MODEL.md) |
 | Any other objection (lockups, KYC, governance…)? | [`FAQ-ALL-OBJECTIONS.md`](FAQ-ALL-OBJECTIONS.md) |
 | Which official sources back all this? | [`SOURCES.md`](SOURCES.md) |
 
@@ -81,6 +84,8 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 ## Part 3 — Run the proofs
 
 ```bash
+node examples/run-all.mjs            # everything at once (+ summary); add --offline to skip network
+
 node examples/self-test.mjs          # offline unit tests + online end-to-end (11 checks)
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
 node examples/exhaustive-check.mjs   # offline exhaustive bounded check (all 1452 histories)

@@ -56,6 +56,7 @@ quote is mis-attributed, or a script misleads, that is a **welcome** finding.
 Requires **Node 18+** and network access (only the live examples need the network).
 
 ```bash
+node examples/run-all.mjs            # everything at once (+ summary); add --offline for no network
 node examples/self-test.mjs          # offline unit tests + online end-to-end (11 checks)
 node examples/model-check.mjs        # offline ledger model + property check (2000 seeds)
 node examples/exhaustive-check.mjs   # offline EXHAUSTIVE bounded check (all 1452 histories)

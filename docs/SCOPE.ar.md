@@ -103,6 +103,9 @@
 
 **ب. شغّل الاختبارات الحيّة على السلسلة** (Node 18+، **بلا مكتبات**):
 ```bash
+node examples/run-all.mjs                       # كل شي مرّة وحدة (+ ملخّص)؛ --offline لتخطّي الشبكة
+node examples/model-check.mjs                   # بلا شبكة: 2000 بذرة (حالة رقم واحد، تاريخ مش تعاكسي)
+node examples/exhaustive-check.mjs              # بلا شبكة: كل 1452 تاريخ محدود، استنفادي
 node examples/provenance-check.mjs              # بلا خانة مصدر في دفعة حقيقية
 node examples/coin-id-check.mjs                 # الرصيد رقم واحد (بلا ID لكل وحدة)
 node examples/mixing-check.mjs                  # معدَّنة+مشرية مختلطة -> رقم واحد -> خروج بلا مصدر
