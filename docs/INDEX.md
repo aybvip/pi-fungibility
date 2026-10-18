@@ -42,6 +42,8 @@ Every document is written in **English** (`*.md`).
 | [`FAQ-SMART-CONTRACTS-AND-TOKENS.md`](FAQ-SMART-CONTRACTS-AND-TOKENS.md) | **“Pi now has Soroban smart contracts and ecosystem tokens — so you can tag a coin’s origin now?”** (no — scalars only; tokens are a different asset) |
 | [`FAQ-MUXED-M-VS-G.md`](FAQ-MUXED-M-VS-G.md) | “Exchanges use `M` addresses, not `G`” |
 | [`FAQ-EXCHANGE-ADDRESSES-OBSERVED.md`](FAQ-EXCHANGE-ADDRESSES-OBSERVED.md) | “These two exchange addresses — can you trace a coin’s origin?” |
+| [`FAQ-TAX-SOURCING.md`](FAQ-TAX-SOURCING.md) | **“Bought vs mined — what does the ledger see?”** (nothing; off-chain records are a different evidence source) |
+| [`FAQ-SOURCE-VS-PRIVILEGES.md`](FAQ-SOURCE-VS-PRIVILEGES.md) | **“Same price, but different privileges?”** — `PiPower` / `Engagement Score` (PiRC1, Pi Launchpad): account-bound, never a second price for π |
 | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) | “The MiCA whitepaper says Pi comes only from mining” |
 | [`FAQ-DONT-BUY-PI.md`](FAQ-DONT-BUY-PI.md) | “Pi once said *don’t buy Pi*” (Enclosed Mainnet; ended 2025-02-20) |
 | [`FAQ-FUNGIBILITY-VS-PRICE.md`](FAQ-FUNGIBILITY-VS-PRICE.md) | “Same coin ≠ same price” |
@@ -86,6 +88,7 @@ Every document is written in **English** (`*.md`).
 | Two concrete exchange addresses (Bitget/OKX) — what do they show? | [`FAQ-EXCHANGE-ADDRESSES-OBSERVED.md`](FAQ-EXCHANGE-ADDRESSES-OBSERVED.md) |
 | Bought vs mined — what does the chain see vs off-chain records? | [`FAQ-TAX-SOURCING.md`](FAQ-TAX-SOURCING.md) |
 | Same price, but different privileges (history-based)? | [`FAQ-SOURCE-VS-PRIVILEGES.md`](FAQ-SOURCE-VS-PRIVILEGES.md) |
+| What is `PiPower`, and does a launchpad discount create “premium π”? | [`FAQ-SOURCE-VS-PRIVILEGES.md`](FAQ-SOURCE-VS-PRIVILEGES.md) §Official corroboration |
 | Can the Core Team set a different price / block sales? | [`FAQ-CAN-CORE-TEAM-SET-PRICE.md`](FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
 | Is an exchange’s on-chain balance really backed? | [`FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |
 | The MiCA whitepaper says “only through mining”? | [`MICA-WHITEPAPER.md`](MICA-WHITEPAPER.md) |

@@ -33,8 +33,11 @@
 - [Can’t you just follow the transactions and see which π came from where?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-TRANSACTION-VS-COIN.md) — you can trace the *transaction*, never the *coin* (three levels)
 - [Every micro-π has an ID?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-MICRO-PI-ID.md) — Account/Balance model, not UTXO
 - [Exchanges use M, not G?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-MUXED-M-VS-G.md) — muxed accounts identify the counterparty
+- [Two concrete exchange addresses (Bitget/OKX) — what do they show?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-EXCHANGE-ADDRESSES-OBSERVED.md) — muxed recipient id (who), not coin origin (where)
 - [Does the SDK / Platform API expose the origin?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-SDK-PLATFORM-API-FIELDS.md) — no; full field enumeration
 - [Do Soroban smart contracts / ecosystem tokens change fungibility?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md) — no; scalars only, tokens are a different asset
+- [Same price, but different privileges (PiPower / Engagement Score)?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-SOURCE-VS-PRIVILEGES.md) — account-bound, never a second price for π; PiRC1 (Pi Launchpad) designs exactly this
+- [Bought vs mined — what does the ledger see vs off-chain records?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-TAX-SOURCING.md) — nothing on-chain; receipts and trade logs are a separate evidence source
 - [Mined + bought then sent — can the recipient tell?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-RECIPIENT-CANNOT-TELL.md) — no
 - [If tainted π touches my wallet, doesn’t the taint spread through everything?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-TAINT-CONTAGION.md) — no taint field; non-transitive taint cannot be allocated, transitive taint is vacuous
 - [All other objections](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-ALL-OBJECTIONS.md) — catalogued with a refutation each
