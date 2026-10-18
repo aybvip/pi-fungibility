@@ -81,6 +81,10 @@ the protocol is either a **quoted official source** or a **plain node script** y
 
 ## 5. Known limitations (the auditor’s checklist)
 
+- **Attack the falsifiers first.** The claim is falsifiable and the falsifiers are listed: a per-unit
+  field, a protocol allocation rule, a non-scalar balance, or one counterexample transaction — **any one
+  kills it**. See [`FALSIFICATION.md`](FALSIFICATION.md). Two are attempted by
+  [`examples/falsify-try.mjs`](../examples/falsify-try.mjs).
 - **Formal proof is not machine-checked in a proof assistant.** §7 is a written argument, not a Lean/Coq
   artifact. We provide an **executable model + property check**
   ([`examples/model-check.mjs`](../examples/model-check.mjs), 2000 seeds) and an **exhaustive bounded check**

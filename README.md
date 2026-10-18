@@ -200,6 +200,7 @@ data** — never **coin provenance**.
 | **“Can the Core Team set a different price for mined vs exchange Pi, or stop you selling?”** | **No — not on-chain.** No origin to target, no price field, no issuer controls. Their power is off-chain/app-level only. | [`docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md`](docs/FAQ-CAN-CORE-TEAM-SET-PRICE.md) |
 | **“Fungibility is one thing — but is an exchange’s balance really backed?”** | **Three separate claims:** A fungibility (**proven**), B a specific deposit is on-chain (**verifiable**), C reserve backing (**not claimed**). | [`docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md`](docs/FAQ-EXCHANGE-DEPOSIT-VERIFY.md) |
 | **“Has this proof been independently audited?”** | **No** — it is **self-verified and reproducible**, which is *not* the same as a third-party audit. Status, scope, and how to do one. | [`docs/AUDIT-REQUEST.md`](docs/AUDIT-REQUEST.md) |
+| **“Then how do I break it?”** | **Don’t review it — falsify it.** Four checkable criteria: a per-unit field, a protocol allocation rule, a non-scalar balance, or **one** counterexample transaction. *Any one* kills the claim. Two are attempted by [`examples/falsify-try.mjs`](examples/falsify-try.mjs); none has been found. | [`docs/FALSIFICATION.md`](docs/FALSIFICATION.md) |
 | **“It’s just an unofficial GitHub repo — must be a scam/phishing.”** | **Audit, don’t trust.** This repo is read-only: no wallet, no passphrase, no keys, no signing, no deps. And “Pi not listed / network closed” is outdated (Open Network 2025-02-20). | [`docs/FAQ-UNOFFICIAL-REPO-SCAM.md`](docs/FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](SECURITY.md) |
 | **“If *tainted* π touches my wallet, doesn’t the taint spread through everything I own?”** | **No — there is no taint field for it to spread through.** Contagion needs a *marked object* and a *propagation rule*; the ledger state is a scalar balance and supplies neither. And it is a hard dichotomy: if taint is **non-transitive** it cannot be allocated to any unit; if **transitive** it reaches every π and therefore distinguishes nothing. | [`docs/FAQ-TAINT-CONTAGION.md`](docs/FAQ-TAINT-CONTAGION.md) |
 | **All other objections** (labeling, chain analysis, lockups, KYC, core-team data, governance…) | Catalogued with a refutation each. | [`docs/FAQ-ALL-OBJECTIONS.md`](docs/FAQ-ALL-OBJECTIONS.md) |
@@ -212,6 +213,7 @@ data** — never **coin provenance**.
 |---|---|
 | [`examples/provenance-check.mjs`](examples/provenance-check.mjs) | **Zero-dependency** script that queries the live chain and shows what an app **can / cannot** know about a coin |
 | [`examples/memo-check.mjs`](examples/memo-check.mjs) | Samples **200 real Mainnet transactions** and shows the large majority carry **no memo at all** (`memo_type: "none"`) — so `memo` is optional, sender-written text, not a provenance channel |
+| [`examples/falsify-try.mjs`](examples/falsify-try.mjs) | **Falsification attempt (F1/F3):** enumerates **every key** the live API returns for a real payment — transaction, operations, effects, account — and scans them all for origin-like tokens; exits non-zero if it finds one |
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | Proves the balance is a **single number** — there is **no per-micro-π ID** |
 | [`examples/mixing-check.mjs`](examples/mixing-check.mjs) | Live proof for the exact **“mined + bought, then send”** scenario: commingling → scalar balance → origin-less payment |
 | [`examples/verify-deposit.mjs`](examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real **native Pi payment on Mainnet** (Claim B); states what the ledger cannot prove (Claim C) |
@@ -230,6 +232,7 @@ data** — never **coin provenance**.
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
 node examples/memo-check.mjs
+node examples/falsify-try.mjs
 # or against a specific transaction:
 node examples/provenance-check.mjs <TXID>
 ```

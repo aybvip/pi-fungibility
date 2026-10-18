@@ -118,6 +118,8 @@ Read the Stellar protocol/accounts docs and the Pi SDK + Platform API — none o
 per-origin field.
 
 > If any of A/B/C is wrong, the claim is wrong. That is the invitation: **falsify it.**
+> **Exactly what would falsify it — four checkable criteria and how to try each — is in
+> [`FALSIFICATION.md`](FALSIFICATION.md).**
 
 ---
 

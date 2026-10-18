@@ -25,6 +25,7 @@ const CHECKS = [
   { script: "exhaustive-check.mjs", offline: true, what: "exhaustive bounded check (all 1452 histories)" },
   { script: "provenance-check.mjs", offline: false, what: "no origin field on a real on-chain payment" },
   { script: "memo-check.mjs", offline: false, what: "the memo is optional — not a provenance channel" },
+  { script: "falsify-try.mjs", offline: false, what: "try to falsify F1/F3 — enumerate the whole API surface" },
   { script: "coin-id-check.mjs", offline: false, what: "balance is one scalar (no per-unit ID)" },
   { script: "mixing-check.mjs", offline: false, what: "mined+bought mixed -> origin-less payment" },
   { script: "verify-deposit.mjs", offline: false, what: "a specific transfer is native on Mainnet (Claim B)" },

@@ -17,6 +17,7 @@ Every document is written in **English** (`*.md`).
 | [`PROOF.md`](../PROOF.md) | Step-by-step proof that an app owner cannot tell where π came from |
 | [`SCOPE.md`](SCOPE.md) | **Precise scope:** what is proven vs **not** claimed (+ independent verification) |
 | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) | **Audit status:** not independently audited — what that means, and how to do one |
+| [`FALSIFICATION.md`](FALSIFICATION.md) | **Falsification criterion:** the four things that would kill the claim, how to try each, and what does *not* count |
 | [`VERIFICATION.md`](VERIFICATION.md) | **Verification status:** last verified date, what ran where (local vs CI), live Mainnet vs offline layers, how to read a red build, and what is **not** verified |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) | How to contribute: report findings, zero-dep rules, add a FAQ |
 | [`THREAT-MODEL.md`](THREAT-MODEL.md) | **Threat model:** assets, actors, capabilities, trust assumptions, attacks, out-of-scope |
@@ -52,6 +53,7 @@ Every document is written in **English** (`*.md`).
 |---|---|
 | [`provenance-check.mjs`](../examples/provenance-check.mjs) | Reads a real tx on-chain; shows there is **no origin field** |
 | [`memo-check.mjs`](../examples/memo-check.mjs) | Samples 200 real Mainnet txs; shows most carry **no memo** (`memo_type: "none"`) — `memo` is optional sender text, not provenance |
+| [`falsify-try.mjs`](../examples/falsify-try.mjs) | **Falsification attempt (F1/F3):** enumerates every key on a real payment and scans for origin-like tokens; exits non-zero on a hit |
 | [`coin-id-check.mjs`](../examples/coin-id-check.mjs) | Shows the balance is **one scalar** — no per-unit ID |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | Live demo: commingling → scalar balance → **origin-less** payment |
 | [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real native Pi payment on Mainnet (Claim B) |
@@ -88,6 +90,7 @@ Every document is written in **English** (`*.md`).
 | Is this repo a scam / phishing? | [`FAQ-UNOFFICIAL-REPO-SCAM.md`](FAQ-UNOFFICIAL-REPO-SCAM.md) · [`SECURITY.md`](../SECURITY.md) · [`DISCLAIMER.md`](../DISCLAIMER.md) |
 | What exactly is proven — and not? | [`SCOPE.md`](SCOPE.md) |
 | Has this been independently audited? | [`AUDIT-REQUEST.md`](AUDIT-REQUEST.md) |
+| How would someone **disprove** this? | [`FALSIFICATION.md`](FALSIFICATION.md) |
 | Has anyone actually **run** this, when, and where? | [`VERIFICATION.md`](VERIFICATION.md) |
 | Who could attack this, and what do we assume? | [`THREAT-MODEL.md`](THREAT-MODEL.md) |
 | Does “taint” spread to the rest of my balance? | [`FAQ-TAINT-CONTAGION.md`](FAQ-TAINT-CONTAGION.md) |
@@ -106,6 +109,7 @@ node examples/model-check.mjs        # offline ledger model + property check (20
 node examples/exhaustive-check.mjs   # offline exhaustive bounded check (all 1452 histories)
 node examples/provenance-check.mjs
 node examples/coin-id-check.mjs
+node examples/falsify-try.mjs
 node examples/verify-deposit.mjs <TXID> [TO_ADDRESS]
 node examples/mixing-check.mjs
 node examples/mixing-check.mjs <SENDER_ACCOUNT>
