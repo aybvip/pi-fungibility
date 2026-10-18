@@ -44,6 +44,7 @@ Every document exists in **English** and **Arabic** (`*.ar.md`).
 | [`coin-id-check.mjs`](../examples/coin-id-check.mjs) | Shows the balance is **one scalar** — no per-unit ID |
 | [`mixing-check.mjs`](../examples/mixing-check.mjs) | Live demo: commingling → scalar balance → **origin-less** payment |
 | [`verify-deposit.mjs`](../examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real native Pi payment on Mainnet (Claim B) |
+| [`self-test.mjs`](../examples/self-test.mjs) | Automated check of the per-operation match (correct → VERIFIED, wrong → NOT VERIFIED) |
 | [`app-payment-flow/frontend.html`](../examples/app-payment-flow/frontend.html) | Official `Pi.createPayment` flow (U2A) |
 | [`app-payment-flow/server.js`](../examples/app-payment-flow/server.js) | Backend handling `PaymentDTO`; prints its keys |
 | [`payment-dto-sample.json`](../examples/payment-dto-sample.json) | Sample `PaymentDTO` showing the missing origin field |

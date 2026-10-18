@@ -54,6 +54,10 @@ It confirms (from the **public** API, the source of truth):
 > independent facts. It requires the **same single operation** to be **both** native **and** directed to the
 > expected recipient — otherwise the verdict is **NOT VERIFIED**. This avoids a misleading result.
 > (It also accepts the muxed `M…` form of the recipient via CAP-27.)
+>
+> Run the automated check: `node examples/self-test.mjs` — it asserts that the **correct** recipient
+> gives `VERIFIED` while a **wrong** recipient gives `NOT VERIFIED` (see
+> [`examples/self-test-output.txt`](../examples/self-test-output.txt)).
 
 > ⚠️ Practical notes:
 > - Exchange **deposit** addresses are often **`M…`** muxed accounts (CAP-27) — see
