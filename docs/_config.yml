@@ -1,0 +1,10 @@
+title: "π = π — Pi fungibility proof"
+description: "A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger."
+url: "https://aybvip.github.io"
+baseurl: "/pi-fungibility"
+theme: jekyll-theme-minimal
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

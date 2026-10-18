@@ -1,0 +1,39 @@
+# π = π — Pi fungibility proof
+
+> Source-verified, dependency-free, read-only proof that **Pi Network's native asset (π) is fungible**:
+> a native Pi payment carries **no observable per-unit mining origin** on the Pi Mainnet ledger.
+> Mined π = π withdrawn from an exchange (OKX / Bitget) = π sent from inside a Pi Browser app.
+
+- Website: https://aybvip.github.io/pi-fungibility/
+- Repository: https://github.com/aybvip/pi-fungibility
+- License: MIT
+
+## Canonical claim
+
+> **“A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger.”**
+
+## Scope
+
+- **A — Fungibility:** proven.
+- **B — A specific deposit is native on-chain:** verifiable.
+- **C — Reserve backing:** **not** claimed.
+
+## Key pages
+
+- [Home](https://aybvip.github.io/pi-fungibility/)
+- [README](https://github.com/aybvip/pi-fungibility/blob/main/README.md)
+- [PROOF](https://github.com/aybvip/pi-fungibility/blob/main/PROOF.md)
+- [SCOPE](https://github.com/aybvip/pi-fungibility/blob/main/docs/SCOPE.md)
+- [SOURCES](https://github.com/aybvip/pi-fungibility/blob/main/docs/SOURCES.md)
+- [INDEX](https://github.com/aybvip/pi-fungibility/blob/main/docs/INDEX.md)
+- [FAQ — all objections](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-ALL-OBJECTIONS.md)
+
+## Reproduce
+
+```
+node examples/run-all.mjs            # full suite (+ summary); --offline to skip network
+node examples/provenance-check.mjs   # live on-chain check
+node examples/coin-id-check.mjs      # balance is one scalar
+```
+
+Not independently audited. Independent & unofficial (not affiliated with Pi Network).

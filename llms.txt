@@ -1,0 +1,51 @@
+# π = π — Pi fungibility proof
+
+> Source-verified, dependency-free, read-only proof that **Pi Network's native asset (π) is fungible**:
+> a native Pi payment carries **no observable per-unit mining origin** on the Pi Mainnet ledger.
+> Mined π = π withdrawn from an exchange (OKX / Bitget) = π sent from inside a Pi Browser app.
+
+- Repository: https://github.com/aybvip/pi-fungibility
+- Website: https://aybvip.github.io/pi-fungibility/
+- License: MIT
+
+## Canonical claim
+
+> **“A native Pi payment carries no observable per-unit mining origin on the Pi Mainnet ledger.”**
+
+## Scope (three separate claims)
+
+- **A — Fungibility:** proven (deterministic, reproducible).
+- **B — A specific deposit is native on-chain:** verifiable per case.
+- **C — Reserve backing:** **not** claimed.
+
+## Core documents
+
+- [README](https://github.com/aybvip/pi-fungibility/blob/main/README.md) — overview, four-layer proof, FAQ table
+- [PROOF](https://github.com/aybvip/pi-fungibility/blob/main/PROOF.md) — step-by-step proof
+- [SCOPE](https://github.com/aybvip/pi-fungibility/blob/main/docs/SCOPE.md) — what is proven vs **not** claimed
+- [SOURCES](https://github.com/aybvip/pi-fungibility/blob/main/docs/SOURCES.md) — verbatim quotes from official sources
+- [INDEX](https://github.com/aybvip/pi-fungibility/blob/main/docs/INDEX.md) — every file, by file and by question
+
+## Question-specific answers
+
+- [Every micro-π has an ID?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-MICRO-PI-ID.md) — Account/Balance model, not UTXO
+- [Exchanges use M, not G?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-MUXED-M-VS-G.md) — muxed accounts identify the counterparty
+- [Does the SDK / Platform API expose the origin?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-SDK-PLATFORM-API-FIELDS.md) — no; full field enumeration
+- [Do Soroban smart contracts / ecosystem tokens change fungibility?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-SMART-CONTRACTS-AND-TOKENS.md) — no; scalars only, tokens are a different asset
+- [Mined + bought then sent — can the recipient tell?](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-RECIPIENT-CANNOT-TELL.md) — no
+- [All other objections](https://github.com/aybvip/pi-fungibility/blob/main/docs/FAQ-ALL-OBJECTIONS.md) — catalogued with a refutation each
+
+## Reproduce (Node 18+, zero dependencies, read-only)
+
+```
+node examples/run-all.mjs            # everything at once (+ summary); add --offline to skip network checks
+node examples/provenance-check.mjs   # live on-chain: there is no origin field
+node examples/coin-id-check.mjs      # the balance is one scalar — no per-unit ID
+node examples/verify-deposit.mjs <TXID> [TO_ADDRESS]
+```
+
+## Status
+
+- **Not independently audited** — self-verified and reproducible, which is not the same as a third-party audit.
+  See [AUDIT-REQUEST](https://github.com/aybvip/pi-fungibility/blob/main/docs/AUDIT-REQUEST.md).
+- Independent & unofficial: not affiliated with Pi Network.

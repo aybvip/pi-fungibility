@@ -22,6 +22,10 @@ Every document is written in **English** (`*.md`).
 | [`SECURITY.md`](../SECURITY.md) | Read-only by design: no wallet/passphrase/keys/signing/deps; how to audit |
 | [`DISCLAIMER.md`](../DISCLAIMER.md) | Independent & unofficial; no financial advice; no custody; no warranty |
 | [`SOURCES.md`](SOURCES.md) | All official sources, with verbatim quotes (§1–§22) |
+| [`index.html`](index.html) | Website landing page (GitHub Pages) |
+| [`llms.txt`](llms.txt) | Machine-readable index for AI tools / LLM crawlers (site copy) |
+| [`CITATION.cff`](../CITATION.cff) | Citation metadata (GitHub “Cite this repository”) |
+| [`llms.txt`](../llms.txt) | Machine-readable index for AI tools / LLM crawlers (repo copy) |
 | [`LICENSE`](../LICENSE) | MIT |
 
 ### Docs — FAQ (one per objection)

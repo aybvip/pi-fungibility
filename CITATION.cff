@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you reference this work, please cite it using these metadata."
+title: "π = π — Pi fungibility: a native Pi payment carries no observable per-unit mining origin"
+abstract: >-
+  A source-verified, dependency-free, read-only analysis with runnable on-chain checks showing that
+  Pi Network's native asset (π) is fungible. A native Pi payment carries no observable per-unit mining
+  origin on the Pi Mainnet ledger: π mined in the Pi app, π withdrawn from an exchange (OKX / Bitget),
+  and π sent from inside a Pi Browser app are the same native asset. The analysis separates three claims:
+  (A) fungibility — proven; (B) a specific deposit is native on-chain — verifiable; (C) reserve backing —
+  not claimed.
+type: software
+authors:
+  - name: "pi-fungibility (aybvip)"
+repository-code: "https://github.com/aybvip/pi-fungibility"
+url: "https://aybvip.github.io/pi-fungibility/"
+license: MIT
+version: "1.0.0"
+date-released: "2026-10-18"
+keywords:
+  - Pi Network
+  - Pi
+  - fungibility
+  - provenance
+  - native asset
+  - Stellar
+  - Soroban
+  - blockchain
+  - cryptocurrency
+  - distributed ledger
+  - Account-Balance model
+  - mainnet

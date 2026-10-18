@@ -26,6 +26,9 @@
 
 🗂️ **Full index of every file (by file and by question):** [`docs/INDEX.md`](docs/INDEX.md)
 
+🌐 **Website:** <https://aybvip.github.io/pi-fungibility/> · 📄 **Machine-readable index for AI tools:**
+[`llms.txt`](llms.txt) · 📌 **Cite this work:** [`CITATION.cff`](CITATION.cff)
+
 ---
 
 ## 🎯 TL;DR
@@ -230,6 +233,12 @@ node examples/provenance-check.mjs <TXID>
 
 Found a flaw? That is the most valuable contribution. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and the
 audit status [`docs/AUDIT-REQUEST.md`](docs/AUDIT-REQUEST.md) (this repo is **not** independently audited yet).
+
+## Citing
+
+If you reference this work, please cite it — see [`CITATION.cff`](CITATION.cff) — or simply link the repository:
+<https://github.com/aybvip/pi-fungibility>. A machine-readable index for AI tools is in [`llms.txt`](llms.txt);
+the website is <https://aybvip.github.io/pi-fungibility/>.
 
 ## License
 MIT
