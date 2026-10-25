@@ -14,7 +14,7 @@
  *   PI_API_KEY=xxx node examples/app-payment-flow/server.js
  */
 
-const express = require("express");
+import express from "express";
 const app = express();
 app.use(express.json());
 

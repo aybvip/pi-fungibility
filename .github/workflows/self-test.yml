@@ -29,10 +29,43 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
 
-      - name: Run full check suite (read-only)
-        run: node examples/run-all.mjs
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run offline checks (deterministic)
+        run: npm run offline
+
+      - name: Run full check suite (read-only, includes live Mainnet reads)
+        run: npm test
 
       - name: Show the committed sample output
         if: always()
         run: cat examples/self-test-output.txt
+
+  build-site:
+    name: build static site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build:site
+
+      - name: Upload built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 7

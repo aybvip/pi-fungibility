@@ -108,7 +108,7 @@ Full treatment: [`docs/FAQ-TRANSACTION-VS-COIN.md`](docs/FAQ-TRANSACTION-VS-COIN
 ## ✅ Verification status
 
 **Last verified: 2026-10-18** — `node examples/run-all.mjs` → **all checks passed** (exit code `0`), on Node 24
-locally and Node 20/22 in CI. The self-test file alone runs **29 checks: 29 passed, 0 failed** (26 offline, 3 online).
+locally and Node 20/22 in CI. The self-test file alone runs **37 checks: 37 passed, 0 failed** (34 offline, 3 online).
 
 - **Live Mainnet reads** (read-only `GET`s against `api.mainnet.minepi.com`) run **locally and in CI** on every
   push. They are reachability-dependent, so a red build can simply mean the API was unreachable.
@@ -238,7 +238,7 @@ data** — never **coin provenance**.
 | [`examples/coin-id-check.mjs`](examples/coin-id-check.mjs) | Proves the balance is a **single number** — there is **no per-micro-π ID** |
 | [`examples/mixing-check.mjs`](examples/mixing-check.mjs) | Live proof for the exact **“mined + bought, then send”** scenario: commingling → scalar balance → origin-less payment |
 | [`examples/verify-deposit.mjs`](examples/verify-deposit.mjs) | Verifies a **specific** transfer is a real **native Pi payment on Mainnet** (Claim B); states what the ledger cannot prove (Claim C) |
-| [`examples/self-test.mjs`](examples/self-test.mjs) | Automated checks: **offline** unit tests (same-op rule, failed-tx gate) + **offline** transport-failure handling (HTTP 500/429, invalid JSON, connection failure, timeout) + **online** end-to-end (correct → VERIFIED, wrong → NOT VERIFIED). 29 checks |
+| [`examples/self-test.mjs`](examples/self-test.mjs) | Automated checks: **offline** unit tests (same-op rule, failed-tx gate) + **offline** transport-failure handling (HTTP 500/429, invalid JSON, connection failure, timeout) + **online** end-to-end (correct → VERIFIED, wrong → NOT VERIFIED). 37 checks |
 | [`examples/model-check.mjs`](examples/model-check.mjs) | **Executable model** + property check (2000 seeds, offline): state is one scalar, `history → state` non-injective, recipient view independent of origin |
 | [`examples/exhaustive-check.mjs`](examples/exhaustive-check.mjs) | **Exhaustive bounded check** (offline, no randomness): enumerates **all 1452** histories in a finite domain; origin-invisibility holds for every one |
 | [`examples/run-all.mjs`](examples/run-all.mjs) | **One command** runs every check and prints a summary (`--offline` to skip network) |

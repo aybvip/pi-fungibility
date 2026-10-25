@@ -1,0 +1,40 @@
+{
+  "name": "pi-fungibility",
+  "version": "1.0.0",
+  "description": "π = π — A source-verified, read-only proof that Pi Network's native asset (π) is fungible.",
+  "type": "module",
+  "license": "MIT",
+  "author": "aybvip",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aybvip/pi-fungibility.git"
+  },
+  "homepage": "https://aybvip.github.io/pi-fungibility/",
+  "bugs": {
+    "url": "https://github.com/aybvip/pi-fungibility/issues"
+  },
+  "keywords": [
+    "pi-network",
+    "stellar",
+    "fungibility",
+    "provenance",
+    "blockchain-analysis",
+    "forensics",
+    "read-only",
+    "soroban"
+  ],
+  "scripts": {
+    "test": "node examples/run-all.mjs",
+    "verify": "node examples/self-test.mjs",
+    "falsify": "node examples/falsify-try.mjs",
+    "offline": "node examples/run-all.mjs --offline",
+    "build:site": "node scripts/build-site.mjs",
+    "deploy:cloudflare": "node scripts/build-site.mjs && npx wrangler pages deploy _site --project-name pi-fungibility --branch main"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "marked": "^12.0.2"
+  }
+}
