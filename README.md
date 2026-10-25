@@ -322,3 +322,14 @@ the website is <https://aybvip.github.io/pi-fungibility/>.
 
 ## License
 MIT
+
+---
+
+## See also
+
+| Repository | What it proves / analyses |
+|---|---|
+| [**pi-fixed-supply**](https://github.com/aybvip/pi-fixed-supply) | Every Pi Mainnet ledger header reports 	otalCoins = 100,000,000,000 π — SHA-256-verified raw header bytes |
+| [**pi-ecosystem-mcap**](https://github.com/aybvip/pi-ecosystem-mcap) | Ecosystem market-cap mechanics: PiDEX, OUSD, CiDi Games, PiRC Launchpad — confirmed vs speculation |
+
+These three repositories form a complementary set: supply is fixed, the asset is fungible, and the ecosystem market mechanics are analysed honestly.
